@@ -14,6 +14,8 @@ export default class Snake implements ICanWalk, ICanSwim, Reptile {
   private gender: Gender;
   private home?: string | undefined;
   private group: Group = "Reptile";
+  private timesGivenBirth: number;
+
   constructor(
     name: string,
     age: number,
@@ -31,6 +33,7 @@ export default class Snake implements ICanWalk, ICanSwim, Reptile {
     this.color = color;
     this.length = length;
     this.home = "hole";
+    this.timesGivenBirth = 0;
     if (this.age >= ageToBeConsideredAdult) {
       this.ageBracket = "Adult";
     } else {
@@ -49,23 +52,26 @@ export default class Snake implements ICanWalk, ICanSwim, Reptile {
       console.log(
         `Only Females can give birth and ${this.name} is a proud male ${this.type}`
       );
-    } else {
-      //Giving birth for reptiles creates 8 reptiles also of random gender, but always at least 2 males and 1 female.
-      for (let i = 1; i <= 5; i++) {
-        const num = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
-        const name: string = this.name + "Baby" + i;
-        const gender: Gender = num === 1 ? "Female" : "Male";
-        const age: number = 0;
-        new Snake(name, age, this.type, gender, this.color, 10);
-      }
-      for (let i = 6; i <= 8; i++) {
-        const name: string = this.name + "Baby" + i;
-        const gender: Gender = i % 2 != 0 ? "Female" : "Male";
-        const age: number = 0;
-        new Snake(name, age, this.type, gender, this.color, 10);
-      }
-      console.log(`${this.name} lays eggs`);
+      return;
     }
+    //Giving birth for reptiles creates 8 reptiles also of random gender, but always at least 2 males and 1 female.
+    this.timesGivenBirth += 1;
+    for (let i = 1; i <= 5; i++) {
+      const num = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
+      const name: string =
+        this.name + "-Baby-" + this.timesGivenBirth + "-" + i;
+      const gender: Gender = num === 1 ? "Female" : "Male";
+      const age: number = 0;
+      new Snake(name, age, this.type, gender, this.color, 10);
+    }
+    for (let i = 6; i <= 8; i++) {
+      const name: string =
+        this.name + "-Baby-" + this.timesGivenBirth + "-" + i;
+      const gender: Gender = i % 2 != 0 ? "Female" : "Male";
+      const age: number = 0;
+      new Snake(name, age, this.type, gender, this.color, 10);
+    }
+    console.log(`${this.name} lays eggs`);
   }
   showHome(): void {
     console.log(`${this.name} lives in a ${this.home}`);

@@ -16,11 +16,14 @@ export default class Lion
   private type: MammalAnimalType = "Lion";
   private group: Group = "Mammal";
   private home?: string | undefined;
+  private timesGivenBirth: number;
+
   constructor(name: string, age: number, gender: Gender) {
     checkAge(age);
     this.name = name;
     this.age = age;
     this.gender = gender;
+    this.timesGivenBirth = 0;
     if (this.age >= ageToBeConsideredAdult) {
       this.ageBracket = "Adult";
     } else {
@@ -49,9 +52,11 @@ export default class Lion
         `${this.name} can't give birth because she doesn't have a home to meet a male`
       );
     } else {
+      this.timesGivenBirth += 1;
       for (let i = 1; i <= 5; i++) {
         const num = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
-        const name: string = this.name + "Baby" + i;
+        const name: string =
+          this.name + "-Baby-" + this.timesGivenBirth + "-" + i;
         const gender: Gender = num === 1 ? "Female" : "Male";
         const age: number = 0;
         const babyLion = new Lion(name, age, gender);
