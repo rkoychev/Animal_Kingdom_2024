@@ -19,7 +19,7 @@ export default class LionFamily {
     );
     lionFamilies.push(this);
   }
-  //тест
+  //тест 2
   addLion(lion: Lion): void {
     if (lion.getHome() !== undefined) {
       console.log(`${lion.getName()} already has a family`);
