@@ -3,7 +3,7 @@ import Reptile from "../interfaces/IReptile";
 import { ICanSwim } from "../interfaces/ICanSwim";
 import { ICanWalk } from "../interfaces/ICanWalk";
 import { ageToBeConsideredAdult, snakes } from "../constVariables";
-import { checkAge, checkLength } from "../verificationFunction/inputCheck";
+import { checkAge, checkLength, checkNameNotEmpty } from "../verificationFunction/inputCheck";
 export default class Snake implements ICanWalk, ICanSwim, Reptile {
   private type: SnakeType;
   private color: string;
@@ -24,6 +24,7 @@ export default class Snake implements ICanWalk, ICanSwim, Reptile {
     color: string,
     length: number
   ) {
+    checkNameNotEmpty(name);
     checkAge(age);
     checkLength(length);
     this.name = name;

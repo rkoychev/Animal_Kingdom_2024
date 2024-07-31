@@ -10,7 +10,11 @@ import { ICanJump } from "../interfaces/ICanJump";
 import { ICanWalk } from "../interfaces/ICanWalk";
 import Mammal from "../interfaces/IMammal";
 import { ageToBeConsideredAdult, squirrels } from "../constVariables";
-import { checkAge, checkHoleSize } from "../verificationFunction/inputCheck";
+import {
+  checkAge,
+  checkHoleSize,
+  checkNameNotEmpty,
+} from "../verificationFunction/inputCheck";
 
 export default class Squirrel implements ICanJump, ICanWalk, Mammal {
   private age: number;
@@ -34,6 +38,7 @@ export default class Squirrel implements ICanJump, ICanWalk, Mammal {
     treeAge: number,
     holeSize: number
   ) {
+    checkNameNotEmpty(name);
     checkAge(age);
     checkHoleSize(holeSize);
     this.name = name;

@@ -9,7 +9,7 @@ import Reptile from "../interfaces/IReptile";
 import { ICanSwim } from "../interfaces/ICanSwim";
 import { ICanWalk } from "../interfaces/ICanWalk";
 import { ageToBeConsideredAdult, tortoises } from "../constVariables";
-import { checkAge } from "../verificationFunction/inputCheck";
+import { checkAge, checkNameNotEmpty } from "../verificationFunction/inputCheck";
 
 export default class Tortoise implements ICanSwim, ICanWalk, Reptile {
   private name: string;
@@ -22,6 +22,7 @@ export default class Tortoise implements ICanSwim, ICanWalk, Reptile {
   private timesGivenBirth: number;
 
   constructor(name: string, age: number, gender: Gender) {
+    checkNameNotEmpty(name);
     checkAge(age);
     this.name = name;
     this.age = age;

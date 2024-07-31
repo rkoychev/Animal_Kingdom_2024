@@ -153,6 +153,11 @@ try {
 } catch (error: any) {
   console.error(error.message);
 }
+try {
+  const snake2=new Snake("d",3,"Anaconda","Female","Red",3)
+} catch (error: any) {
+  console.error(error.message);
+}
 const snake2=new Snake("Ssss",3,"Anaconda","Female","Red",33)
 const animalShelter = AnimalShelter.getInstance();
 console.log(crocodilePacks[0].crocodiles);

@@ -13,3 +13,8 @@ export function checkHoleSize(holeSize: number): void {
     throw new Error("Hole size can't be negative");
   }
 }
+export function checkNameNotEmpty(name: string): void {
+  if(name.length===0){
+    throw new Error("Name can't be empty");
+  }
+}

@@ -4,10 +4,12 @@ import verifyCrocodilePack, {
   verifyAddCrocodile,
   verifyPackName,
 } from "../verificationFunction/crocodileVerifications";
+import { checkNameNotEmpty } from "../verificationFunction/inputCheck";
 export default class CrocodilesPack {
   name: string;
   crocodiles: Crocodile[] = [];
   constructor(name: string, crocodiles: Crocodile[]) {
+    checkNameNotEmpty(name);
     verifyPackName(name);
     verifyCrocodilePack(crocodiles);
     this.name = name;

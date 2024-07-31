@@ -5,7 +5,7 @@ import { ICanTalk } from "../interfaces/ICanTalk";
 import { ICanWalk } from "../interfaces/ICanWalk";
 import Mammal from "../interfaces/IMammal";
 import { ageToBeConsideredAdult, lionFamilies } from "../constVariables";
-import { checkAge } from "../verificationFunction/inputCheck";
+import { checkAge, checkNameNotEmpty } from "../verificationFunction/inputCheck";
 export default class Lion
   implements ICanJump, ICanRun, ICanTalk, ICanWalk, Mammal
 {
@@ -19,6 +19,7 @@ export default class Lion
   private timesGivenBirth: number;
 
   constructor(name: string, age: number, gender: Gender) {
+    checkNameNotEmpty(name);
     checkAge(age);
     this.name = name;
     this.age = age;

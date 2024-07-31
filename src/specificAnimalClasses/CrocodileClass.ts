@@ -3,7 +3,7 @@ import { ageToBeConsideredAdult, crocodilePacks } from "../constVariables";
 import Reptile from "../interfaces/IReptile";
 import { ICanSwim } from "../interfaces/ICanSwim";
 import { ICanWalk } from "../interfaces/ICanWalk";
-import { checkAge, checkLength } from "../verificationFunction/inputCheck";
+import { checkAge, checkLength, checkNameNotEmpty } from "../verificationFunction/inputCheck";
 
 export default class Crocodile implements ICanSwim, ICanWalk, Reptile {
   private length: number;
@@ -16,6 +16,7 @@ export default class Crocodile implements ICanSwim, ICanWalk, Reptile {
   private home?: string | undefined;
   private timesGivenBirth: number;
   constructor(name: string, age: number, gender: Gender, length: number) {
+    checkNameNotEmpty(name);
     checkAge(age);
     checkLength(length);
     this.name = name;

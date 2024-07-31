@@ -1,5 +1,6 @@
 import { lionFamilies } from "../constVariables";
 import Lion from "../specificAnimalClasses/LionClass";
+import { checkNameNotEmpty } from "../verificationFunction/inputCheck";
 import verifyLionFamily, {
   verifyFamilyName,
 } from "../verificationFunction/lionVerifications";
@@ -8,6 +9,7 @@ export default class LionFamily {
   name: string;
   lions: Lion[] = [];
   constructor(name: string, lions: Lion[]) {
+    checkNameNotEmpty(name);
     verifyFamilyName(name);
     verifyLionFamily(lions);
     this.name = name;
@@ -19,7 +21,6 @@ export default class LionFamily {
     );
     lionFamilies.push(this);
   }
-  //тест 2
   addLion(lion: Lion): void {
     if (lion.getHome() !== undefined) {
       console.log(`${lion.getName()} already has a family`);
