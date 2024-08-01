@@ -6,15 +6,14 @@ import { ICanWalk } from "../interfaces/ICanWalk";
 import { checkAge, checkLength } from "../verificationFunction/inputCheck";
 
 export default class Crocodile implements ICanSwim, ICanWalk, Reptile {
-  private length: number;
-  private ageBracket: AgeBracket;
-  private name: string;
-  private age: number;
-  private gender: Gender;
-  private type: ReptileAnimalType = "Crocodile";
-  private group: Group = "Reptile";
-  private home?: string | undefined;
-  private timesGivenBirth: number;
+ private length: number;
+ private ageBracket: AgeBracket;
+ private name: string;
+ private age: number;
+ private gender: Gender;
+ private type: ReptileAnimalType = "Crocodile";
+ private group: Group = "Reptile";
+ private home?: string | undefined;
   constructor(name: string, age: number, gender: Gender, length: number) {
     checkAge(age);
     checkLength(length);
@@ -22,7 +21,6 @@ export default class Crocodile implements ICanSwim, ICanWalk, Reptile {
     this.age = age;
     this.gender = gender;
     this.length = length;
-    this.timesGivenBirth = 0;
     if (this.age >= ageToBeConsideredAdult) {
       this.ageBracket = "Adult";
     } else {
@@ -46,11 +44,9 @@ export default class Crocodile implements ICanSwim, ICanWalk, Reptile {
       );
     } else {
       //Giving birth for reptiles creates 8 reptiles also of random gender, but always at least 2 males and 1 female.
-      this.timesGivenBirth += 1;
       for (let i = 1; i <= 5; i++) {
         const num = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
-        const name: string =
-          this.name + "-Baby-" + this.timesGivenBirth + "-" + i;
+        const name: string = this.name + "Baby" + i;
         const gender: Gender = num === 1 ? "Female" : "Male";
         const age: number = 0;
         const babyCroc = new Crocodile(name, age, gender, 10);
@@ -61,8 +57,7 @@ export default class Crocodile implements ICanSwim, ICanWalk, Reptile {
         });
       }
       for (let i = 6; i <= 8; i++) {
-        const name: string =
-          this.name + "-Baby-" + this.timesGivenBirth + "-" + i;
+        const name: string = this.name + "Baby" + i;
         const gender: Gender = i % 2 != 0 ? "Female" : "Male";
         const age: number = 0;
         const babyCroc = new Crocodile(name, age, gender, 10);
@@ -102,7 +97,7 @@ export default class Crocodile implements ICanSwim, ICanWalk, Reptile {
   getGroup(): Group {
     return this.group;
   }
-  getType(): ReptileAnimalType {
+  getType():ReptileAnimalType{
     return this.type;
   }
   // Setter for home

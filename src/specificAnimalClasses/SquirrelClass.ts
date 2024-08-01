@@ -24,8 +24,6 @@ export default class Squirrel implements ICanJump, ICanWalk, Mammal {
   private storedNuts = 0;
   private home?: string | undefined;
   private group: Group = "Mammal";
-  private timesGivenBirth: number;
-
   constructor(
     name: string,
     age: number,
@@ -48,7 +46,6 @@ export default class Squirrel implements ICanJump, ICanWalk, Mammal {
     this.treeAge = treeAge;
     this.holeSize = holeSize;
     this.home = `${this.treeAge} old ${this.treeType} tree`;
-    this.timesGivenBirth = 0;
     squirrels.push(this);
   }
   walk(): void {
@@ -72,16 +69,15 @@ export default class Squirrel implements ICanJump, ICanWalk, Mammal {
       );
   }
   giveBirth(): void {
+    console.log(squirrels);
     if (this.gender === "Male") {
       console.log(
         `Only Females can give birth and ${this.name} is a proud male ${this.type}`
       );
     } else {
-      this.timesGivenBirth += 1;
       for (let i = 1; i <= 5; i++) {
         const num = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
-        const name: string =
-          this.name + "-Baby-" + this.timesGivenBirth + "-" + i;
+        const name: string = this.name + "Baby" + i;
         const gender: Gender = num === 1 ? "Female" : "Male";
         const age: number = 0;
         new Squirrel(

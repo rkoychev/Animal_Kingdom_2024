@@ -19,8 +19,6 @@ export default class Tortoise implements ICanSwim, ICanWalk, Reptile {
   private ageBracket: AgeBracket;
   private type: ReptileAnimalType = "Tortoise";
   private group: Group = "Reptile";
-  private timesGivenBirth: number;
-
   constructor(name: string, age: number, gender: Gender) {
     checkAge(age);
     this.name = name;
@@ -32,7 +30,6 @@ export default class Tortoise implements ICanSwim, ICanWalk, Reptile {
       this.ageBracket = "Child";
     }
     this.home = "Animal Kingdom";
-    this.timesGivenBirth = 0;
     tortoises.push(this);
   }
   swim() {
@@ -47,18 +44,15 @@ export default class Tortoise implements ICanSwim, ICanWalk, Reptile {
         `Only Females can give birth and ${this.name} is a proud male ${this.type}`
       );
     } else {
-      this.timesGivenBirth += 1;
       for (let i = 1; i <= 5; i++) {
         const num = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
-        const name: string =
-          this.name + "-Baby-" + this.timesGivenBirth + "-" + i;
+        const name: string = this.name + "Baby" + i;
         const gender: Gender = num === 1 ? "Female" : "Male";
         const age: number = 0;
         new Tortoise(name, age, gender);
       }
       for (let i = 6; i <= 8; i++) {
-        const name: string =
-          this.name + "-Baby-" + this.timesGivenBirth + "-" + i;
+        const name: string = this.name + "Baby" + i;
         const gender: Gender = i % 2 != 0 ? "Female" : "Male";
         const age: number = 0;
         new Tortoise(name, age, gender);
