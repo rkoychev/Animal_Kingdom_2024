@@ -34,9 +34,4 @@ export default class LionFamily {
     lion.setHome(this.name);
     this.lions.push(lion);
   }
-  removeLion(lion: Lion): void {
-    lion.setHome(undefined);
-    this.lions = this.lions.filter((lio) => lio !== lion);
-    console.log(`${lion.getName()} has left ${this.name}`);
-  }
 }

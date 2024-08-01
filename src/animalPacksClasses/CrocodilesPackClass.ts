@@ -34,12 +34,6 @@ export default class CrocodilesPack {
       }
     }
   }
-  removeCrocodile(crocodile: Crocodile): void {
-    crocodile.setHome(undefined);
-    this.crocodiles = this.crocodiles.filter((croco) => crocodile !== croco);
-    console.log(`${crocodile.getName()} has left ${this.name}`);
-  }
-
   addCrocodileFromBirth(crocodile: Crocodile): void {
     crocodile.setHome(this.name);
     this.crocodiles.push(crocodile);

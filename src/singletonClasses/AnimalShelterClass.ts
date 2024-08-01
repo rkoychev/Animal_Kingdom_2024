@@ -3,11 +3,7 @@ import { SnakeType } from "../customTypes";
 import {
   animalShelterMammalsLimit,
   animalShelterReptilesLimit,
-  crocodilePacks,
-  lionFamilies,
 } from "../constVariables";
-import Crocodile from "../specificAnimalClasses/CrocodileClass";
-import Lion from "../specificAnimalClasses/LionClass";
 
 export default class AnimalShelter {
   private static instance: AnimalShelter;
@@ -45,53 +41,44 @@ export default class AnimalShelter {
   }
 
   addAnimal(animal: Animal): void {
+    if (animal.getHome() !== undefined && (animal.getType()==="Lion" || animal.getType()==="Crocodile")){
+      console.log(`${animal.getName()} already has a home`);
+      return;
+    }
     if (animal.getGroup() === "Mammal") {
       if (this.mammalsNumber >= this.mammalLimit) {
         console.log(
           "Sorry, there is no space for another mammal in the Animal Shelter!"
         );
         return;
-      }
-
-      if (animal.getType() === "Lion") {
-        if (animal.getHome() !== undefined) {
-          const family = lionFamilies.find(
-            (pack) => pack.name === animal.getHome()
-          );
-          family?.removeLion(animal as Lion);
-          animal.setHome(undefined);
+      } else {
+        this.animals.push(animal);
+        animal.setHome("Animal Shelter");
+        if (animal.getType()=== "Lion") {
+          this.lions++;
+        } else if (animal.getType() === "Squirrel") {
+          this.squirrels++;
         }
-        this.lions++;
-      } else if (animal.getType() === "Squirrel") {
-        this.squirrels++;
+        console.log(`${animal.getName()} has been added to the Animal Shelter`);
       }
-      this.animals.push(animal);
-      animal.setHome("Animal Shelter");
-      console.log(`${animal.getName()} has been added to the Animal Shelter`);
     } else if (animal.getGroup() === "Reptile") {
       if (this.reptileNumbers >= this.reptileLimit) {
         console.log(
           "Sorry, there is no space for another reptile in the Animal Shelter!"
         );
         return;
-      }
-      if (animal.getType() === "Crocodile") {
-        if (animal.getHome() !== undefined) {
-          const pack = crocodilePacks.find(
-            (pack) => pack.name === animal.getHome()
-          );
-          pack?.removeCrocodile(animal as Crocodile);
-          animal.setHome(undefined);
+      } else {
+        this.animals.push(animal);
+        animal.setHome("Animal Shelter");
+        if (animal.getType() === "Crocodile") {
+          this.crocodiles++;
+        } else if (animal.getType()=== "Tortoise") {
+          this.tortoise++;
+        } else if (["Anaconda", "Cobra", "Python"].includes(animal.getType())) {
+          this.snakes++;
         }
-        this.crocodiles++;
-      } else if (animal.getType() === "Tortoise") {
-        this.tortoise++;
-      } else if (["Anaconda", "Cobra", "Python"].includes(animal.getType())) {
-        this.snakes++;
+        console.log(`${animal.getName()} has been added to the Animal Shelter`);
       }
-      this.animals.push(animal);
-      animal.setHome("Animal Shelter");
-      console.log(`${animal.getName()} has been added to the Animal Shelter`);
     }
   }
 }

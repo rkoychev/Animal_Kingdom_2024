@@ -1,6 +1,6 @@
 import CrocodilesPack from "./animalPacksClasses/CrocodilesPackClass";
 import LionFamily from "./animalPacksClasses/LionsPackClass";
-import { crocodilePacks, snakes, squirrels, tortoises } from "./constVariables";
+import { snakes, squirrels, tortoises } from "./constVariables";
 import { Gender } from "./customTypes";
 import AnimalShelter from "./singletonClasses/AnimalShelterClass";
 import Crocodile from "./specificAnimalClasses/CrocodileClass";
@@ -54,7 +54,7 @@ const lionData = [
   { name: "Kion", age: 1, gender: "Male" },
   { name: "Vitani", age: 3, gender: "Female" },
   { name: "Zira", age: 5, gender: "Female" },
-  { name: "Kovu", age: 4, gender: "Female" },
+  { name: "Kovu", age: 4, gender: "Male" },
   { name: "Rani", age: 2, gender: "Female" },
 ];
 const lions: Lion[] = lionData.map(
@@ -88,6 +88,7 @@ lion1.giveBirth();
 lion1.showHome();
 
 lionFamily.addLion(lion1);
+lionFamily.lions[2].giveBirth();
 console.log(lionFamily);
 
 console.log("\n--- Squirrel Section ---");
@@ -155,14 +156,11 @@ try {
 }
 const snake2=new Snake("Ssss",3,"Anaconda","Female","Red",33)
 const animalShelter = AnimalShelter.getInstance();
-console.log(crocodilePacks[0].crocodiles);
 animalShelter.addAnimal(snake2);
 animalShelter.addAnimal(lion2);
 animalShelter.addAnimal(lion1);
-lionFamily.addLion(new Lion("Lion2",3,"Male"));
 animalShelter.addAnimal(squirrel1);
 animalShelter.addAnimal(crocodile1);
 animalShelter.addAnimal(snake1);
 animalShelter.addAnimal(tortoise1);
 animalShelter.showAnimals();
-console.log(crocodilePacks);
