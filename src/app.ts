@@ -78,13 +78,15 @@ try {
 } catch (error: any) {
   console.error(error.message);
 }
+lionsFamily2.animals[2].giveBirth();
+console.log(lionsFamily2.animals[2]);
 lion1.walk();
 lion1.talk();
 lion1.run();
 lion1.jump();
 lion1.giveBirth();
 lion1.showHome();
-
+console.log(lionsFamily2);
 lionsFamily2.addAnimal(lion1);
 console.log(lionsFamily2);
 
@@ -171,7 +173,3 @@ animalShelter.addAnimal(crocodile1);
 animalShelter.addAnimal(snake1);
 animalShelter.addAnimal(tortoise1);
 animalShelter.showAnimals();
-const lionsFamily = new AnimalFamily("Leonels", lions);
-lionsFamily.addAnimal(lion1);
-lionsFamily.removeAnimal(lion1);
-console.log(lionsFamily);
