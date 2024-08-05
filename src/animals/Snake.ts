@@ -1,44 +1,35 @@
-import { AgeBracket, Gender, Group, SnakeType } from "../customTypes";
+import { SnakeType } from "../customTypes";
 import Reptile from "../interfaces/IReptile";
 import { ICanSwim } from "../interfaces/ICanSwim";
 import { ICanWalk } from "../interfaces/ICanWalk";
-import { ageToBeConsideredAdult, snakes } from "../constVariables";
-import { checkAge, checkLength } from "../verificationFunction/inputCheck";
-export default class Snake implements ICanWalk, ICanSwim, Reptile {
+import { snakes } from "../app";
+import Animal from "../Animal";
+export default class Snake
+  extends Animal
+  implements ICanWalk, ICanSwim, Reptile
+{
   private type: SnakeType;
   private color: string;
   private length: number;
-  private ageBracket: AgeBracket;
-  private name: string;
-  private age: number;
-  private gender: Gender;
-  private home?: string | undefined;
-  private group: Group = "Reptile";
-  private timesGivenBirth: number;
-
+  protected home?: string | undefined;
+  group: "Reptile";
   constructor(
     name: string,
     age: number,
     type: SnakeType,
-    gender: Gender,
+    isMale: boolean,
     color: string,
     length: number
   ) {
-    checkAge(age);
-    checkLength(length);
-    this.name = name;
-    this.age = age;
-    this.gender = gender;
+    super(name, age, isMale);
+    if (length <= 0) {
+      throw new Error("Length must be greater than zero");
+    }
     this.type = type;
     this.color = color;
     this.length = length;
     this.home = "hole";
-    this.timesGivenBirth = 0;
-    if (this.age >= ageToBeConsideredAdult) {
-      this.ageBracket = "Adult";
-    } else {
-      this.ageBracket = "Child";
-    }
+    this.group = "Reptile";
     snakes.push(this);
   }
   walk() {
@@ -48,7 +39,7 @@ export default class Snake implements ICanWalk, ICanSwim, Reptile {
     console.log(`${this.name} is swiming`);
   }
   giveBirth(): void {
-    if (this.gender === "Male") {
+    if (this.isMale) {
       console.log(
         `Only Females can give birth and ${this.name} is a proud male ${this.type}`
       );
@@ -60,47 +51,23 @@ export default class Snake implements ICanWalk, ICanSwim, Reptile {
       const num = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
       const name: string =
         this.name + "-Baby-" + this.timesGivenBirth + "-" + i;
-      const gender: Gender = num === 1 ? "Female" : "Male";
+      const gender: boolean = num === 1;
       const age: number = 0;
       new Snake(name, age, this.type, gender, this.color, 10);
     }
     for (let i = 6; i <= 8; i++) {
       const name: string =
         this.name + "-Baby-" + this.timesGivenBirth + "-" + i;
-      const gender: Gender = i % 2 != 0 ? "Female" : "Male";
+      const gender: boolean = i % 2 != 0;
       const age: number = 0;
       new Snake(name, age, this.type, gender, this.color, 10);
     }
     console.log(`${this.name} lays eggs`);
   }
-  showHome(): void {
-    console.log(`${this.name} lives in a ${this.home}`);
-  }
-
-  getName(): string {
-    return this.name;
-  }
-
-  getAge(): number {
-    return this.age;
-  }
-
-  getGender(): Gender {
-    return this.gender;
-  }
-
-  getHome(): string | undefined {
-    return this.home;
-  }
-
-  getGroup(): Group {
-    return this.group;
-  }
-  getType(): SnakeType {
+  getType() {
     return this.type;
   }
-  // Setter for home
-  setHome(home: string | undefined): void {
-    this.home = home;
+  getGroup() {
+    return this.group;
   }
 }

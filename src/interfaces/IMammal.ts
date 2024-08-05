@@ -1,4 +1,5 @@
-export default interface Mammal {
+export default interface IMammal {
+  group: "Mammal";
   giveBirth(): void;
   showHome(): void;
 }
