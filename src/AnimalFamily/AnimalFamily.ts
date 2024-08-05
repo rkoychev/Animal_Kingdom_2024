@@ -30,9 +30,11 @@ export default class AnimalFamily {
       verifyFamilyInfo(specificRequirements);
     if (verifycationResult.isValid) {
       this.name = name;
+      animals.forEach((animal) => {
+        animal.setHome(this.name);
+      });
       this.animals = animals;
       this.animalsType = animalType;
-      console.log(this);
       families.push(this);
     } else {
       throw new Error(verifycationResult.message);
@@ -64,6 +66,7 @@ export default class AnimalFamily {
         const verifycationResult: VerificationResult =
           verifyFamilyInfo(specificRequirements);
         if (verifycationResult.isValid) {
+          animal.setHome(this.name);
           this.animals.push(animal);
         } else {
           console.log(`Cannot add ${animalType}`);
@@ -91,6 +94,7 @@ export default class AnimalFamily {
     if (verifycationResult.isValid) {
       this.animals = animalsWithoutRemovedAnimal;
       console.log(`removed ${animal.getName()} from ${this.name}`);
+      animal.setHome(undefined);
     } else {
       console.log(`Cannot remove ${animal.getName()} from family`);
       console.log(verifycationResult.message);
