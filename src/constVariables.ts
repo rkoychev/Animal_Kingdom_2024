@@ -1,7 +1,0 @@
-export const AGE_TO_BE_ADULT = 2;
-export const ANIMAL_SHELTER_MAMMAL_LIMIT = 20;
-export const ANIMAL_SHELTER_REPTILE_LIMIT = 19;
-export const CROCODILE_FAMILY_LIMIT = 25;
-export const CROCODILE_FAMILY_MINIMUM = 1;
-export const LION_FAMILY_LIMIT = 10;
-export const LION_FAMILY_MINIMUM = 8;

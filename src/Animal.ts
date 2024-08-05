@@ -1,4 +1,4 @@
-import { AGE_TO_BE_ADULT } from "./constVariables";
+const AGE_TO_BE_ADULT = 2;
 export default abstract class Animal {
   protected isAdult: boolean;
   protected name: string;

@@ -1,11 +1,9 @@
 import { AnimalType } from "../customTypes";
-import {
-  ANIMAL_SHELTER_MAMMAL_LIMIT,
-  ANIMAL_SHELTER_REPTILE_LIMIT,
-} from "../constVariables";
 import Crocodile from "../animals/Crocodile";
 import Lion from "../animals/Lion";
 import { families } from "../app";
+const ANIMAL_SHELTER_MAMMAL_LIMIT = 20;
+const ANIMAL_SHELTER_REPTILE_LIMIT = 19;
 export default class AnimalShelter {
   private static instance: AnimalShelter;
   mammalLimit: number = ANIMAL_SHELTER_MAMMAL_LIMIT;
