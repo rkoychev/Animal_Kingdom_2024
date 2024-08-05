@@ -1,18 +1,7 @@
-import CrocodilesPack from "./animalPacksClasses/CrocodilesPackClass";
-import LionFamily from "./animalPacksClasses/LionsPackClass";
-import Snake from "./specificAnimalClasses/SnakeClass";
-import Squirrel from "./specificAnimalClasses/SquirrelClass";
-import Tortoise from "./specificAnimalClasses/TortoiseClass";
-
-export const ageToBeConsideredAdult = 2;
-export const animalShelterMammalsLimit = 20;
-export const animalShelterReptilesLimit = 19;
-export const lionFamilies: LionFamily[] = [];
-export const crocodilePacks: CrocodilesPack[] = [];
-export const squirrels: Squirrel[] = [];
-export const snakes: Snake[] = [];
-export const tortoises: Tortoise[] = [];
-export const crocodilePackSizeLimit = 25;
-export const crocodilePackSizeMinimum = 0;
-export const lionFamilyLimit = 10;
-export const lionsFamilyMinimum = 8;
+export const AGE_TO_BE_ADULT = 2;
+export const ANIMAL_SHELTER_MAMMAL_LIMIT = 20;
+export const ANIMAL_SHELTER_REPTILE_LIMIT = 19;
+export const CROCODILE_FAMILY_LIMIT = 25;
+export const CROCODILE_FAMILY_MINIMUM = 1;
+export const LION_FAMILY_LIMIT = 10;
+export const LION_FAMILY_MINIMUM = 8;

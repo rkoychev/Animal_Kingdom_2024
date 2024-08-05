@@ -1,59 +1,37 @@
-import {
-  AgeBracket,
-  Gender,
-  Group,
-  MammalAnimalType,
-  ReptileAnimalType,
-  TreeType,
-} from "../customTypes";
+import { MammalAnimalType, ReptileAnimalType, TreeType } from "../customTypes";
 import { ICanJump } from "../interfaces/ICanJump";
 import { ICanWalk } from "../interfaces/ICanWalk";
 import Mammal from "../interfaces/IMammal";
-import { ageToBeConsideredAdult, squirrels } from "../constVariables";
-import {
-  checkAge,
-  checkHoleSize,
-  checkNameNotEmpty,
-} from "../verificationFunction/inputCheck";
-
-export default class Squirrel implements ICanJump, ICanWalk, Mammal {
-  private age: number;
-  private name: string;
-  private gender: Gender;
-  private ageBracket: AgeBracket;
+import { squirrels } from "../app";
+import Animal from "../Animal";
+export default class Squirrel
+  extends Animal
+  implements ICanJump, ICanWalk, Mammal
+{
   private type: MammalAnimalType = "Squirrel";
   private treeType: TreeType;
   private treeAge: number;
   private holeSize: number;
   private storedNuts = 0;
-  private home?: string | undefined;
-  private group: Group = "Mammal";
-  private timesGivenBirth: number;
+  group: "Mammal";
 
   constructor(
     name: string,
     age: number,
-    gender: Gender,
+    isMale: boolean,
     treeType: TreeType,
     treeAge: number,
     holeSize: number
   ) {
-    checkNameNotEmpty(name);
-    checkAge(age);
-    checkHoleSize(holeSize);
-    this.name = name;
-    this.age = age;
-    this.gender = gender;
-    if (this.age >= ageToBeConsideredAdult) {
-      this.ageBracket = "Adult";
-    } else {
-      this.ageBracket = "Child";
+    super(name, age, isMale);
+    if (holeSize <= 0) {
+      throw new Error("Hole size must be greater than zero");
     }
+
     this.treeType = treeType;
     this.treeAge = treeAge;
     this.holeSize = holeSize;
-    this.home = `${this.treeAge} old ${this.treeType} tree`;
-    this.timesGivenBirth = 0;
+    this.group = "Mammal";
     squirrels.push(this);
   }
   walk(): void {
@@ -77,7 +55,7 @@ export default class Squirrel implements ICanJump, ICanWalk, Mammal {
       );
   }
   giveBirth(): void {
-    if (this.gender === "Male") {
+    if (this.isMale) {
       console.log(
         `Only Females can give birth and ${this.name} is a proud male ${this.type}`
       );
@@ -87,12 +65,12 @@ export default class Squirrel implements ICanJump, ICanWalk, Mammal {
         const num = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
         const name: string =
           this.name + "-Baby-" + this.timesGivenBirth + "-" + i;
-        const gender: Gender = num === 1 ? "Female" : "Male";
+        const isMale: boolean = num === 1;
         const age: number = 0;
         new Squirrel(
           name,
           age,
-          gender,
+          isMale,
           this.treeType,
           this.treeAge,
           this.holeSize
@@ -101,27 +79,8 @@ export default class Squirrel implements ICanJump, ICanWalk, Mammal {
       console.log(`${this.name} gives birth`);
     }
   }
-  showHome(): void {
-    console.log(`${this.name} lives in a ${this.home}`);
-  }
 
-  getName(): string {
-    return this.name;
-  }
-
-  getAge(): number {
-    return this.age;
-  }
-
-  getGender(): Gender {
-    return this.gender;
-  }
-
-  getHome(): string | undefined {
-    return this.home;
-  }
-
-  getGroup(): Group {
+  getGroup(): string {
     return this.group;
   }
   getType(): ReptileAnimalType | MammalAnimalType {
