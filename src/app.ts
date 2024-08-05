@@ -1,10 +1,10 @@
-import AnimalShelter from "./singletons/AnimalShelter";
+import AnimalShelter from "./animalShelter/AnimalShelter";
 import Crocodile from "./animals/Crocodile";
 import Lion from "./animals/Lion";
 import Snake from "./animals/Snake";
 import Squirrel from "./animals/Squirrel";
 import Tortoise from "./animals/Tortoise";
-import AnimalFamily from "./AnimalFamily/AnimalFamily";
+import AnimalFamily from "./animalFamily/AnimalFamily";
 export const families: AnimalFamily[] = [];
 export const squirrels: Squirrel[] = [];
 export const snakes: Snake[] = [];
