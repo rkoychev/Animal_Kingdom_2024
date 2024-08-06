@@ -1,5 +1,7 @@
+import { ICanWalk } from "../interfaces/ICanWalk";
+
 const AGE_TO_BE_ADULT = 2;
-export default abstract class Animal {
+export default abstract class Animal implements ICanWalk {
   protected isAdult: boolean;
   protected name: string;
   protected age: number;
@@ -23,11 +25,16 @@ export default abstract class Animal {
     }
     this.timesGivenBirth = 0;
   }
+
+  walk(): void {
+    console.log(`${this.name} is walking`);
+  }
+  
   showHome(): void {
     if (this.home === undefined) {
       console.log(`${this.name} doesn't have a home yet`);
     } else {
-      console.log(`${this.name} lives in ${this.home} pack`);
+      console.log(`${this.name} lives in ${this.home}`);
     }
   }
   getName(): string {

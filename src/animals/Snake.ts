@@ -1,18 +1,13 @@
 import { SnakeType } from "../customTypes";
-import Reptile from "../interfaces/IReptile";
-import { ICanSwim } from "../interfaces/ICanSwim";
-import { ICanWalk } from "../interfaces/ICanWalk";
 import { snakes } from "../app";
-import Animal from "../Animal";
+import Reptile from "../hierarchy/Reptile";
 export default class Snake
-  extends Animal
-  implements ICanWalk, ICanSwim, Reptile
+  extends Reptile
 {
   private type: SnakeType;
   private color: string;
   private length: number;
   protected home?: string | undefined;
-  group: "Reptile";
   constructor(
     name: string,
     age: number,
@@ -29,15 +24,12 @@ export default class Snake
     this.color = color;
     this.length = length;
     this.home = "hole";
-    this.group = "Reptile";
     snakes.push(this);
   }
-  walk() {
+  override walk(): void {
     console.log(`${this.name} is sliding`);
   }
-  swim() {
-    console.log(`${this.name} is swiming`);
-  }
+  
   giveBirth(): void {
     if (this.isMale) {
       console.log(
@@ -66,8 +58,5 @@ export default class Snake
   }
   getType() {
     return this.type;
-  }
-  getGroup() {
-    return this.group;
   }
 }

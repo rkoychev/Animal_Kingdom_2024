@@ -2,6 +2,7 @@ import { AnimalType } from "../customTypes";
 import Crocodile from "../animals/Crocodile";
 import Lion from "../animals/Lion";
 import { families } from "../app";
+import Mammal from "../hierarchy/Mammal";
 const ANIMAL_SHELTER_MAMMAL_LIMIT = 20;
 const ANIMAL_SHELTER_REPTILE_LIMIT = 19;
 export default class AnimalShelter {
@@ -40,7 +41,7 @@ export default class AnimalShelter {
   }
 
   addAnimal(animal: AnimalType): void {
-    if (animal.getGroup() === "Mammal") {
+    if (animal instanceof Mammal) {
       if (this.mammalsNumber >= this.mammalLimit) {
         console.log(
           "Sorry, there is no space for another mammal in the Animal Shelter!"

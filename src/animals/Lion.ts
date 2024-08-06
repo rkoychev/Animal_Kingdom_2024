@@ -1,28 +1,18 @@
 import { MammalAnimalType } from "../customTypes";
-import { ICanJump } from "../interfaces/ICanJump";
 import { ICanRun } from "../interfaces/ICanRun";
 import { ICanTalk } from "../interfaces/ICanTalk";
-import { ICanWalk } from "../interfaces/ICanWalk";
-import Mammal from "../interfaces/IMammal";
-import Animal from "../Animal";
 import { families } from "../app";
+import Mammal from "../hierarchy/Mammal";
 export default class Lion
-  extends Animal
-  implements ICanJump, ICanRun, ICanTalk, ICanWalk, Mammal
+  extends Mammal
+  implements  ICanRun, ICanTalk
 {
   private type: MammalAnimalType = "Lion";
-  group: "Mammal";
 
   constructor(name: string, age: number, isMale: boolean) {
     super(name, age, isMale);
-    this.group = "Mammal";
   }
-  walk(): void {
-    console.log(`${this.name} is walking`);
-  }
-  jump(): void {
-    console.log(`${this.name} is jumping`);
-  }
+  
   run(): void {
     console.log(`${this.name} is running`);
   }
@@ -58,8 +48,5 @@ export default class Lion
   }
   getType() {
     return this.type;
-  }
-  getGroup() {
-    return this.group;
   }
 }
