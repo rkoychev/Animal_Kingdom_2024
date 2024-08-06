@@ -9,7 +9,7 @@ import verifyFamilyInfo, {
 export default class AnimalFamily {
   name: string;
   animals: AnimalType[];
-  animalsType: typeof Lion | typeof Crocodile; //not really sure if this is okay like this
+  animalsType: typeof Lion | typeof Crocodile;
   constructor(name: string, animals: AnimalType[]) {
     if (animals.length === 0) {
       throw new Error("A family must have at least one Animal");
