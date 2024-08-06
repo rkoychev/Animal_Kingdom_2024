@@ -1,13 +1,9 @@
 import { ReptileAnimalType } from "../customTypes";
-import { ICanSwim } from "../interfaces/ICanSwim";
-import { ICanWalk } from "../interfaces/ICanWalk";
-import Animal from "../hierarchy/Animal";
 import { families } from "../app";
 import Reptile from "../hierarchy/Reptile";
 
 export default class Crocodile
   extends Reptile
-  implements ICanSwim, ICanWalk
 {
   private length: number;
   private type: ReptileAnimalType = "Crocodile";
@@ -18,12 +14,8 @@ export default class Crocodile
     }
     this.length = length;
   }
-  swim() {
-    console.log(`${this.name} is swimming`);
-  }
-  walk() {
-    console.log(`${this.name} is walking`);
-  }
+  
+  
   giveBirth(): void {
     if (this.isMale) {
       console.log(

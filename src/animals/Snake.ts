@@ -1,12 +1,8 @@
 import { SnakeType } from "../customTypes";
-import { ICanSwim } from "../interfaces/ICanSwim";
-import { ICanWalk } from "../interfaces/ICanWalk";
 import { snakes } from "../app";
-import Animal from "../hierarchy/Animal";
 import Reptile from "../hierarchy/Reptile";
 export default class Snake
   extends Reptile
-  implements ICanWalk, ICanSwim
 {
   private type: SnakeType;
   private color: string;
@@ -30,12 +26,10 @@ export default class Snake
     this.home = "hole";
     snakes.push(this);
   }
-  walk() {
+  override walk(): void {
     console.log(`${this.name} is sliding`);
   }
-  swim() {
-    console.log(`${this.name} is swiming`);
-  }
+  
   giveBirth(): void {
     if (this.isMale) {
       console.log(

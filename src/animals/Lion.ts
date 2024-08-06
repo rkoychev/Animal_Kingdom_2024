@@ -1,26 +1,18 @@
 import { MammalAnimalType } from "../customTypes";
-import { ICanJump } from "../interfaces/ICanJump";
 import { ICanRun } from "../interfaces/ICanRun";
 import { ICanTalk } from "../interfaces/ICanTalk";
-import { ICanWalk } from "../interfaces/ICanWalk";
-import Animal from "../hierarchy/Animal";
 import { families } from "../app";
 import Mammal from "../hierarchy/Mammal";
 export default class Lion
   extends Mammal
-  implements ICanJump, ICanRun, ICanTalk, ICanWalk
+  implements  ICanRun, ICanTalk
 {
   private type: MammalAnimalType = "Lion";
 
   constructor(name: string, age: number, isMale: boolean) {
     super(name, age, isMale);
   }
-  walk(): void {
-    console.log(`${this.name} is walking`);
-  }
-  jump(): void {
-    console.log(`${this.name} is jumping`);
-  }
+  
   run(): void {
     console.log(`${this.name} is running`);
   }

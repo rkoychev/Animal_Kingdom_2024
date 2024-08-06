@@ -1,12 +1,8 @@
 import { MammalAnimalType, ReptileAnimalType, TreeType } from "../customTypes";
-import { ICanJump } from "../interfaces/ICanJump";
-import { ICanWalk } from "../interfaces/ICanWalk";
 import { squirrels } from "../app";
-import Animal from "../hierarchy/Animal";
 import Mammal from "../hierarchy/Mammal";
 export default class Squirrel
   extends Mammal
-  implements ICanJump, ICanWalk
 {
   private type: MammalAnimalType = "Squirrel";
   private treeType: TreeType;
@@ -32,12 +28,7 @@ export default class Squirrel
     this.holeSize = holeSize;
     squirrels.push(this);
   }
-  walk(): void {
-    console.log(`${this.name} is walking`);
-  }
-  jump(): void {
-    console.log(`${this.name} is jumping`);
-  }
+  
   addNuts(numberOfNuts: number): void {
     if (numberOfNuts < 0) {
       console.log(`Cannot add a negative number of Nuts`);
