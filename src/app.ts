@@ -122,8 +122,12 @@ const crocodilePack = new AnimalFamily("Swamp Squad", [
   crocodile2,
   crocodile3,
 ]);
+try {
+  crocodilePack.addAnimal(lion1);
+} catch (error: any) {
+  console.log(error.message);
+}
 const c = crocodilePack.animals[0];
-c.getType();
 
 crocodile1.walk();
 crocodile1.swim();
@@ -152,6 +156,13 @@ console.log(tortoises);
 console.log("\n--- Animal Shelter Section ---");
 const lion2 = new Lion("Maximus", 3, false);
 try {
+  const squirrel6 = new Squirrel("asd", 2, true, "Cedar", 3, 5);
+  const fam5 = new AnimalFamily("sqsqsq", [squirrel6]);
+} catch (error: any) {
+  console.log(error);
+}
+
+try {
   const snake2 = new Snake("Ssss", 3, "Anaconda", false, "Red", -1);
 } catch (error: any) {
   console.error(error.message);
@@ -161,6 +172,7 @@ try {
 } catch (error: any) {
   console.error(error.message);
 }
+
 const snake2 = new Snake("Ssss", 3, "Anaconda", false, "Red", 33);
 const animalShelter = AnimalShelter.getInstance();
 console.log(families[0].animals);

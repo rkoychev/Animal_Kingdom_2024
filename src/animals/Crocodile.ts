@@ -1,12 +1,8 @@
-import { ReptileAnimalType } from "../customTypes";
 import { families } from "../app";
 import Reptile from "../hierarchy/Reptile";
 
-export default class Crocodile
-  extends Reptile
-{
+export default class Crocodile extends Reptile {
   private length: number;
-  private type: ReptileAnimalType = "Crocodile";
   constructor(name: string, age: number, isMale: boolean, length: number) {
     super(name, age, isMale);
     if (length <= 0) {
@@ -14,12 +10,11 @@ export default class Crocodile
     }
     this.length = length;
   }
-  
-  
+
   giveBirth(): void {
     if (this.isMale) {
       console.log(
-        `Only Females can give birth and ${this.name} is a proud male ${this.type}`
+        `Only Females can give birth and ${this.name} is a proud male Crocodile`
       );
     } else if (this.home === undefined) {
       console.log(
@@ -55,8 +50,5 @@ export default class Crocodile
       }
       console.log(`${this.name} lays eggs`);
     }
-  }
-  getType() {
-    return this.type;
   }
 }

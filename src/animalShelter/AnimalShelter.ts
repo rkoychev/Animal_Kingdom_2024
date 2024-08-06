@@ -3,6 +3,9 @@ import Crocodile from "../animals/Crocodile";
 import Lion from "../animals/Lion";
 import { families } from "../app";
 import Mammal from "../hierarchy/Mammal";
+import Squirrel from "../animals/Squirrel";
+import Tortoise from "../animals/Tortoise";
+import Snake from "../animals/Snake";
 const ANIMAL_SHELTER_MAMMAL_LIMIT = 20;
 const ANIMAL_SHELTER_REPTILE_LIMIT = 19;
 export default class AnimalShelter {
@@ -49,7 +52,7 @@ export default class AnimalShelter {
         return;
       }
 
-      if (animal.getType() === "Lion") {
+      if (animal instanceof Lion) {
         if (animal.getHome() !== undefined) {
           const family = families.find(
             (pack) => pack.name === animal.getHome()
@@ -58,7 +61,7 @@ export default class AnimalShelter {
           animal.setHome(undefined);
         }
         this.lions++;
-      } else if (animal.getType() === "Squirrel") {
+      } else if (animal instanceof Squirrel) {
         this.squirrels++;
       }
       this.animals.push(animal);
@@ -71,16 +74,16 @@ export default class AnimalShelter {
         );
         return;
       }
-      if (animal.getType() === "Crocodile") {
+      if (animal instanceof Crocodile) {
         if (animal.getHome() !== undefined) {
           const pack = families.find((pack) => pack.name === animal.getHome());
-          pack?.removeAnimal(animal as Crocodile);
+          pack?.removeAnimal(animal);
           animal.setHome(undefined);
         }
         this.crocodiles++;
-      } else if (animal.getType() === "Tortoise") {
+      } else if (animal instanceof Tortoise) {
         this.tortoise++;
-      } else if (["Anaconda", "Cobra", "Python"].includes(animal.getType())) {
+      } else if (animal instanceof Snake) {
         this.snakes++;
       }
       this.animals.push(animal);

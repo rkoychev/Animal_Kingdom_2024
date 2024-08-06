@@ -1,18 +1,15 @@
-import {
-  AnimalType,
-  MammalAnimalType,
-  ReptileAnimalType,
-} from "../customTypes";
+import { AnimalType } from "../customTypes";
 import { families } from "../app";
+import Lion from "../animals/Lion";
+import Crocodile from "../animals/Crocodile";
 export type VerificationResult = {
   isValid: boolean;
   message: string;
 };
-
 export type VerificationProps = {
   name?: string;
   animals: AnimalType[];
-  animalsType?: MammalAnimalType | ReptileAnimalType;
+  animalsType?: typeof Lion | typeof Crocodile;
   minAnimals?: number;
   maxAnimals?: number;
   minMales?: number;
@@ -38,7 +35,10 @@ export default function verifyFamilyInfo(
   let femaleAdultsCount = 0;
   let allSameType = true;
   validations.animals?.forEach((animal) => {
-    if (animal.getType() !== validations.animalsType) {
+    if (
+      validations.animalsType &&
+      !(animal instanceof validations.animalsType)
+    ) {
       allSameType = false;
     }
     if (animal.getIsAdult()) {

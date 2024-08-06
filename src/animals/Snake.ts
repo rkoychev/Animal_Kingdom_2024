@@ -1,9 +1,7 @@
 import { SnakeType } from "../customTypes";
 import { snakes } from "../app";
 import Reptile from "../hierarchy/Reptile";
-export default class Snake
-  extends Reptile
-{
+export default class Snake extends Reptile {
   private type: SnakeType;
   private color: string;
   private length: number;
@@ -29,7 +27,7 @@ export default class Snake
   override walk(): void {
     console.log(`${this.name} is sliding`);
   }
-  
+
   giveBirth(): void {
     if (this.isMale) {
       console.log(
@@ -55,8 +53,5 @@ export default class Snake
       new Snake(name, age, this.type, gender, this.color, 10);
     }
     console.log(`${this.name} lays eggs`);
-  }
-  getType() {
-    return this.type;
   }
 }

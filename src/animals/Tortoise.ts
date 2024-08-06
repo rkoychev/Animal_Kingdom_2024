@@ -1,23 +1,18 @@
-import { ReptileAnimalType } from "../customTypes";
 import { tortoises } from "../app";
 import Reptile from "../hierarchy/Reptile";
 
-export default class Tortoise
-  extends Reptile
-{
-  private type: ReptileAnimalType = "Tortoise";
-
+export default class Tortoise extends Reptile {
   constructor(name: string, age: number, isMale: boolean) {
     super(name, age, isMale);
 
     this.home = "Animal Kingdom";
     tortoises.push(this);
   }
-  
+
   giveBirth(): void {
     if (this.isMale) {
       console.log(
-        `Only Females can give birth and ${this.name} is a proud male ${this.type}`
+        `Only Females can give birth and ${this.name} is a proud male Tortoise`
       );
     } else {
       this.timesGivenBirth += 1;
@@ -38,8 +33,5 @@ export default class Tortoise
       }
       console.log(`${this.name} lays eggs`);
     }
-  }
-  getType() {
-    return this.type;
   }
 }

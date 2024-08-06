@@ -6,6 +6,4 @@ import Tortoise from "./animals/Tortoise";
 
 export type TreeType = "Poplar" | "Cedar" | "Oak" | "Maple";
 export type SnakeType = "Cobra" | "Python" | "Anaconda";
-export type MammalAnimalType = "Lion" | "Squirrel";
-export type ReptileAnimalType = "Crocodile" | "Tortoise" | SnakeType;
 export type AnimalType = Lion | Snake | Crocodile | Tortoise | Squirrel;
