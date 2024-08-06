@@ -1,19 +1,18 @@
 import { MammalAnimalType, ReptileAnimalType, TreeType } from "../customTypes";
 import { ICanJump } from "../interfaces/ICanJump";
 import { ICanWalk } from "../interfaces/ICanWalk";
-import Mammal from "../interfaces/IMammal";
 import { squirrels } from "../app";
-import Animal from "../Animal";
+import Animal from "../hierarchy/Animal";
+import Mammal from "../hierarchy/Mammal";
 export default class Squirrel
-  extends Animal
-  implements ICanJump, ICanWalk, Mammal
+  extends Mammal
+  implements ICanJump, ICanWalk
 {
   private type: MammalAnimalType = "Squirrel";
   private treeType: TreeType;
   private treeAge: number;
   private holeSize: number;
   private storedNuts = 0;
-  group: "Mammal";
 
   constructor(
     name: string,
@@ -31,7 +30,6 @@ export default class Squirrel
     this.treeType = treeType;
     this.treeAge = treeAge;
     this.holeSize = holeSize;
-    this.group = "Mammal";
     squirrels.push(this);
   }
   walk(): void {
@@ -80,14 +78,9 @@ export default class Squirrel
     }
   }
 
-  getGroup(): string {
-    return this.group;
-  }
   getType(): ReptileAnimalType | MammalAnimalType {
     return this.type;
   }
-
-  // Setter for home
   setHome(home: string | undefined): void {
     this.home = home;
   }

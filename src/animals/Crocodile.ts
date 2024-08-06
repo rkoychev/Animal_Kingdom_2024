@@ -1,24 +1,22 @@
 import { ReptileAnimalType } from "../customTypes";
-import Reptile from "../interfaces/IReptile";
 import { ICanSwim } from "../interfaces/ICanSwim";
 import { ICanWalk } from "../interfaces/ICanWalk";
-import Animal from "../Animal";
+import Animal from "../hierarchy/Animal";
 import { families } from "../app";
+import Reptile from "../hierarchy/Reptile";
 
 export default class Crocodile
-  extends Animal
-  implements ICanSwim, ICanWalk, Reptile
+  extends Reptile
+  implements ICanSwim, ICanWalk
 {
   private length: number;
   private type: ReptileAnimalType = "Crocodile";
-  group: "Reptile";
   constructor(name: string, age: number, isMale: boolean, length: number) {
     super(name, age, isMale);
     if (length <= 0) {
       throw new Error("Length must be greater than zero");
     }
     this.length = length;
-    this.group = "Reptile";
   }
   swim() {
     console.log(`${this.name} is swimming`);
@@ -68,8 +66,5 @@ export default class Crocodile
   }
   getType() {
     return this.type;
-  }
-  getGroup() {
-    return this.group;
   }
 }

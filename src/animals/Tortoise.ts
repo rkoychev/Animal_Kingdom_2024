@@ -1,22 +1,20 @@
 import { ReptileAnimalType } from "../customTypes";
-import Reptile from "../interfaces/IReptile";
 import { ICanSwim } from "../interfaces/ICanSwim";
 import { ICanWalk } from "../interfaces/ICanWalk";
 import { tortoises } from "../app";
-import Animal from "../Animal";
+import Animal from "../hierarchy/Animal";
+import Reptile from "../hierarchy/Reptile";
 
 export default class Tortoise
-  extends Animal
-  implements ICanSwim, ICanWalk, Reptile
+  extends Reptile
+  implements ICanSwim, ICanWalk
 {
   private type: ReptileAnimalType = "Tortoise";
-  group: "Reptile";
 
   constructor(name: string, age: number, isMale: boolean) {
     super(name, age, isMale);
 
     this.home = "Animal Kingdom";
-    this.group = "Reptile";
     tortoises.push(this);
   }
   swim() {
@@ -52,8 +50,5 @@ export default class Tortoise
   }
   getType() {
     return this.type;
-  }
-  getGroup() {
-    return this.group;
   }
 }

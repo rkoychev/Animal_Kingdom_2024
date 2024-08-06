@@ -27,7 +27,7 @@ export default abstract class Animal {
     if (this.home === undefined) {
       console.log(`${this.name} doesn't have a home yet`);
     } else {
-      console.log(`${this.name} lives in ${this.home} pack`);
+      console.log(`${this.name} lives in ${this.home}`);
     }
   }
   getName(): string {
