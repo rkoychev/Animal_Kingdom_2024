@@ -16,46 +16,20 @@ export default class Crocodile
   }
   
   
-  giveBirth(): void {
-    if (this.isMale) {
-      console.log(
-        `Only Females can give birth and ${this.name} is a proud male ${this.type}`
-      );
-    } else if (this.home === undefined) {
-      console.log(
-        `${this.name} can't give birth because she doesn't have a home to meet a male`
-      );
-    } else {
-      //Giving birth for reptiles creates 8 reptiles also of random gender, but always at least 2 males and 1 female.
-      this.timesGivenBirth += 1;
-      for (let i = 1; i <= 5; i++) {
-        const num = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
-        const name: string =
-          this.name + "-Baby-" + this.timesGivenBirth + "-" + i;
-        const gender: boolean = num === 1;
-        const age: number = 0;
-        const babyCroc = new Crocodile(name, age, gender, 10);
-        families.forEach((fam) => {
-          if (fam.name === this.home) {
-            fam.addAnimal(babyCroc, true);
-          }
-        });
-      }
-      for (let i = 6; i <= 8; i++) {
-        const name: string =
-          this.name + "-Baby-" + this.timesGivenBirth + "-" + i;
-        const gender: boolean = i % 2 != 0;
-        const age: number = 0;
-        const babyCroc = new Crocodile(name, age, gender, 10);
-        families.forEach((fam) => {
-          if (fam.name === this.home) {
-            fam.addAnimal(babyCroc, true);
-          }
-        });
-      }
-      console.log(`${this.name} lays eggs`);
+  giveBirth(): [string, number, boolean,string][] {
+    const crocodilesTuples = super.giveBirth();
+    for (var crocodileTuple of crocodilesTuples) {
+
+      const babySnake = new Crocodile(crocodileTuple[0], 0, crocodileTuple[2], 10);
+      families.forEach((family) => {
+        if (family.name === this.home) {
+          family.addAnimal(babySnake, true);
+        }
+      });
     }
+    return [["", 0, false,""]];
   }
+  
   getType() {
     return this.type;
   }

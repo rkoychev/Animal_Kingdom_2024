@@ -43,30 +43,13 @@ export default class Squirrel
         } nuts`
       );
   }
-  giveBirth(): void {
-    if (this.isMale) {
-      console.log(
-        `Only Females can give birth and ${this.name} is a proud male ${this.type}`
-      );
-    } else {
-      this.timesGivenBirth += 1;
-      for (let i = 1; i <= 5; i++) {
-        const num = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
-        const name: string =
-          this.name + "-Baby-" + this.timesGivenBirth + "-" + i;
-        const isMale: boolean = num === 1;
-        const age: number = 0;
-        new Squirrel(
-          name,
-          age,
-          isMale,
-          this.treeType,
-          this.treeAge,
-          this.holeSize
-        );
-      }
-      console.log(`${this.name} gives birth`);
+  giveBirth(): [string, number,boolean,string][] {
+    const squirrelsTuples = super.giveBirth();
+    for(var squirrelTuple of squirrelsTuples){
+      const babysquirrel = new Squirrel(squirrelTuple[0], 0, squirrelTuple[2],this.treeType,this.treeAge,this.holeSize);
+      babysquirrel.home = squirrelTuple[3];
     }
+    return[["",0,false,""]];
   }
 
   getType(): ReptileAnimalType | MammalAnimalType {

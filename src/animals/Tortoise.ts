@@ -14,30 +14,14 @@ export default class Tortoise
     tortoises.push(this);
   }
   
-  giveBirth(): void {
-    if (this.isMale) {
-      console.log(
-        `Only Females can give birth and ${this.name} is a proud male ${this.type}`
-      );
-    } else {
-      this.timesGivenBirth += 1;
-      for (let i = 1; i <= 5; i++) {
-        const num = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
-        const name: string =
-          this.name + "-Baby-" + this.timesGivenBirth + "-" + i;
-        const isMale: boolean = num === 1;
-        const age: number = 0;
-        new Tortoise(name, age, isMale);
-      }
-      for (let i = 6; i <= 8; i++) {
-        const name: string =
-          this.name + "-Baby-" + this.timesGivenBirth + "-" + i;
-        const isMale: boolean = i % 2 != 0;
-        const age: number = 0;
-        new Tortoise(name, age, isMale);
-      }
-      console.log(`${this.name} lays eggs`);
+  giveBirth(): [string, number,boolean,string][] {
+    const tortoisesTuples = super.giveBirth();
+    for(var tortoiseTuple of tortoisesTuples){
+    
+     const babySnake = new Tortoise(tortoiseTuple[0], 0, tortoiseTuple[2]);
+     babySnake.home = tortoiseTuple[3];
     }
+    return[["",0,false,""]];
   }
   getType() {
     return this.type;
