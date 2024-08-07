@@ -1,6 +1,4 @@
 import { families } from "../app";
-import Lion from "../animals/Lion";
-import Crocodile from "../animals/Crocodile";
 import Animal from "../hierarchy/Animal";
 export type VerificationResult = {
   isValid: boolean;
@@ -9,7 +7,6 @@ export type VerificationResult = {
 export type VerificationProps = {
   name?: string;
   animals: Animal[];
-  animalsType?: typeof Lion | typeof Crocodile;
   minAnimals?: number;
   maxAnimals?: number;
   minMales?: number;
@@ -28,6 +25,7 @@ export default function verifyFamilyInfo(
 ): VerificationResult {
   let isValid = true;
   let message = "";
+  const animalsClass = validations.animals[0].constructor.name;
   const animalsCount = validations.animals?.length;
   let femalesCount = 0;
   let malesCount = 0;
@@ -35,10 +33,7 @@ export default function verifyFamilyInfo(
   let femaleAdultsCount = 0;
   let allSameType = true;
   validations.animals?.forEach((animal) => {
-    if (
-      validations.animalsType &&
-      !(animal instanceof validations.animalsType)
-    ) {
+    if (animal.constructor.name !== animalsClass) {
       allSameType = false;
     }
     if (animal.getIsAdult()) {

@@ -1,5 +1,3 @@
-import Crocodile from "../animals/Crocodile";
-import Lion from "../animals/Lion";
 import { families } from "../app";
 import Animal from "../hierarchy/Animal";
 import verifyFamilyInfo, {
@@ -12,6 +10,9 @@ export default class AnimalFamily {
   constructor(name: string, animals: Animal[]) {
     if (animals.length === 0) {
       throw new Error("A family must have at least one Animal");
+    }
+    if (animals[0].getCanHaveFamily() === false) {
+      throw new Error(`${animals[0].constructor.name} cannot have family`);
     }
     let requirements: VerificationProps = {
       name: name,
@@ -35,8 +36,8 @@ export default class AnimalFamily {
     }
   }
   addAnimal(animal: Animal, fromBirth = false) {
-    const animalInstance = checkInstance(this.animals[0]);
-    if (!(animal instanceof animalInstance))
+    const animalClass = this.animals[0].constructor.name;
+    if (animal.constructor.name !== animalClass)
       throw new Error(
         `Two different types of Animal cannot be in the same family`
       );
@@ -50,7 +51,6 @@ export default class AnimalFamily {
       } else {
         let requirements: VerificationProps = {
           animals: familyWithNewMember,
-          animalsType: animalInstance,
         };
         const specificRequirements = getSpecificRequirements(
           requirements,
@@ -109,20 +109,18 @@ function getSpecificRequirements(
     minAnimals: 8,
     maxMaleAdults: 1,
   };
-  const animalInstance = checkInstance(animal);
-  switch (animalInstance) {
-    case Crocodile:
+  const animalClass = animal.constructor.name;
+  switch (animalClass) {
+    case "Crocodile":
       specificRequirements = {
         ...CROCODILE_FAMILY_REQUIREMENTS,
         ...specificRequirements,
-        animalsType: Crocodile,
       };
       break;
-    case Lion:
+    case "Lion":
       specificRequirements = {
         ...LION_FAMILY_REQUIREMENTS,
         ...specificRequirements,
-        animalsType: Lion,
       };
       break;
     default:
@@ -130,13 +128,4 @@ function getSpecificRequirements(
   }
 
   return specificRequirements;
-}
-function checkInstance(animal: Animal): typeof Crocodile | typeof Lion {
-  if (animal instanceof Crocodile) {
-    return Crocodile;
-  } else if (animal instanceof Lion) {
-    return Lion;
-  } else {
-    throw new Error(`${animal.constructor.name}s don't live in families`);
-  }
 }

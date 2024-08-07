@@ -5,6 +5,7 @@ import Mammal from "../hierarchy/Mammal";
 export default class Lion extends Mammal implements ICanRun, ICanTalk {
   constructor(name: string, age: number, isMale: boolean) {
     super(name, age, isMale);
+    this.canHaveFamily = true;
   }
 
   run(): void {
