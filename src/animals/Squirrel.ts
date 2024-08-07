@@ -1,10 +1,7 @@
-import { MammalAnimalType, ReptileAnimalType, TreeType } from "../customTypes";
+import { TreeType } from "../customTypes";
 import { squirrels } from "../app";
 import Mammal from "../hierarchy/Mammal";
-export default class Squirrel
-  extends Mammal
-{
-  private type: MammalAnimalType = "Squirrel";
+export default class Squirrel extends Mammal {
   private treeType: TreeType;
   private treeAge: number;
   private holeSize: number;
@@ -28,7 +25,7 @@ export default class Squirrel
     this.holeSize = holeSize;
     squirrels.push(this);
   }
-  
+
   addNuts(numberOfNuts: number): void {
     if (numberOfNuts < 0) {
       console.log(`Cannot add a negative number of Nuts`);
@@ -46,7 +43,7 @@ export default class Squirrel
   giveBirth(): void {
     if (this.isMale) {
       console.log(
-        `Only Females can give birth and ${this.name} is a proud male ${this.type}`
+        `Only Females can give birth and ${this.name} is a proud male ${this.constructor.name}`
       );
     } else {
       this.timesGivenBirth += 1;
@@ -69,9 +66,6 @@ export default class Squirrel
     }
   }
 
-  getType(): ReptileAnimalType | MammalAnimalType {
-    return this.type;
-  }
   setHome(home: string | undefined): void {
     this.home = home;
   }

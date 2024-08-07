@@ -5,19 +5,25 @@ import Snake from "./animals/Snake";
 import Squirrel from "./animals/Squirrel";
 import Tortoise from "./animals/Tortoise";
 import AnimalFamily from "./animalFamily/AnimalFamily";
+
 export const families: AnimalFamily[] = [];
 export const squirrels: Squirrel[] = [];
 export const snakes: Snake[] = [];
 export const tortoises: Tortoise[] = [];
+
 console.log("Starting");
 
 console.log("\n--- Lion Section ---");
 const lion1 = new Lion("Simba", 5, true);
+
 try {
   const invalidAgeLion = new Lion("Simba", -5, true);
-} catch (error: any) {
-  console.error(error.message);
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.message);
+  }
 }
+
 try {
   const invalidAniAnimalFamily = new AnimalFamily("Pride Rock", [
     new Lion("Simba", 5, true),
@@ -25,9 +31,12 @@ try {
     new Lion("Nala", 4, false),
     new Lion("Sarabi", 6, false),
   ]);
-} catch (error: any) {
-  console.error(error.message);
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.message);
+  }
 }
+
 try {
   const lionData = [
     { name: "Nala", age: 4, isMale: false },
@@ -43,9 +52,12 @@ try {
     (data) => new Lion(data.name, data.age, data.isMale)
   );
   const lionsFamily = new AnimalFamily("Pride Rock", lions);
-} catch (error: any) {
-  console.error(error.message);
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.message);
+  }
 }
+
 const lionData = [
   { name: "Nala", age: 4, isMale: false },
   { name: "Sarabi", age: 6, isMale: false },
@@ -60,6 +72,7 @@ const lions: Lion[] = lionData.map(
   (data) => new Lion(data.name, data.age, data.isMale)
 );
 const lionsFamily2 = new AnimalFamily("Pride Rock", lions);
+
 try {
   const lionData = [
     { name: "Nala", age: 4, isMale: false },
@@ -75,9 +88,12 @@ try {
     (data) => new Lion(data.name, data.age, data.isMale)
   );
   const lionsFamily = new AnimalFamily("Pride Rock", lions);
-} catch (error: any) {
-  console.error(error.message);
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.message);
+  }
 }
+
 lionsFamily2.animals[2].giveBirth();
 console.log(lionsFamily2.animals[2]);
 lion1.walk();
@@ -108,13 +124,16 @@ console.log("\n--- Crocodile Section ---");
 const crocodile1 = new Crocodile("Croco", 10, false, 23);
 const crocodile2 = new Crocodile("Snapper", 5, true, 22);
 const crocodile3 = new Crocodile("Crocodile3", 10, false, 22);
+
 try {
   const crocodilePack = new AnimalFamily("Swamp Squad", [
     crocodile1,
     crocodile2,
   ]);
-} catch (error: any) {
-  console.error(error.message);
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.message);
+  }
 }
 
 const crocodilePack = new AnimalFamily("Swamp Squad", [
@@ -122,8 +141,16 @@ const crocodilePack = new AnimalFamily("Swamp Squad", [
   crocodile2,
   crocodile3,
 ]);
+
+try {
+  crocodilePack.addAnimal(lion1);
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.message);
+  }
+}
+
 const c = crocodilePack.animals[0];
-c.getType();
 
 crocodile1.walk();
 crocodile1.swim();
@@ -151,16 +178,32 @@ console.log(tortoises);
 
 console.log("\n--- Animal Shelter Section ---");
 const lion2 = new Lion("Maximus", 3, false);
+
+try {
+  const squirrel6 = new Squirrel("asd", 2, true, "Cedar", 3, 5);
+  const fam5 = new AnimalFamily("sqsqsq", [squirrel6]);
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.message);
+  }
+}
+
 try {
   const snake2 = new Snake("Ssss", 3, "Anaconda", false, "Red", -1);
-} catch (error: any) {
-  console.error(error.message);
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.message);
+  }
 }
+
 try {
   const snake2 = new Snake("d", 3, "Anaconda", false, "Red", 3);
-} catch (error: any) {
-  console.error(error.message);
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.message);
+  }
 }
+
 const snake2 = new Snake("Ssss", 3, "Anaconda", false, "Red", 33);
 const animalShelter = AnimalShelter.getInstance();
 console.log(families[0].animals);

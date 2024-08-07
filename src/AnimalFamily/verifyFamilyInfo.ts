@@ -1,18 +1,12 @@
-import {
-  AnimalType,
-  MammalAnimalType,
-  ReptileAnimalType,
-} from "../customTypes";
 import { families } from "../app";
+import Animal from "../hierarchy/Animal";
 export type VerificationResult = {
   isValid: boolean;
   message: string;
 };
-
 export type VerificationProps = {
   name?: string;
-  animals: AnimalType[];
-  animalsType?: MammalAnimalType | ReptileAnimalType;
+  animals: Animal[];
   minAnimals?: number;
   maxAnimals?: number;
   minMales?: number;
@@ -31,16 +25,13 @@ export default function verifyFamilyInfo(
 ): VerificationResult {
   let isValid = true;
   let message = "";
+  const animalsClass = validations.animals[0].constructor.name;
   const animalsCount = validations.animals?.length;
   let femalesCount = 0;
   let malesCount = 0;
   let malesAdultsCount = 0;
   let femaleAdultsCount = 0;
-  let allSameType = true;
   validations.animals?.forEach((animal) => {
-    if (animal.getType() !== validations.animalsType) {
-      allSameType = false;
-    }
     if (animal.getIsAdult()) {
       if (animal.getIsMale()) {
         malesAdultsCount += 1;
@@ -54,6 +45,9 @@ export default function verifyFamilyInfo(
       femalesCount += 1;
     }
   });
+  const allSameType = !validations.animals.some(
+    (animal) => animal.constructor.name !== animalsClass
+  );
   if (!allSameType) {
     isValid = false;
     message += `Cannot have different animal types in the same family. \n`;
