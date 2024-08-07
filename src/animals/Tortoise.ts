@@ -1,12 +1,7 @@
-import { ReptileAnimalType } from "../customTypes";
 import { tortoises } from "../app";
 import Reptile from "../hierarchy/Reptile";
 
-export default class Tortoise
-  extends Reptile
-{
-  private type: ReptileAnimalType = "Tortoise";
-
+export default class Tortoise extends Reptile {
   constructor(name: string, age: number, isMale: boolean) {
     super(name, age, isMale);
 
@@ -22,8 +17,5 @@ export default class Tortoise
      babySnake.home = tortoiseTuple[3];
     }
     return[["",0,false,""]];
-  }
-  getType() {
-    return this.type;
   }
 }

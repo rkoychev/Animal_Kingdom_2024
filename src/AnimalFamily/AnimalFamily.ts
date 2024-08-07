@@ -1,30 +1,26 @@
 import { families } from "../app";
-import {
-  AnimalType,
-  MammalAnimalType,
-  ReptileAnimalType,
-} from "../customTypes";
+import Animal from "../hierarchy/Animal";
 import verifyFamilyInfo, {
   VerificationResult,
   VerificationProps,
 } from "./verifyFamilyInfo";
 export default class AnimalFamily {
   name: string;
-  animals: AnimalType[];
-  animalsType: MammalAnimalType | ReptileAnimalType;
-  constructor(name: string, animals: AnimalType[]) {
+  animals: Animal[];
+  constructor(name: string, animals: Animal[]) {
     if (animals.length === 0) {
       throw new Error("A family must have at least one Animal");
     }
-
+    if (animals[0].getCanHaveFamily() === false) {
+      throw new Error(`${animals[0].constructor.name} cannot have family`);
+    }
     let requirements: VerificationProps = {
       name: name,
       animals: animals,
     };
-    const animalType = animals[0].getType();
     const specificRequirements = getSpecificRequirements(
       requirements,
-      animalType
+      animals[0]
     );
     const verifycationResult: VerificationResult =
       verifyFamilyInfo(specificRequirements);
@@ -34,19 +30,17 @@ export default class AnimalFamily {
         animal.setHome(this.name);
       });
       this.animals = animals;
-      this.animalsType = animalType;
       families.push(this);
     } else {
       throw new Error(verifycationResult.message);
     }
   }
-  addAnimal(animal: AnimalType, fromBirth = false) {
-    const animalType = animal.getType();
-    if (this.animalsType !== animalType) {
+  addAnimal(animal: Animal, fromBirth = false) {
+    const animalClass = this.animals[0].constructor.name;
+    if (animal.constructor.name !== animalClass)
       throw new Error(
-        `Animal type ${animalType} cannot be in the same family as ${this.animalsType}`
+        `Two different types of Animal cannot be in the same family`
       );
-    }
     if (animal.getHome() === this.name) {
       console.log(`${this.name} is already in the family`);
     } else {
@@ -57,11 +51,10 @@ export default class AnimalFamily {
       } else {
         let requirements: VerificationProps = {
           animals: familyWithNewMember,
-          animalsType: this.animalsType,
         };
         const specificRequirements = getSpecificRequirements(
           requirements,
-          this.animalsType
+          animal
         );
         const verifycationResult: VerificationResult =
           verifyFamilyInfo(specificRequirements);
@@ -69,25 +62,24 @@ export default class AnimalFamily {
           animal.setHome(this.name);
           this.animals.push(animal);
         } else {
-          console.log(`Cannot add ${animalType}`);
+          console.log(`Cannot add ${animal.getName()} to family`);
           console.log(verifycationResult.message);
         }
       }
     }
   }
-  removeAnimal(animal: AnimalType) {
+  removeAnimal(animal: Animal) {
+    if (this.animals.indexOf(animal)!==-1) {
+      console.log(`${animal.getName()} is not part of ${this.name}`);
+      return;
+    }
     const animalsWithoutRemovedAnimal = this.animals.filter(
       (anim) => anim !== animal
     );
-
     let requirements: VerificationProps = {
       animals: animalsWithoutRemovedAnimal,
-      animalsType: this.animalsType,
     };
-    const specificRequirements = getSpecificRequirements(
-      requirements,
-      this.animalsType
-    );
+    const specificRequirements = getSpecificRequirements(requirements, animal);
     const verifycationResult: VerificationResult =
       verifyFamilyInfo(specificRequirements);
     //if verification is successful
@@ -103,7 +95,7 @@ export default class AnimalFamily {
 }
 function getSpecificRequirements(
   basicRequirements: VerificationProps,
-  specificAnimalType: MammalAnimalType | ReptileAnimalType
+  animal: Animal
 ): VerificationProps {
   let specificRequirements = basicRequirements;
   const CROCODILE_FAMILY_REQUIREMENTS: VerificationProps = {
@@ -117,18 +109,23 @@ function getSpecificRequirements(
     minAnimals: 8,
     maxMaleAdults: 1,
   };
-  if (specificAnimalType === "Crocodile") {
-    specificRequirements = {
-      ...CROCODILE_FAMILY_REQUIREMENTS,
-      ...basicRequirements,
-      animalsType: specificAnimalType,
-    };
-  } else if (specificAnimalType === "Lion") {
-    specificRequirements = {
-      ...LION_FAMILY_REQUIREMENTS,
-      ...basicRequirements,
-      animalsType: specificAnimalType,
-    };
+  const animalClass = animal.constructor.name;
+  switch (animalClass) {
+    case "Crocodile":
+      specificRequirements = {
+        ...CROCODILE_FAMILY_REQUIREMENTS,
+        ...specificRequirements,
+      };
+      break;
+    case "Lion":
+      specificRequirements = {
+        ...LION_FAMILY_REQUIREMENTS,
+        ...specificRequirements,
+      };
+      break;
+    default:
+      break;
   }
+
   return specificRequirements;
 }

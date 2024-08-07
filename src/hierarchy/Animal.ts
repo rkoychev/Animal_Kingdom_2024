@@ -8,6 +8,7 @@ export default abstract class Animal implements ICanWalk {
   protected isMale: boolean;
   protected home?: string | undefined;
   protected timesGivenBirth: number;
+  protected _canHaveFamily: boolean = false;
   constructor(name: string, age: number, isMale: boolean) {
     if (age < 0) {
       throw new Error("Age cant be negative");
@@ -29,7 +30,9 @@ export default abstract class Animal implements ICanWalk {
   walk(): void {
     console.log(`${this.name} is walking`);
   }
-  
+
+  giveBirth(): void {}
+
   showHome(): void {
     if (this.home === undefined) {
       console.log(`${this.name} doesn't have a home yet`);
@@ -56,5 +59,8 @@ export default abstract class Animal implements ICanWalk {
   }
   setHome(home: string | undefined): void {
     this.home = home;
+  }
+  getCanHaveFamily(): boolean {
+    return this._canHaveFamily;
   }
 }

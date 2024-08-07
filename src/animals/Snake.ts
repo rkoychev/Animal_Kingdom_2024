@@ -1,9 +1,7 @@
 import { SnakeType } from "../customTypes";
 import { snakes } from "../app";
 import Reptile from "../hierarchy/Reptile";
-export default class Snake
-  extends Reptile
-{
+export default class Snake extends Reptile {
   private type: SnakeType;
   private color: string;
   private length: number;
@@ -38,9 +36,5 @@ export default class Snake
       babySnake.home = snakeTuple[3];
     }
     return [["", 0, false,""]];
-  }
-
-  getType() {
-    return this.type;
   }
 }
