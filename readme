@@ -1,2 +1,1 @@
-If you cannot run and debug the app.ts file first go to package.json file and below the description add type:"module", then go to tsconfig.json and there in lib change the es6 to ES2016 then in a terminal run tsc -w.
-After all this is done try to run the app.ts file and if it fails revert all the changes made and try again somehow now it works.
+Run tsc or tsc -w for watch mode before trying to run the app.ts
