@@ -1,4 +1,3 @@
-import { AnimalType } from "../customTypes";
 import Crocodile from "../animals/Crocodile";
 import Lion from "../animals/Lion";
 import { families } from "../app";
@@ -6,6 +5,7 @@ import Mammal from "../hierarchy/Mammal";
 import Squirrel from "../animals/Squirrel";
 import Tortoise from "../animals/Tortoise";
 import Snake from "../animals/Snake";
+import Animal from "../hierarchy/Animal";
 const ANIMAL_SHELTER_MAMMAL_LIMIT = 20;
 const ANIMAL_SHELTER_REPTILE_LIMIT = 19;
 export default class AnimalShelter {
@@ -17,7 +17,7 @@ export default class AnimalShelter {
   private snakes = 0;
   private squirrels = 0;
   private tortoise = 0;
-  private animals: AnimalType[] = [];
+  private animals: Animal[] = [];
 
   private constructor() {}
 
@@ -43,7 +43,7 @@ export default class AnimalShelter {
     console.log(`tortoise: ${this.tortoise}`);
   }
 
-  addAnimal(animal: AnimalType): void {
+  addAnimal(animal: Animal): void {
     if (animal instanceof Mammal) {
       if (this.mammalsNumber >= this.mammalLimit) {
         console.log(

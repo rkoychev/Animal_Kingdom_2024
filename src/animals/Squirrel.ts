@@ -43,7 +43,7 @@ export default class Squirrel extends Mammal {
   giveBirth(): void {
     if (this.isMale) {
       console.log(
-        `Only Females can give birth and ${this.name} is a proud male Squirrel`
+        `Only Females can give birth and ${this.name} is a proud male ${this.constructor.name}`
       );
     } else {
       this.timesGivenBirth += 1;

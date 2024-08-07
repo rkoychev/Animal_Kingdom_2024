@@ -1,14 +1,14 @@
-import { AnimalType } from "../customTypes";
 import { families } from "../app";
 import Lion from "../animals/Lion";
 import Crocodile from "../animals/Crocodile";
+import Animal from "../hierarchy/Animal";
 export type VerificationResult = {
   isValid: boolean;
   message: string;
 };
 export type VerificationProps = {
   name?: string;
-  animals: AnimalType[];
+  animals: Animal[];
   animalsType?: typeof Lion | typeof Crocodile;
   minAnimals?: number;
   maxAnimals?: number;

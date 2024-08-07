@@ -31,7 +31,7 @@ export default class Snake extends Reptile {
   giveBirth(): void {
     if (this.isMale) {
       console.log(
-        `Only Females can give birth and ${this.name} is a proud male ${this.type}`
+        `Only Females can give birth and ${this.name} is a proud male ${this.constructor.name}`
       );
       return;
     }

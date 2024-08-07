@@ -29,7 +29,9 @@ export default abstract class Animal implements ICanWalk {
   walk(): void {
     console.log(`${this.name} is walking`);
   }
-  
+
+  giveBirth(): void {}
+
   showHome(): void {
     if (this.home === undefined) {
       console.log(`${this.name} doesn't have a home yet`);

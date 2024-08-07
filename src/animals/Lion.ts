@@ -16,7 +16,7 @@ export default class Lion extends Mammal implements ICanRun, ICanTalk {
   giveBirth(): void {
     if (this.isMale) {
       console.log(
-        `Only Females can give birth and ${this.name} is a proud male Lion`
+        `Only Females can give birth and ${this.name} is a proud male ${this.constructor.name}`
       );
     } else if (this.home === undefined) {
       console.log(

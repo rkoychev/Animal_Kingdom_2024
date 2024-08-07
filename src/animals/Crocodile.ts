@@ -14,7 +14,7 @@ export default class Crocodile extends Reptile {
   giveBirth(): void {
     if (this.isMale) {
       console.log(
-        `Only Females can give birth and ${this.name} is a proud male Crocodile`
+        `Only Females can give birth and ${this.name} is a proud male ${this.constructor.name}`
       );
     } else if (this.home === undefined) {
       console.log(

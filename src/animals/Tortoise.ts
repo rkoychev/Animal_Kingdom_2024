@@ -12,7 +12,7 @@ export default class Tortoise extends Reptile {
   giveBirth(): void {
     if (this.isMale) {
       console.log(
-        `Only Females can give birth and ${this.name} is a proud male Tortoise`
+        `Only Females can give birth and ${this.name} is a proud male ${this.constructor.name}`
       );
     } else {
       this.timesGivenBirth += 1;

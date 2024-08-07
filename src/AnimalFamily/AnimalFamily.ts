@@ -1,25 +1,18 @@
 import Crocodile from "../animals/Crocodile";
 import Lion from "../animals/Lion";
 import { families } from "../app";
-import { AnimalType } from "../customTypes";
+import Animal from "../hierarchy/Animal";
 import verifyFamilyInfo, {
   VerificationResult,
   VerificationProps,
 } from "./verifyFamilyInfo";
 export default class AnimalFamily {
   name: string;
-  animals: AnimalType[];
-  animalsType: typeof Lion | typeof Crocodile;
-  constructor(name: string, animals: AnimalType[]) {
+  animals: Animal[];
+  constructor(name: string, animals: Animal[]) {
     if (animals.length === 0) {
       throw new Error("A family must have at least one Animal");
     }
-    if (animals[0] instanceof Lion) {
-      this.animalsType = Lion;
-    } else if (animals[0] instanceof Crocodile) {
-      this.animalsType = Crocodile;
-    } else throw new Error("Only Crocodile and Lions can have a family");
-
     let requirements: VerificationProps = {
       name: name,
       animals: animals,
@@ -41,12 +34,12 @@ export default class AnimalFamily {
       throw new Error(verifycationResult.message);
     }
   }
-  addAnimal(animal: AnimalType, fromBirth = false) {
-    if (!(animal instanceof this.animalsType)) {
+  addAnimal(animal: Animal, fromBirth = false) {
+    const animalInstance = checkInstance(this.animals[0]);
+    if (!(animal instanceof animalInstance))
       throw new Error(
         `Two different types of Animal cannot be in the same family`
       );
-    }
     if (animal.getHome() === this.name) {
       console.log(`${this.name} is already in the family`);
     } else {
@@ -57,7 +50,7 @@ export default class AnimalFamily {
       } else {
         let requirements: VerificationProps = {
           animals: familyWithNewMember,
-          animalsType: this.animalsType,
+          animalsType: animalInstance,
         };
         const specificRequirements = getSpecificRequirements(
           requirements,
@@ -75,14 +68,16 @@ export default class AnimalFamily {
       }
     }
   }
-  removeAnimal(animal: AnimalType) {
+  removeAnimal(animal: Animal) {
+    if (!this.animals.includes(animal)) {
+      console.log(`${animal.getName()} is not part of ${this.name}`);
+      return;
+    }
     const animalsWithoutRemovedAnimal = this.animals.filter(
       (anim) => anim !== animal
     );
-
     let requirements: VerificationProps = {
       animals: animalsWithoutRemovedAnimal,
-      animalsType: this.animalsType,
     };
     const specificRequirements = getSpecificRequirements(requirements, animal);
     const verifycationResult: VerificationResult =
@@ -100,7 +95,7 @@ export default class AnimalFamily {
 }
 function getSpecificRequirements(
   basicRequirements: VerificationProps,
-  animal: AnimalType
+  animal: Animal
 ): VerificationProps {
   let specificRequirements = basicRequirements;
   const CROCODILE_FAMILY_REQUIREMENTS: VerificationProps = {
@@ -114,18 +109,34 @@ function getSpecificRequirements(
     minAnimals: 8,
     maxMaleAdults: 1,
   };
-  if (animal instanceof Crocodile) {
-    specificRequirements = {
-      ...CROCODILE_FAMILY_REQUIREMENTS,
-      ...basicRequirements,
-      animalsType: Crocodile,
-    };
-  } else if (animal instanceof Lion) {
-    specificRequirements = {
-      ...LION_FAMILY_REQUIREMENTS,
-      ...basicRequirements,
-      animalsType: Lion,
-    };
+  const animalInstance = checkInstance(animal);
+  switch (animalInstance) {
+    case Crocodile:
+      specificRequirements = {
+        ...CROCODILE_FAMILY_REQUIREMENTS,
+        ...specificRequirements,
+        animalsType: Crocodile,
+      };
+      break;
+    case Lion:
+      specificRequirements = {
+        ...LION_FAMILY_REQUIREMENTS,
+        ...specificRequirements,
+        animalsType: Lion,
+      };
+      break;
+    default:
+      break;
   }
+
   return specificRequirements;
+}
+function checkInstance(animal: Animal): typeof Crocodile | typeof Lion {
+  if (animal instanceof Crocodile) {
+    return Crocodile;
+  } else if (animal instanceof Lion) {
+    return Lion;
+  } else {
+    throw new Error(`${animal.constructor.name}s don't live in families`);
+  }
 }
