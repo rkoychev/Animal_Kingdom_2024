@@ -31,11 +31,7 @@ export default function verifyFamilyInfo(
   let malesCount = 0;
   let malesAdultsCount = 0;
   let femaleAdultsCount = 0;
-  let allSameType = true;
   validations.animals?.forEach((animal) => {
-    if (animal.constructor.name !== animalsClass) {
-      allSameType = false;
-    }
     if (animal.getIsAdult()) {
       if (animal.getIsMale()) {
         malesAdultsCount += 1;
@@ -49,6 +45,9 @@ export default function verifyFamilyInfo(
       femalesCount += 1;
     }
   });
+  const allSameType = !validations.animals.some(
+    (animal) => animal.constructor.name !== animalsClass
+  );
   if (!allSameType) {
     isValid = false;
     message += `Cannot have different animal types in the same family. \n`;

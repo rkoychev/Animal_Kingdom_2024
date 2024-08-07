@@ -5,7 +5,7 @@ export default class Crocodile extends Reptile {
   private length: number;
   constructor(name: string, age: number, isMale: boolean, length: number) {
     super(name, age, isMale);
-    this.canHaveFamily = true;
+    this._canHaveFamily = true;
     if (length <= 0) {
       throw new Error("Length must be greater than zero");
     }
