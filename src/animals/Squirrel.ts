@@ -1,5 +1,6 @@
 import { TreeType } from "../customTypes";
 import { squirrels } from "../app";
+import { AnimalCandidate } from "../hierarchy/Animal";
 import Mammal from "../hierarchy/Mammal";
 export default class Squirrel extends Mammal {
   private treeType: TreeType;
@@ -35,21 +36,21 @@ export default class Squirrel extends Mammal {
       this.storedNuts += numberOfNuts;
     } else
       console.log(
-        `${this.name} hole has space left only for ${
-          this.holeSize - this.storedNuts
+        `${this.name} hole has space left only for ${this.holeSize - this.storedNuts
         } nuts`
       );
-  }
-  giveBirth(): [string, number,boolean,string][] {
-    const squirrelsTuples = super.giveBirth();
-    for(var squirrelTuple of squirrelsTuples){
-      const babysquirrel = new Squirrel(squirrelTuple[0], 0, squirrelTuple[2],this.treeType,this.treeAge,this.holeSize);
-      babysquirrel.home = squirrelTuple[3];
-    }
-    return[["",0,false,""]];
-  }
+  };
+  public giveBirth(): void {
+    const candidateSquirrels: AnimalCandidate[] = super.giveBirth() as AnimalCandidate[];
+    if (candidateSquirrels) {
+      candidateSquirrels.forEach(squirrelObjectInfo => {
+        const babySquirrel = new Squirrel(squirrelObjectInfo.name, 0, squirrelObjectInfo.isMale, this.treeType, this.treeAge, this.holeSize);
+        babySquirrel.home = squirrelObjectInfo.home;
+      });
+    };
+  };
 
   setHome(home: string | undefined): void {
     this.home = home;
-  }
+  };
 }

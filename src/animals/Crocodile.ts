@@ -1,4 +1,5 @@
 import { families } from "../app";
+import { AnimalCandidate } from "../hierarchy/Animal";
 import Reptile from "../hierarchy/Reptile";
 
 export default class Crocodile extends Reptile {
@@ -11,19 +12,22 @@ export default class Crocodile extends Reptile {
     }
     this.length = length;
   }
-  
-  
-  giveBirth(): [string, number, boolean,string][] {
-    const crocodilesTuples = super.giveBirth();
-    for (var crocodileTuple of crocodilesTuples) {
 
-      const babySnake = new Crocodile(crocodileTuple[0], 0, crocodileTuple[2], 10);
-      families.forEach((family) => {
-        if (family.name === this.home) {
-          family.addAnimal(babySnake, true);
-        }
+
+  public giveBirth(): void {
+    const candidateCrocks: AnimalCandidate[] = super.giveBirth() as AnimalCandidate[];
+    let length: number;
+    if (candidateCrocks) {
+      candidateCrocks.forEach(crockObjectInfo => {
+        length = Math.floor(Math.random() * 5);
+        const babyCrocodile = new Crocodile(crockObjectInfo.name, 0, crockObjectInfo.isMale, length);
+        families.forEach((family) => {
+          if (family.name === this.home) {
+            family.addAnimal(babyCrocodile, true);
+          };
+        });
       });
-    }
-    return [["", 0, false,""]];
-  }
+
+    };
+  };
 }

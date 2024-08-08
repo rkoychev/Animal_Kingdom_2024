@@ -1,6 +1,7 @@
 import { SnakeType } from "../customTypes";
 import { snakes } from "../app";
 import Reptile from "../hierarchy/Reptile";
+import { AnimalCandidate } from "../hierarchy/Animal";
 export default class Snake extends Reptile {
   private type: SnakeType;
   private color: string;
@@ -27,14 +28,16 @@ export default class Snake extends Reptile {
   override walk(): void {
     console.log(`${this.name} is sliding`);
   }
-  
-  giveBirth(): [string, number, boolean,string][] {
-    const snakesTuples = super.giveBirth();
-    for (var snakeTuple of snakesTuples) {
 
-      const babySnake = new Snake(snakeTuple[0], 0, this.type, snakeTuple[2], this.color, 10);
-      babySnake.home = snakeTuple[3];
-    }
-    return [["", 0, false,""]];
-  }
+  public giveBirth(): void {
+    const candidateSnakes: AnimalCandidate[] = super.giveBirth() as AnimalCandidate[];
+    let length: number;
+    if (candidateSnakes) {
+      candidateSnakes.forEach(snakeObjectInfo => {
+        length = Math.floor(Math.random() * 3 + 1);
+        const babySnake = new Snake(snakeObjectInfo.name, 0, this.type, snakeObjectInfo.isMale, this.color, length);
+        babySnake.home = snakeObjectInfo.home;
+      });
+    };
+  };
 }

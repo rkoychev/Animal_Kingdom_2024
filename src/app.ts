@@ -14,7 +14,7 @@ export const tortoises: Tortoise[] = [];
 console.log("Starting");
 
 console.log("\n--- Lion Section ---");
-const lion1 = new Tortoise("Simba", 5, true);
+const lion1 = new Lion("Simba", 5, false);
 
 try {
   const invalidAgeLion = new Lion("Simba", -5, true);
@@ -96,10 +96,10 @@ try {
 
 lionsFamily2.animals[2].giveBirth();
 console.log(lionsFamily2.animals[2]);
-lion1.walk();/* 
+lion1.walk(); 
 lion1.talk();
 lion1.run();
-lion1.jump(); */
+lion1.jump(); 
 lion1.giveBirth();
 lion1.showHome();
 console.log(lionsFamily2);

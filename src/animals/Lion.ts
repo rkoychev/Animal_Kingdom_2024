@@ -1,6 +1,8 @@
 import { ICanRun } from "../interfaces/ICanRun";
 import { ICanTalk } from "../interfaces/ICanTalk";
 import { families } from "../app";
+import  { AnimalCandidate } from "../hierarchy/Animal";
+
 import Mammal from "../hierarchy/Mammal";
 export default class Lion extends Mammal implements ICanRun, ICanTalk {
   constructor(name: string, age: number, isMale: boolean) {
@@ -15,18 +17,17 @@ export default class Lion extends Mammal implements ICanRun, ICanTalk {
     console.log(`${this.name} is talking`);
   }
 
-  giveBirth(): [string, number,boolean,string][] {
-
-    const lionsTuples = super.giveBirth();
-    for(var lionTuple of lionsTuples){
-    
-      const babyLion = new Lion(lionTuple[0], 0, lionTuple[2]);
-      families.forEach((family) => {
-        if (family.name === this.home) {
-          family.addAnimal(babyLion, true);
-        }
+  public giveBirth(): void {
+    const candidateLions: AnimalCandidate[] = super.giveBirth() as AnimalCandidate[];
+    if (candidateLions) {
+      candidateLions.forEach(lionObjectInfo => {
+        const babyLion = new Lion(lionObjectInfo.name, 0, lionObjectInfo.isMale);
+        families.forEach((family) => {
+          if (family.name === this.home) {
+            family.addAnimal(babyLion, true);
+          }
+        });
       });
     }
-    return[["",0,false,""]];
   }
 }

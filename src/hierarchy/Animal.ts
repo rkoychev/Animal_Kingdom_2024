@@ -1,4 +1,10 @@
 import { ICanWalk } from "../interfaces/ICanWalk";
+export type AnimalCandidate = {
+  name: string,
+  age: number,
+  isMale: boolean,
+  home: string | undefined
+}
 
 const AGE_TO_BE_ADULT = 2;
 export default abstract class Animal implements ICanWalk {
@@ -31,7 +37,6 @@ export default abstract class Animal implements ICanWalk {
     console.log(`${this.name} is walking`);
   }
 
-  giveBirth(): void {}
 
   showHome(): void {
     if (this.home === undefined) {
@@ -62,5 +67,16 @@ export default abstract class Animal implements ICanWalk {
   }
   getCanHaveFamily(): boolean {
     return this._canHaveFamily;
+  }
+  public giveBirth():AnimalCandidate[] | void{
+    if (this.isMale) {
+      throw Error(
+        `Only Females can give birth and ${this.name} is a proud male ${this.constructor.name}`
+      );
+    } else if (this.home === undefined) {
+      throw Error(
+        `${this.name} can't give birth because she doesn't have a home to meet a male`
+      );
+    }
   }
 }

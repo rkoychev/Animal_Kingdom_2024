@@ -1,4 +1,5 @@
 import { tortoises } from "../app";
+import { AnimalCandidate } from "../hierarchy/Animal";
 import Reptile from "../hierarchy/Reptile";
 
 export default class Tortoise extends Reptile {
@@ -7,15 +8,15 @@ export default class Tortoise extends Reptile {
 
     this.home = "Animal Kingdom";
     tortoises.push(this);
-  }
-  
-  giveBirth(): [string, number,boolean,string][] {
-    const tortoisesTuples = super.giveBirth();
-    for(var tortoiseTuple of tortoisesTuples){
-    
-     const babySnake = new Tortoise(tortoiseTuple[0], 0, tortoiseTuple[2]);
-     babySnake.home = tortoiseTuple[3];
-    }
-    return[["",0,false,""]];
-  }
-}
+  };
+
+  public giveBirth(): void {
+    const candidateTortoises: AnimalCandidate[] = super.giveBirth() as AnimalCandidate[];
+    if (candidateTortoises) {
+      candidateTortoises.forEach(tortoiseObjectInfo => {
+        const babyTortoise = new Tortoise(tortoiseObjectInfo.name, 0, tortoiseObjectInfo.isMale);
+        babyTortoise.home = tortoiseObjectInfo.home;
+      });
+    };
+  };
+};
