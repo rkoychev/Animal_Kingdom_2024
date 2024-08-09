@@ -1,6 +1,7 @@
 import { SnakeType } from "../customTypes";
 import { snakes } from "../app";
 import Reptile from "../hierarchy/Reptile";
+import { AnimalCandidate } from "../hierarchy/Animal";
 export default class Snake extends Reptile {
   private type: SnakeType;
   private color: string;
@@ -28,30 +29,15 @@ export default class Snake extends Reptile {
     console.log(`${this.name} is sliding`);
   }
 
-  giveBirth(): void {
-    if (this.isMale) {
-      console.log(
-        `Only Females can give birth and ${this.name} is a proud male ${this.constructor.name}`
-      );
-      return;
-    }
-    //Giving birth for reptiles creates 8 reptiles also of random gender, but always at least 2 males and 1 female.
-    this.timesGivenBirth += 1;
-    for (let i = 1; i <= 5; i++) {
-      const num = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
-      const name: string =
-        this.name + "-Baby-" + this.timesGivenBirth + "-" + i;
-      const gender: boolean = num === 1;
-      const age: number = 0;
-      new Snake(name, age, this.type, gender, this.color, 10);
-    }
-    for (let i = 6; i <= 8; i++) {
-      const name: string =
-        this.name + "-Baby-" + this.timesGivenBirth + "-" + i;
-      const gender: boolean = i % 2 != 0;
-      const age: number = 0;
-      new Snake(name, age, this.type, gender, this.color, 10);
-    }
-    console.log(`${this.name} lays eggs`);
-  }
+  public giveBirth(): void {
+    const candidateSnakes: AnimalCandidate[] = super.giveBirth() as AnimalCandidate[];
+    let length: number;
+    if (candidateSnakes) {
+      candidateSnakes.forEach(snakeObjectInfo => {
+        length = Math.floor(Math.random() * 3)+ 1;
+        const babySnake = new Snake(snakeObjectInfo.name, 0, this.type, snakeObjectInfo.isMale, this.color, length);
+        babySnake.home = this.home;
+      });
+    };
+  };
 }

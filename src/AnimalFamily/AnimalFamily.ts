@@ -69,7 +69,7 @@ export default class AnimalFamily {
     }
   }
   removeAnimal(animal: Animal) {
-    if (!this.animals.includes(animal)) {
+    if (this.animals.indexOf(animal)!==-1) {
       console.log(`${animal.getName()} is not part of ${this.name}`);
       return;
     }

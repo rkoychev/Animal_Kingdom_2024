@@ -27,7 +27,7 @@ try {
 try {
   const invalidAniAnimalFamily = new AnimalFamily("Pride Rock", [
     new Lion("Simba", 5, true),
-    new Lion("Mufasa", 6, true),
+    new Lion("Mufasa", 6, false),
     new Lion("Nala", 4, false),
     new Lion("Sarabi", 6, false),
   ]);
@@ -61,7 +61,7 @@ try {
 const lionData = [
   { name: "Nala", age: 4, isMale: false },
   { name: "Sarabi", age: 6, isMale: false },
-  { name: "Kiara", age: 2, isMale: false },
+  { name: "Kiara", age: 2, isMale: true },
   { name: "Kion", age: 1, isMale: true },
   { name: "Vitani", age: 3, isMale: false },
   { name: "Zira", age: 5, isMale: false },
@@ -77,8 +77,8 @@ try {
   const lionData = [
     { name: "Nala", age: 4, isMale: false },
     { name: "Sarabi", age: 6, isMale: false },
-    { name: "Kiara", age: 2, isMale: false },
-    { name: "Kion", age: 3, isMale: true },
+    { name: "Kiara", age: 2, isMale: true },
+    { name: "Kion", age: 3, isMale: false },
     { name: "Vitani", age: 3, isMale: false },
     { name: "Zira", age: 5, isMale: false },
     { name: "Kovu", age: 4, isMale: true },
@@ -96,10 +96,10 @@ try {
 
 lionsFamily2.animals[2].giveBirth();
 console.log(lionsFamily2.animals[2]);
-lion1.walk();
+lion1.walk(); 
 lion1.talk();
 lion1.run();
-lion1.jump();
+lion1.jump(); 
 lion1.giveBirth();
 lion1.showHome();
 console.log(lionsFamily2);
@@ -121,6 +121,15 @@ squirrel2.giveBirth();
 console.log(squirrels);
 
 console.log("\n--- Crocodile Section ---");
+try{
+  const crocodile51 = new Crocodile("Croco", 10, false, -23);
+}
+catch(error){
+  if (error instanceof Error) {
+    console.error(error.message);
+  }
+
+}
 const crocodile1 = new Crocodile("Croco", 10, false, 23);
 const crocodile2 = new Crocodile("Snapper", 5, true, 22);
 const crocodile3 = new Crocodile("Crocodile3", 10, false, 22);
@@ -206,7 +215,6 @@ try {
 
 const snake2 = new Snake("Ssss", 3, "Anaconda", false, "Red", 33);
 const animalShelter = AnimalShelter.getInstance();
-console.log(families[0].animals);
 animalShelter.addAnimal(snake2);
 animalShelter.addAnimal(lion2);
 animalShelter.addAnimal(lion1);
