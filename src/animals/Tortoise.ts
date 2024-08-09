@@ -15,7 +15,7 @@ export default class Tortoise extends Reptile {
     if (candidateTortoises) {
       candidateTortoises.forEach(tortoiseObjectInfo => {
         const babyTortoise = new Tortoise(tortoiseObjectInfo.name, 0, tortoiseObjectInfo.isMale);
-        babyTortoise.home = tortoiseObjectInfo.home;
+        babyTortoise.home = this.home;
       });
     };
   };

@@ -45,7 +45,7 @@ export default class Squirrel extends Mammal {
     if (candidateSquirrels) {
       candidateSquirrels.forEach(squirrelObjectInfo => {
         const babySquirrel = new Squirrel(squirrelObjectInfo.name, 0, squirrelObjectInfo.isMale, this.treeType, this.treeAge, this.holeSize);
-        babySquirrel.home = squirrelObjectInfo.home;
+        babySquirrel.home = this.home;
       });
     };
   };

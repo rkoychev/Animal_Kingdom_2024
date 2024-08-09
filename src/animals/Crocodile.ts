@@ -15,19 +15,15 @@ export default class Crocodile extends Reptile {
 
 
   public giveBirth(): void {
+    const family = families.find(x => x.name == this.home);
     const candidateCrocks: AnimalCandidate[] = super.giveBirth() as AnimalCandidate[];
     let length: number;
     if (candidateCrocks) {
       candidateCrocks.forEach(crockObjectInfo => {
-        length = Math.floor(Math.random() * 5);
+        length = Math.floor(Math.random() * 4) + 1;
         const babyCrocodile = new Crocodile(crockObjectInfo.name, 0, crockObjectInfo.isMale, length);
-        families.forEach((family) => {
-          if (family.name === this.home) {
-            family.addAnimal(babyCrocodile, true);
-          };
-        });
+        family?.addAnimal(babyCrocodile, true);
       });
-
     };
   };
 }

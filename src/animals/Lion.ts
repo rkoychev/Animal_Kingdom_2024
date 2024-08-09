@@ -8,26 +8,23 @@ export default class Lion extends Mammal implements ICanRun, ICanTalk {
   constructor(name: string, age: number, isMale: boolean) {
     super(name, age, isMale);
     this._canHaveFamily = true;
-  }
+  };
 
   run(): void {
     console.log(`${this.name} is running`);
-  }
+  };
   talk(): void {
     console.log(`${this.name} is talking`);
-  }
+  };
 
   public giveBirth(): void {
+    const family = families.find(x=>x.name == this.home);
     const candidateLions: AnimalCandidate[] = super.giveBirth() as AnimalCandidate[];
     if (candidateLions) {
       candidateLions.forEach(lionObjectInfo => {
         const babyLion = new Lion(lionObjectInfo.name, 0, lionObjectInfo.isMale);
-        families.forEach((family) => {
-          if (family.name === this.home) {
-            family.addAnimal(babyLion, true);
-          }
-        });
+        family?.addAnimal(babyLion,true);
       });
-    }
-  }
-}
+    };
+  };
+};
