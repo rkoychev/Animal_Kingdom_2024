@@ -68,10 +68,10 @@ export default class AnimalFamily {
       }
     }
   }
-  removeAnimal(animal: Animal) {
+  removeAnimal(animal: Animal): boolean {
     if (this.animals.indexOf(animal) !== -1) {
       console.log(`${animal.getName()} is not part of ${this.name}`);
-      return;
+      return false;
     }
     const animalsWithoutRemovedAnimal = this.animals.filter(
       (anim) => anim !== animal
@@ -87,9 +87,11 @@ export default class AnimalFamily {
       this.animals = animalsWithoutRemovedAnimal;
       console.log(`removed ${animal.getName()} from ${this.name}`);
       animal.setHome(undefined);
+      return true;
     } else {
       console.log(`Cannot remove ${animal.getName()} from family`);
       console.log(verifycationResult.message);
+      return false;
     }
   }
 }
