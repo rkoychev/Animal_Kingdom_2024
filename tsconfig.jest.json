@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs", // Jest expects CommonJS modules
+    "target": "ES6"
+  },
+  "include": ["src/**/*.test.ts", "src/**/*.spec.ts"],
+  "exclude": ["node_modules"]
+}

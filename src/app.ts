@@ -1,21 +1,17 @@
-import AnimalShelter from "./animalShelter/AnimalShelter";
-import Crocodile from "./animals/Crocodile";
-import Lion from "./animals/Lion";
 import Snake from "./animals/Snake";
 import Squirrel from "./animals/Squirrel";
 import Tortoise from "./animals/Tortoise";
 import AnimalFamily from "./animalFamily/AnimalFamily";
-
 export const families: AnimalFamily[] = [];
 export const squirrels: Squirrel[] = [];
 export const snakes: Snake[] = [];
 export const tortoises: Tortoise[] = [];
-
+/*import AnimalShelter from "./animalShelter/AnimalShelter";
+import Crocodile from "./animals/Crocodile";
+import Lion from "./animals/Lion";
 console.log("Starting");
-
 console.log("\n--- Lion Section ---");
 const lion1 = new Lion("Simba", 5, true);
-
 try {
   const invalidAgeLion = new Lion("Simba", -5, true);
 } catch (error) {
@@ -96,10 +92,10 @@ try {
 
 lionsFamily2.animals[2].giveBirth();
 console.log(lionsFamily2.animals[2]);
-lion1.walk(); 
+lion1.walk();
 lion1.talk();
 lion1.run();
-lion1.jump(); 
+lion1.jump();
 lion1.giveBirth();
 lion1.showHome();
 console.log(lionsFamily2);
@@ -121,14 +117,12 @@ squirrel2.giveBirth();
 console.log(squirrels);
 
 console.log("\n--- Crocodile Section ---");
-try{
+try {
   const crocodile51 = new Crocodile("Croco", 10, false, -23);
-}
-catch(error){
+} catch (error) {
   if (error instanceof Error) {
     console.error(error.message);
   }
-
 }
 const crocodile1 = new Crocodile("Croco", 10, false, 23);
 const crocodile2 = new Crocodile("Snapper", 5, true, 22);
@@ -234,3 +228,4 @@ animalShelter.setReptileLimit(0);
 const l2 = new Lion("Krasavec",3,false);
 animalShelter.addAnimal(l2);
 animalShelter.setReptileLimit(1);
+*/

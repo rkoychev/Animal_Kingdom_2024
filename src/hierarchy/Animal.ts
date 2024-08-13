@@ -1,8 +1,8 @@
 import { ICanWalk } from "../interfaces/ICanWalk";
 export type AnimalCandidate = {
-  name: string,
-  isMale: boolean
-}
+  name: string;
+  isMale: boolean;
+};
 
 const AGE_TO_BE_ADULT = 2;
 export default abstract class Animal implements ICanWalk {
@@ -15,7 +15,7 @@ export default abstract class Animal implements ICanWalk {
   protected _canHaveFamily: boolean = false;
   constructor(name: string, age: number, isMale: boolean) {
     if (age < 0) {
-      throw new Error("Age cant be negative");
+      throw new Error("Age cannot be negative");
     }
     if (name === "") {
       throw new Error("Name cannot be empty");
@@ -34,7 +34,6 @@ export default abstract class Animal implements ICanWalk {
   walk(): void {
     console.log(`${this.name} is walking`);
   }
-
 
   showHome(): void {
     if (this.home === undefined) {
