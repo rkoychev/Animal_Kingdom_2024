@@ -96,10 +96,10 @@ try {
 
 lionsFamily2.animals[2].giveBirth();
 console.log(lionsFamily2.animals[2]);
-lion1.walk();
+lion1.walk(); 
 lion1.talk();
 lion1.run();
-lion1.jump();
+lion1.jump(); 
 lion1.giveBirth();
 lion1.showHome();
 console.log(lionsFamily2);
@@ -121,24 +121,19 @@ squirrel2.giveBirth();
 console.log(squirrels);
 
 console.log("\n--- Crocodile Section ---");
-try {
+try{
   const crocodile51 = new Crocodile("Croco", 10, false, -23);
-} catch (error) {
+}
+catch(error){
   if (error instanceof Error) {
     console.error(error.message);
   }
+
 }
 const crocodile1 = new Crocodile("Croco", 10, false, 23);
 const crocodile2 = new Crocodile("Snapper", 5, true, 22);
 const crocodile3 = new Crocodile("Crocodile3", 10, false, 22);
-const crocodile4 = new Crocodile("AAA", 10, false, 23);
-const crocodile5 = new Crocodile("BBB", 5, true, 22);
-const crocodile6 = new Crocodile("CCC", 10, false, 22);
-const crocodilePack2 = new AnimalFamily("Crocs2", [
-  crocodile4,
-  crocodile5,
-  crocodile6,
-]);
+
 try {
   const crocodilePack = new AnimalFamily("Swamp Squad", [
     crocodile1,
@@ -155,7 +150,7 @@ const crocodilePack = new AnimalFamily("Swamp Squad", [
   crocodile2,
   crocodile3,
 ]);
-crocodile5.switchFamily(crocodilePack);
+
 try {
   crocodilePack.addAnimal(lion1);
 } catch (error) {
@@ -217,8 +212,8 @@ try {
     console.error(error.message);
   }
 }
+
 const snake2 = new Snake("Ssss", 3, "Anaconda", false, "Red", 33);
-snake2.switchFamily(crocodilePack);
 const animalShelter = AnimalShelter.getInstance();
 animalShelter.addAnimal(snake2);
 animalShelter.addAnimal(lion2);
