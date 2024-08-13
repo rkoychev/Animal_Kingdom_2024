@@ -22,9 +22,9 @@ export default class AnimalFamily {
       requirements,
       animals[0]
     );
-    const verifycationResult: VerificationResult =
+    const verificationResult: VerificationResult =
       verifyFamilyInfo(specificRequirements);
-    if (verifycationResult.isValid) {
+    if (verificationResult.message === "") {
       this.name = name;
       animals.forEach((animal) => {
         animal.setHome(this.name);
@@ -32,47 +32,47 @@ export default class AnimalFamily {
       this.animals = animals;
       families.push(this);
     } else {
-      throw new Error(verifycationResult.message);
+      throw new Error(verificationResult.message);
     }
   }
-  addAnimal(animal: Animal, fromBirth = false) {
+  //return an empty string if it can be added otherwise the reason that it can't be added
+  checkCanAddAnimal(animal: Animal): string {
     const animalClass = this.animals[0].constructor.name;
-    if (animal.constructor.name !== animalClass)
-      throw new Error(
-        `Two different types of Animal cannot be in the same family`
-      );
+    if (animal.constructor.name !== animalClass) {
+      return `Two different types of Animal cannot be in the same family`;
+    }
     if (animal.getHome() === this.name) {
-      console.log(`${this.name} is already in the family`);
+      return `${this.name} is already in the family`;
+    }
+    const familyWithNewMember = [...this.animals, animal];
+    let requirements: VerificationProps = {
+      animals: familyWithNewMember,
+    };
+    const specificRequirements = getSpecificRequirements(requirements, animal);
+    const verificationResult: VerificationResult =
+      verifyFamilyInfo(specificRequirements);
+    return verificationResult.message;
+  }
+  addAnimal(animal: Animal, fromBirth = false): void {
+    const verificationResult = this.checkCanAddAnimal(animal);
+    if (fromBirth) {
+      this.animals.push(animal);
     } else {
-      const familyWithNewMember = [...this.animals, animal];
-      //if from birth we skip the verifications
-      if (fromBirth) {
+      if (verificationResult === "") {
+        animal.setHome(this.name);
         this.animals.push(animal);
+        console.log(`${animal.getName()} added to ${this.name}`);
       } else {
-        let requirements: VerificationProps = {
-          animals: familyWithNewMember,
-        };
-        const specificRequirements = getSpecificRequirements(
-          requirements,
-          animal
-        );
-        const verifycationResult: VerificationResult =
-          verifyFamilyInfo(specificRequirements);
-        if (verifycationResult.isValid) {
-          animal.setHome(this.name);
-          this.animals.push(animal);
-        } else {
-          console.log(`Cannot add ${animal.getName()} to family`);
-          console.log(verifycationResult.message);
-        }
+        console.log(`Cannot add ${animal.getName()} to family`);
+        console.log(verificationResult);
       }
     }
   }
-  removeAnimal(animal: Animal): boolean {
 
+  //return an empty string if it can be removed otherwise the reason that it can't be removed
+  checkCanRemoveAnimal(animal: Animal): string {
     if (this.animals.indexOf(animal) === -1) {
-      console.log(`${animal.getName()} is not part of ${this.name}`);
-      return false;
+      return `${animal.getName()} is not part of ${this.name}`;
     }
     const animalsWithoutRemovedAnimal = this.animals.filter(
       (anim) => anim !== animal
@@ -81,20 +81,23 @@ export default class AnimalFamily {
       animals: animalsWithoutRemovedAnimal,
     };
     const specificRequirements = getSpecificRequirements(requirements, animal);
-    const verifycationResult: VerificationResult =
+    const verificationResult: VerificationResult =
       verifyFamilyInfo(specificRequirements);
-    if (verifycationResult.isValid) {
-      this.animals = animalsWithoutRemovedAnimal;
-      console.log(`removed ${animal.getName()} from ${this.name}`);
+    return verificationResult.message;
+  }
+  removeAnimal(animal: Animal): void {
+    const verificationResult = this.checkCanRemoveAnimal(animal);
+    if (verificationResult === "") {
+      this.animals = this.animals.filter((anim) => anim !== animal);
+      console.log(`Removed ${animal.getName()} from ${this.name}`);
       animal.setHome(undefined);
-      return true;
     } else {
       console.log(`Cannot remove ${animal.getName()} from family`);
-      console.log(verifycationResult.message);
-      return false;
+      console.log(verificationResult);
     }
   }
 }
+
 function getSpecificRequirements(
   basicRequirements: VerificationProps,
   animal: Animal
