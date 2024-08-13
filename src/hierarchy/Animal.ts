@@ -63,7 +63,7 @@ export default abstract class Animal implements ICanWalk {
   setHome(home: string | undefined): void {
     this.home = home;
   }
-  getCanHaveFamily(): boolean {
+  canHaveFamily(): boolean {
     return this._canHaveFamily;
   }
   public giveBirth(): AnimalCandidate[] | void | boolean {

@@ -11,7 +11,7 @@ export default class AnimalFamily {
     if (animals.length === 0) {
       throw new Error("A family must have at least one Animal");
     }
-    if (animals[0].getCanHaveFamily() === false) {
+    if (animals[0].canHaveFamily() === false) {
       throw new Error(`${animals[0].constructor.name} cannot have family`);
     }
     let requirements: VerificationProps = {
