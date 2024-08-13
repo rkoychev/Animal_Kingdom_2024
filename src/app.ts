@@ -1,21 +1,17 @@
-import AnimalShelter from "./animalShelter/AnimalShelter";
-import Crocodile from "./animals/Crocodile";
-import Lion from "./animals/Lion";
 import Snake from "./animals/Snake";
 import Squirrel from "./animals/Squirrel";
 import Tortoise from "./animals/Tortoise";
 import AnimalFamily from "./animalFamily/AnimalFamily";
-
 export const families: AnimalFamily[] = [];
 export const squirrels: Squirrel[] = [];
 export const snakes: Snake[] = [];
 export const tortoises: Tortoise[] = [];
-
+/*import AnimalShelter from "./animalShelter/AnimalShelter";
+import Crocodile from "./animals/Crocodile";
+import Lion from "./animals/Lion";
 console.log("Starting");
-
 console.log("\n--- Lion Section ---");
 const lion1 = new Lion("Simba", 5, true);
-
 try {
   const invalidAgeLion = new Lion("Simba", -5, true);
 } catch (error) {
@@ -239,3 +235,4 @@ animalShelter.setReptileLimit(0);
 const l2 = new Lion("Krasavec",3,false);
 animalShelter.addAnimal(l2);
 animalShelter.setReptileLimit(1);
+*/

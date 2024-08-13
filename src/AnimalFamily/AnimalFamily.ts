@@ -92,6 +92,7 @@ export default class AnimalFamily {
       console.log(`Removed ${animal.getName()} from ${this.name}`);
       animal.setHome(undefined);
       return true;
+      return true;
     } else {
       console.log(`Cannot remove ${animal.getName()} from family`);
       console.log(verificationResult);

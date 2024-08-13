@@ -1,1 +1,5 @@
 Run tsc or tsc -w for watch mode before trying to run the app.ts
+Running the Setup:
+Install Dependencies: Run npm install to install all necessary packages.
+Run Tests: Execute npm test to run Jest tests.
+Start Development Server: Use npm start to start the Webpack development server
