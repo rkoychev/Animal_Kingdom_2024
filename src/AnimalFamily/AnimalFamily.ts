@@ -85,15 +85,17 @@ export default class AnimalFamily {
       verifyFamilyInfo(specificRequirements);
     return verificationResult.message;
   }
-  removeAnimal(animal: Animal): void {
+  removeAnimal(animal: Animal): boolean {
     const verificationResult = this.checkCanRemoveAnimal(animal);
     if (verificationResult === "") {
       this.animals = this.animals.filter((anim) => anim !== animal);
       console.log(`Removed ${animal.getName()} from ${this.name}`);
       animal.setHome(undefined);
+      return true;
     } else {
       console.log(`Cannot remove ${animal.getName()} from family`);
       console.log(verificationResult);
+      return false;
     }
   }
 }
