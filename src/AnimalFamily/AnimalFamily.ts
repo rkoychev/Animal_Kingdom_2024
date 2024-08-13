@@ -11,7 +11,7 @@ export default class AnimalFamily {
     if (animals.length === 0) {
       throw new Error("A family must have at least one Animal");
     }
-    if (animals[0].getCanHaveFamily() === false) {
+    if (animals[0].canHaveFamily() === false) {
       throw new Error(`${animals[0].constructor.name} cannot have family`);
     }
     let requirements: VerificationProps = {
@@ -24,7 +24,7 @@ export default class AnimalFamily {
     );
     const verifycationResult: VerificationResult =
       verifyFamilyInfo(specificRequirements);
-    if (verifycationResult.isValid) {
+    if (verifycationResult.message === "") {
       this.name = name;
       animals.forEach((animal) => {
         animal.setHome(this.name);
@@ -58,7 +58,7 @@ export default class AnimalFamily {
         );
         const verifycationResult: VerificationResult =
           verifyFamilyInfo(specificRequirements);
-        if (verifycationResult.isValid) {
+        if (verifycationResult.message === "") {
           animal.setHome(this.name);
           this.animals.push(animal);
         } else {
@@ -69,7 +69,7 @@ export default class AnimalFamily {
     }
   }
   removeAnimal(animal: Animal) {
-    if (this.animals.indexOf(animal)!==-1) {
+    if (this.animals.indexOf(animal) !== -1) {
       console.log(`${animal.getName()} is not part of ${this.name}`);
       return;
     }
@@ -83,7 +83,7 @@ export default class AnimalFamily {
     const verifycationResult: VerificationResult =
       verifyFamilyInfo(specificRequirements);
     //if verification is successful
-    if (verifycationResult.isValid) {
+    if (verifycationResult.message === "") {
       this.animals = animalsWithoutRemovedAnimal;
       console.log(`removed ${animal.getName()} from ${this.name}`);
       animal.setHome(undefined);
