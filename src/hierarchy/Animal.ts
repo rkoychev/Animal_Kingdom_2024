@@ -1,3 +1,5 @@
+import AnimalFamily from "../animalFamily/AnimalFamily";
+import { families } from "../app";
 import { ICanWalk } from "../interfaces/ICanWalk";
 export type AnimalCandidate = {
   name: string;
@@ -78,5 +80,32 @@ export default abstract class Animal implements ICanWalk {
       return false;
     }
     return true;
+  }
+  public switchFamily(newFamily: AnimalFamily): void {
+    if (!this._canHaveFamily) {
+      console.log(
+        `${this.name} can't switch family because ${this.constructor.name}s don't live in families`
+      );
+      return;
+    }
+    if (this.home === undefined) {
+      `${this.name} can't switch family because it is not part of a family`;
+      return;
+    }
+    const currentFamily = families.find((family) => family.name === this.home);
+    const canRemoveFromFamily = currentFamily?.checkCanRemoveAnimal(this);
+    if (canRemoveFromFamily !== "") {
+      console.log(canRemoveFromFamily);
+      return;
+    } else {
+      const canAddToNewFamily = newFamily.checkCanAddAnimal(this);
+      if (canAddToNewFamily !== "") {
+        console.log(canAddToNewFamily);
+        return;
+      }
+      currentFamily?.removeAnimal(this);
+      newFamily.addAnimal(this);
+      console.log("Family switch completed");
+    }
   }
 }
