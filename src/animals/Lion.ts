@@ -24,6 +24,7 @@ export default class Lion extends Mammal implements ICanRun, ICanTalk,ICanJump {
   public giveBirth(numberOfChildren:number): void {
     const family = families.find(x=>x.name == this.home);
     const candidateLions: AnimalCandidate[] = super.giveBirth(numberOfChildren) as AnimalCandidate[];
+
     if (candidateLions) {
       candidateLions.forEach(lionObjectInfo => {
         const babyLion = new Lion(lionObjectInfo.name, 0, lionObjectInfo.isMale);

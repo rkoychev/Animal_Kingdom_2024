@@ -1,7 +1,6 @@
 import { families } from "../app";
 import Animal from "../hierarchy/Animal";
 export type VerificationResult = {
-  isValid: boolean;
   message: string;
 };
 export type VerificationProps = {
@@ -64,7 +63,6 @@ export default function verifyFamilyInfo(
     validations.maxAnimals &&
     animalsCount > validations.maxAnimals
   ) {
-    isValid = false;
     message += `Family members cannot be more than ${validations.maxAnimals}. \n`;
   }
 
@@ -73,7 +71,6 @@ export default function verifyFamilyInfo(
     validations.minAnimals &&
     animalsCount < validations.minAnimals
   ) {
-    isValid = false;
     message += `Family members cannot be less than ${validations.minAnimals}. \n`;
   }
 
@@ -81,7 +78,6 @@ export default function verifyFamilyInfo(
     validations.maxMaleAdults &&
     malesAdultsCount > validations.maxMaleAdults
   ) {
-    isValid = false;
     message += `Male adults in the family cannot be more than ${validations.maxMaleAdults}.\n`;
   }
 
@@ -89,7 +85,6 @@ export default function verifyFamilyInfo(
     validations.minMaleAdults &&
     malesAdultsCount < validations.minMaleAdults
   ) {
-    isValid = false;
     message += `Male adults in the family cannot be less than ${validations.minMaleAdults}.\n `;
   }
 
@@ -97,7 +92,6 @@ export default function verifyFamilyInfo(
     validations.maxFemaleAdults &&
     femaleAdultsCount > validations.maxFemaleAdults
   ) {
-    isValid = false;
     message += `Female adults in the family cannot be more than ${validations.maxFemaleAdults}. \n`;
   }
 
@@ -105,27 +99,22 @@ export default function verifyFamilyInfo(
     validations.minFemaleAdults &&
     femaleAdultsCount < validations.minFemaleAdults
   ) {
-    isValid = false;
     message += `Female adults in the family cannot be less than ${validations.minFemaleAdults}. \n`;
   }
 
   if (validations.minMales && malesCount < validations.minMales) {
-    isValid = false;
     message += `Males in the family cannot be less than ${validations.minMales}. \n`;
   }
 
   if (validations.maxMales && malesCount > validations.maxMales) {
-    isValid = false;
     message += `Males in the family cannot be more than ${validations.maxMales}. \n`;
   }
 
   if (validations.minFemales && femalesCount < validations.minFemales) {
-    isValid = false;
     message += `Females in the family cannot be less than ${validations.minFemales}. \n`;
   }
 
   if (validations.maxFemales && femalesCount > validations.maxFemales) {
-    isValid = false;
     message += `Females in the family cannot be more than ${validations.maxFemales}. \n`;
   }
 
@@ -134,12 +123,10 @@ export default function verifyFamilyInfo(
     femalesCount < validations.minOfAnyGender &&
     malesCount < validations.minOfAnyGender
   ) {
-    isValid = false;
     message += `Family members of any gender cannot be less than ${validations.minOfAnyGender}.\n `;
   }
 
   return {
-    isValid: isValid,
     message: message.trim(),
   };
 }

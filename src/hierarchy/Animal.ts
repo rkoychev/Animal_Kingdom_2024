@@ -1,8 +1,10 @@
+import AnimalFamily from "../animalFamily/AnimalFamily";
+import { families } from "../app";
 import { ICanWalk } from "../interfaces/ICanWalk";
 export type AnimalCandidate = {
-  name: string,
-  isMale: boolean
-}
+  name: string;
+  isMale: boolean;
+};
 
 const AGE_TO_BE_ADULT = 2;
 export default abstract class Animal implements ICanWalk {
@@ -15,7 +17,7 @@ export default abstract class Animal implements ICanWalk {
   protected _canHaveFamily: boolean = false;
   constructor(name: string, age: number, isMale: boolean) {
     if (age < 0) {
-      throw new Error("Age cant be negative");
+      throw new Error("Age cannot be negative");
     }
     if (name === "") {
       throw new Error("Name cannot be empty");
@@ -34,7 +36,6 @@ export default abstract class Animal implements ICanWalk {
   walk(): void {
     console.log(`${this.name} is walking`);
   }
-
 
   showHome(): void {
     if (this.home === undefined) {
@@ -63,7 +64,7 @@ export default abstract class Animal implements ICanWalk {
   setHome(home: string | undefined): void {
     this.home = home;
   }
-  getCanHaveFamily(): boolean {
+  canHaveFamily(): boolean {
     return this._canHaveFamily;
   }
   public giveBirth(numberOfChildren:number,numberOfChildrenWithRandomGender:number): AnimalCandidate[] | void | boolean {
@@ -79,5 +80,32 @@ export default abstract class Animal implements ICanWalk {
       return false;
     }
     return true;
+  }
+  public switchFamily(newFamily: AnimalFamily): void {
+    if (!this._canHaveFamily) {
+      console.log(
+        `${this.name} can't switch family because ${this.constructor.name}s don't live in families`
+      );
+      return;
+    }
+    if (this.home === undefined) {
+      `${this.name} can't switch family because it is not part of a family`;
+      return;
+    }
+    const currentFamily = families.find((family) => family.name === this.home);
+    const canRemoveFromFamily = currentFamily?.checkCanRemoveAnimal(this);
+    if (canRemoveFromFamily !== "") {
+      console.log(canRemoveFromFamily);
+      return;
+    } else {
+      const canAddToNewFamily = newFamily.checkCanAddAnimal(this);
+      if (canAddToNewFamily !== "") {
+        console.log(canAddToNewFamily);
+        return;
+      }
+      currentFamily?.removeAnimal(this);
+      newFamily.addAnimal(this);
+      console.log("Family switch completed");
+    }
   }
 }
