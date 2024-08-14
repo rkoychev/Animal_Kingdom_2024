@@ -2,6 +2,7 @@ import { SnakeType } from "../customTypes";
 import { snakes } from "../app";
 import Reptile from "../hierarchy/Reptile";
 import { AnimalCandidate } from "../hierarchy/Animal";
+
 export default class Snake extends Reptile {
   private type: SnakeType;
   private color: string;
@@ -29,8 +30,8 @@ export default class Snake extends Reptile {
     console.log(`${this.name} is sliding`);
   }
 
-  public giveBirth(): void {
-    const candidateSnakes: AnimalCandidate[] = super.giveBirth() as AnimalCandidate[];
+  public giveBirth(numberOfChildren:number,numberOfChildrenWithRandomGender:number): void {
+    const candidateSnakes: AnimalCandidate[] = super.giveBirth(numberOfChildren,numberOfChildrenWithRandomGender) as AnimalCandidate[];
     let length: number;
     if (candidateSnakes) {
       candidateSnakes.forEach(snakeObjectInfo => {

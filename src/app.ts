@@ -5,6 +5,8 @@ import Snake from "./animals/Snake";
 import Squirrel from "./animals/Squirrel";
 import Tortoise from "./animals/Tortoise";
 import AnimalFamily from "./animalFamily/AnimalFamily";
+import Elephant from "./animals/Elephant";
+import Giraffe from "./animals/Giraffe";
 
 export const families: AnimalFamily[] = [];
 export const squirrels: Squirrel[] = [];
@@ -94,13 +96,13 @@ try {
   }
 }
 
-lionsFamily2.animals[2].giveBirth();
+lionsFamily2.animals[2].giveBirth(5,0);
 console.log(lionsFamily2.animals[2]);
 lion1.walk(); 
 lion1.talk();
 lion1.run();
 lion1.jump(); 
-lion1.giveBirth();
+lion1.giveBirth(5);
 lion1.showHome();
 console.log(lionsFamily2);
 lionsFamily2.addAnimal(lion1);
@@ -115,9 +117,9 @@ squirrel1.jump();
 squirrel1.addNuts(15);
 squirrel1.addNuts(-3);
 squirrel1.addNuts(10);
-squirrel1.giveBirth();
+squirrel1.giveBirth(5);
 squirrel1.showHome();
-squirrel2.giveBirth();
+squirrel2.giveBirth(5);
 console.log(squirrels);
 
 console.log("\n--- Crocodile Section ---");
@@ -163,17 +165,17 @@ const c = crocodilePack.animals[0];
 
 crocodile1.walk();
 crocodile1.swim();
-crocodile1.giveBirth();
+crocodile1.giveBirth(8,5);
 crocodile1.showHome();
 crocodilePack.animals[1];
-crocodilePack.animals[0].giveBirth();
+crocodilePack.animals[0].giveBirth(8,5);
 console.log(crocodilePack);
 
 console.log("\n--- Snake Section ---");
 const snake1 = new Snake("Slither", 4, "Anaconda", false, "Green", 33);
 snake1.swim();
 snake1.walk();
-snake1.giveBirth();
+snake1.giveBirth(8,5);
 snake1.showHome();
 console.log(snakes);
 
@@ -181,7 +183,7 @@ console.log("\n--- Tortoise Section ---");
 const tortoise1 = new Tortoise("Shelly", 100, false);
 tortoise1.walk();
 tortoise1.swim();
-tortoise1.giveBirth();
+tortoise1.giveBirth(8,5);
 tortoise1.showHome();
 console.log(tortoises);
 
@@ -231,3 +233,72 @@ animalShelter.setReptileLimit(12);
 console.log(animalShelter.getMammalLimit(), animalShelter.getReptileLimit());
 animalShelter.setMammalLimit(-3);
 animalShelter.setReptileLimit(0);
+
+
+const el1 = new Elephant("s",2,true,5,350);
+const el2 = new Elephant("a",2,true,5,350);
+const el3 = new Elephant("d",2,false,5,350);
+const el4 = new Elephant("w",2,false,5,350);
+
+const elephantHerd = new AnimalFamily("Long Horns", [
+  el1,
+  el2,
+  el3,
+  el4
+]);
+el3.giveBirth();
+try {
+  const el5 = new Elephant("d", 3, false, -10, 3);
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.message);
+  }
+}
+
+try {
+  const el5 = new Elephant("d", 3, false, 3, -20);
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.message);
+  }
+}
+try {
+  el2.giveBirth();
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.message);
+  }
+}
+try {
+  const giraffe1 = new Giraffe("high in the sky",4,false,-5);
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.message);
+  }
+}
+
+const giraffe1 = new Giraffe("high in the sky",4,false,5);
+
+try{
+  giraffe1.giveBirth();
+}
+catch(error) {
+  if (error instanceof Error) {
+    console.error(error.message);
+  }
+}
+
+const giraffesFamily = new AnimalFamily("Long Necks", [
+  giraffe1
+]);
+giraffe1.giveBirth();
+
+try {
+  const giraffesFamily = new AnimalFamily("Long Necks", [
+    giraffe1, crocodile1
+  ]);
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.message);
+  }
+}

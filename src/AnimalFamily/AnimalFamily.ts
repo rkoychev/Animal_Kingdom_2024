@@ -109,6 +109,16 @@ function getSpecificRequirements(
     minAnimals: 8,
     maxMaleAdults: 1,
   };
+  const ELEPHANT_FAMILY_REQUIREMENTS: VerificationProps = {
+    animals: [],
+    minMaleAdults: 2,
+    minFemaleAdults: 2
+  };
+  const GIRAFFE_FAMILY_REQUIREMENTS: VerificationProps = {
+    animals: [],
+    minAnimals: 1,
+    maxAnimals: 20
+  };
   const animalClass = animal.constructor.name;
   switch (animalClass) {
     case "Crocodile":
@@ -123,6 +133,18 @@ function getSpecificRequirements(
         ...specificRequirements,
       };
       break;
+    case "Elephant":
+      specificRequirements = {
+        ...ELEPHANT_FAMILY_REQUIREMENTS,
+        ...specificRequirements,
+      };
+      break;
+      case "Giraffe":
+        specificRequirements = {
+          ...GIRAFFE_FAMILY_REQUIREMENTS,
+          ...specificRequirements,
+        };
+        break;
     default:
       break;
   }
