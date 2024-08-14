@@ -36,7 +36,7 @@ export default class AnimalFamily {
     }
   }
   //return an empty string if it can be added otherwise the reason that it can't be added
-  checkCanAddAnimal(animal: Animal): string {
+  public checkCanAddAnimal(animal: Animal): string {
     const animalClass = this.animals[0].constructor.name;
     if (animal.constructor.name !== animalClass) {
       return `Two different types of Animal cannot be in the same family`;
@@ -53,11 +53,11 @@ export default class AnimalFamily {
       verifyFamilyInfo(specificRequirements);
     return verificationResult.message;
   }
-  addAnimal(animal: Animal, fromBirth = false): void {
-    const verificationResult = this.checkCanAddAnimal(animal);
+  public addAnimal(animal: Animal, fromBirth = false): void {
     if (fromBirth) {
       this.animals.push(animal);
     } else {
+      const verificationResult = this.checkCanAddAnimal(animal);
       if (verificationResult === "") {
         animal.setHome(this.name);
         this.animals.push(animal);
@@ -70,7 +70,7 @@ export default class AnimalFamily {
   }
 
   //return an empty string if it can be removed otherwise the reason that it can't be removed
-  checkCanRemoveAnimal(animal: Animal): string {
+  public checkCanRemoveAnimal(animal: Animal): string {
     if (this.animals.indexOf(animal) === -1) {
       return `${animal.getName()} is not part of ${this.name}`;
     }
@@ -85,7 +85,7 @@ export default class AnimalFamily {
       verifyFamilyInfo(specificRequirements);
     return verificationResult.message;
   }
-  removeAnimal(animal: Animal): boolean {
+  public removeAnimal(animal: Animal): boolean {
     const verificationResult = this.checkCanRemoveAnimal(animal);
     if (verificationResult === "") {
       this.animals = this.animals.filter((anim) => anim !== animal);
