@@ -67,7 +67,9 @@ export default abstract class Animal implements ICanWalk {
   canHaveFamily(): boolean {
     return this._canHaveFamily;
   }
-  public giveBirth(numberOfChildren:number,numberOfChildrenWithRandomGender:number): AnimalCandidate[] | void | boolean {
+  public abstract giveBirth(): void;
+
+  protected canGiveBirth(): boolean {
     if (this.isMale) {
       console.error(
         `Only Females can give birth and ${this.name} is a proud male ${this.constructor.name}`

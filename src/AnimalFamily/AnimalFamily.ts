@@ -124,7 +124,7 @@ function getSpecificRequirements(
   };
   const GIRAFFE_FAMILY_REQUIREMENTS: VerificationProps = {
     animals: [],
-    minAnimals: 1,
+    minAnimals: 10,
     maxAnimals: 20
   };
   const animalClass = animal.constructor.name;

@@ -4,10 +4,12 @@ import Mammal from "../hierarchy/Mammal";
 import { ICanRun } from "../interfaces/ICanRun";
 import { ICanTalk } from "../interfaces/ICanTalk";
 import { ICanWalk } from "../interfaces/ICanWalk";
+const NUMBER_OF_BABY_ELEPHANTS_BORN = 1;
 
 export default class Elephant extends Mammal implements ICanRun, ICanTalk{
-    height:number;
-    weight:number;
+    private height:number;
+    private weight:number;
+    private numberOfBabiesBorn = NUMBER_OF_BABY_ELEPHANTS_BORN;
     constructor(
         name: string, 
         age: number, 
@@ -36,11 +38,11 @@ export default class Elephant extends Mammal implements ICanRun, ICanTalk{
   
     public  giveBirth(): void {
         const family = families.find(elephant =>elephant.name == this.home);
-        const candidateElephants: AnimalCandidate[] = super.giveBirth(1) as AnimalCandidate[];
+        const candidateElephants: AnimalCandidate[] = this.generateBabyProperties(this.numberOfBabiesBorn);
         if (candidateElephants) {
             candidateElephants.forEach(elephantObjectInfo => {
-            const babyElephantHeight = Math.round((Math.random() * (1.2 - 0.8) + 0.8) * 100) / 100;
-            const babyElephantWeight = Math.round((Math.random() * (75 - 65) + 65));
+            const babyElephantHeight = this.generateRandomHeight(0.8, 1.2);
+            const babyElephantWeight = this.generateRandomWeight(65,75);
             const babyLion = new Elephant(
                 elephantObjectInfo.name, 
                 0, 

@@ -2,11 +2,12 @@ import { families } from "../app";
 import Animal, { AnimalCandidate } from "../hierarchy/Animal";
 import Mammal from "../hierarchy/Mammal";
 import { ICanRun } from "../interfaces/ICanRun";
-import { ICanTalk } from "../interfaces/ICanTalk";
-import { ICanWalk } from "../interfaces/ICanWalk";
+const NUMBER_OF_BABY_GIRAFFES_BORN = 1;
+
 
 export default class Giraffe extends Mammal implements ICanRun {
     height:number;
+    private numberOfBabiesBorn = NUMBER_OF_BABY_GIRAFFES_BORN;
     constructor(
         name: string, 
         age: number, 
@@ -24,13 +25,14 @@ export default class Giraffe extends Mammal implements ICanRun {
     run(): void {
       console.log(`${this.name} is running`);
     };
+    
   
     public  giveBirth(): void {
         const family = families.find(giraffe =>giraffe.name == this.home);
-        const candidateGiraffes: AnimalCandidate[] = super.giveBirth(1) as AnimalCandidate[];
+        const candidateGiraffes: AnimalCandidate[] =this.generateBabyProperties(this.numberOfBabiesBorn);
         if (candidateGiraffes) {
             candidateGiraffes.forEach(giraffeObjectInfo => {
-            const babyGiraffeHeight = Math.round((Math.random() * (1.8 - 1.5) + 1.5) * 100) / 100;
+            const babyGiraffeHeight = this.generateRandomHeight(1.5,1.8);
             const babyGiraffe = new Giraffe(
                 giraffeObjectInfo.name, 
                 0, 

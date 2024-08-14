@@ -4,15 +4,17 @@ import { families } from "../app";
 import  { AnimalCandidate } from "../hierarchy/Animal";
 import Mammal from "../hierarchy/Mammal";
 import { ICanJump } from "../interfaces/ICanJump";
+const NUMBER_OF_BABY_LIONS_BORN = 5;
 
 export default class Lion extends Mammal implements ICanRun, ICanTalk,ICanJump {
+  private numberOfBabiesBorn = NUMBER_OF_BABY_LIONS_BORN;
   constructor(name: string, age: number, isMale: boolean) {
     super(name, age, isMale);
     this._canHaveFamily = true;
   };
 
   jump(): void {
-    throw new Error("Method not implemented.");
+    console.log(`${this.name} is jumping`);
   };
   run(): void {
     console.log(`${this.name} is running`);
@@ -21,9 +23,9 @@ export default class Lion extends Mammal implements ICanRun, ICanTalk,ICanJump {
     console.log(`${this.name} is talking`);
   };
 
-  public giveBirth(numberOfChildren:number): void {
+  public giveBirth(): void {
     const family = families.find(x=>x.name == this.home);
-    const candidateLions: AnimalCandidate[] = super.giveBirth(numberOfChildren) as AnimalCandidate[];
+    const candidateLions: AnimalCandidate[] = this.generateBabyProperties(this.numberOfBabiesBorn);
 
     if (candidateLions) {
       candidateLions.forEach(lionObjectInfo => {
