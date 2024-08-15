@@ -22,9 +22,6 @@ export default class Crocodile extends Reptile {
 
   public giveBirth(): void {
     const family = families.find((crocodile) => crocodile.name == this.home);
-    const candidateCrocks: AnimalCandidate[] =
-      super.giveBirth() as AnimalCandidate[];
-    const family = families.find((x) => x.name == this.home);
     const candidateCrocks: AnimalCandidate[] = this.generateBabyProperties(
       this.numberOfBabiesBorn,
       this.numberOfBabiesBornRandomGender

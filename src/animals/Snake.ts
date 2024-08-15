@@ -43,8 +43,10 @@ export default class Snake extends Reptile {
   }
 
   public giveBirth(): void {
-    const candidateSnakes: AnimalCandidate[] =
-      super.giveBirth() as AnimalCandidate[];
+    const candidateSnakes: AnimalCandidate[] = this.generateBabyProperties(
+      this.numberOfBabiesBorn,
+      this.numberOfBabiesBornRandomGender
+    );
     let length: number;
     if (candidateSnakes) {
       candidateSnakes.forEach((snakeObjectInfo) => {
