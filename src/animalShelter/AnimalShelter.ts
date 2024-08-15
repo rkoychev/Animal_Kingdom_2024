@@ -29,7 +29,7 @@ export default class AnimalShelter {
   private getMammalsCount() {
     return this.animals.filter(x => x instanceof Mammal).length;
   }
-  
+
   getMammalLimit() {
     return this._mammalLimit;
   }
@@ -51,7 +51,7 @@ export default class AnimalShelter {
 
   private getReptileCount() {
     return this.animals.filter(x => x instanceof Reptile).length;
-  }  
+  }
   getReptileLimit() {
     return this._reptileLimit;
   }
@@ -66,12 +66,12 @@ export default class AnimalShelter {
       console.log("New Reptile Limit is now : " + this._reptileLimit);
     } else {
       console.log(
-        `Cannot change reptile limit to ${newReptileLimit} there ${reptilesTotal==1 ? "is" : "are" } already ${reptilesTotal} ${reptilesTotal==1 ? "reptile" : "reptile" }`
+        `Cannot change reptile limit to ${newReptileLimit} there ${reptilesTotal == 1 ? "is" : "are"} already ${reptilesTotal} ${reptilesTotal == 1 ? "reptile" : "reptile"}`
       );
     }
   }
 
-  
+
   showAnimals() {
 
     console.log(this.animals);
@@ -86,13 +86,13 @@ export default class AnimalShelter {
 
   addAnimal(animal: Animal): void {
 
-    if (animal instanceof Reptile && this.getReptileCount() + 1 > this._reptileLimit  ) {
+    if (animal instanceof Reptile && this.getReptileCount() + 1 > this._reptileLimit) {
       console.error(
         "Sorry, there is no space for another reptile in the Animal Shelter!"
       );
       return;
     }
-    else if (  animal instanceof Mammal && this.getMammalsCount() + 1 > this._mammalLimit) {
+    else if (animal instanceof Mammal && this.getMammalsCount() + 1 > this._mammalLimit) {
       console.error(
         "Sorry, there is no space for another mammal in the Animal Shelter!"
       );
@@ -103,6 +103,6 @@ export default class AnimalShelter {
       this.animals.push(animal);
       animal.setHome("Animal Shelter");
       console.log(`${animal.getName()} has been added to the Animal Shelter`);
-    }    
-  }      
+    }
+  }
 }

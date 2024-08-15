@@ -9,6 +9,9 @@ export default abstract class Reptile extends Animal implements ICanSwim {
 
   public giveBirth(): AnimalCandidate[] | void {
     if (super.giveBirth()) {
+  public generateBabyProperties(numberOfChildren: number, numberOfChildrenWithRandomGender: number): AnimalCandidate[] {
+    const candidatesforAnimals: AnimalCandidate[] = [];
+    if (this.canGiveBirth()) {
       this.timesGivenBirth++;
       const candidatesforAnimals: AnimalCandidate[] = [];
       const numberOfReptileBabies = 8;
@@ -17,7 +20,7 @@ export default abstract class Reptile extends Animal implements ICanSwim {
         const name: string =
           this.name + "-Baby-" + this.timesGivenBirth + "-" + i;
         let isMale: boolean = true; // default Value
-        if (i <= numberOfReptilelBabiesRandomGender) {
+        if (i <= numberOfChildrenWithRandomGender) {
           isMale = Math.random() % 2 == 0 ? false : true;
         } else {
           isMale = i % 2 == 0 ? true : false;
