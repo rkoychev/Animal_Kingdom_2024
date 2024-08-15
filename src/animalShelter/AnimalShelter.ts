@@ -7,6 +7,7 @@ import Tortoise from "../animals/Tortoise";
 import Snake from "../animals/Snake";
 import Animal from "../hierarchy/Animal";
 import Reptile from "../hierarchy/Reptile";
+import { forEach } from "lodash";
 const DEFAULT_MAMMAL_LIMIT = 20;
 const DEFAULT_REPTILE_LIMIT = 19;
 export default class AnimalShelter {
@@ -78,10 +79,19 @@ export default class AnimalShelter {
   public report(){
     let animalsWhoJump = 0;
     let animalsWhoRun = 0;
-    this.animals.forEach(animal=>this.hasMethod(animal, "jump") ? animalsWhoJump++: animalsWhoJump+=0);
-    this.animals.forEach(animal=>this.hasMethod(animal, "run") ? animalsWhoRun++: animalsWhoRun+=0);
-    let anaimalsWhoClimbTrees =  this.animals.filter(animal=>animal._canClimbTrees).length;
-
+    let anaimalsWhoClimbTrees =0
+    for(const animal of this.animals){
+      if(this.hasMethod(animal, "jump")){
+        animalsWhoJump++
+      }
+      if(this.hasMethod(animal, "run")){
+        animalsWhoRun++;
+      } 
+      if(animal._canClimbTrees){
+        anaimalsWhoClimbTrees++;
+      }
+    }
+    
     console.log(animalsWhoJump +` animals can jump`);
     console.log(animalsWhoRun +` animals can run`);
     console.log(anaimalsWhoClimbTrees +` animals can climb trees`);
