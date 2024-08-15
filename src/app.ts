@@ -12,7 +12,7 @@ export const families: AnimalFamily[] = [];
 export const squirrels: Squirrel[] = [];
 export const snakes: Snake[] = [];
 export const tortoises: Tortoise[] = [];
-
+/* 
 console.log("Starting");
 
 console.log("\n--- Lion Section ---");
@@ -288,9 +288,7 @@ catch (error) {
   }
 }
 
-const giraffesFamily = new AnimalFamily("Long Necks", [
-  giraffe1
-]);
+
 giraffe1.giveBirth();
 
 try {
@@ -302,3 +300,5 @@ try {
     console.error(error.message);
   }
 }
+
+animalShelter.report(); */

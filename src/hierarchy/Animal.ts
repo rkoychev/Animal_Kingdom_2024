@@ -15,6 +15,7 @@ export default abstract class Animal implements ICanWalk {
   protected home?: string;
   protected timesGivenBirth: number;
   protected _canHaveFamily: boolean = false;
+  public _canClimbTrees = false;
   constructor(name: string, age: number, isMale: boolean) {
     if (age < 0) {
       throw new Error("Age cannot be negative");

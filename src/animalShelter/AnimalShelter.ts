@@ -68,8 +68,24 @@ export default class AnimalShelter {
       console.log(
         `Cannot change reptile limit to ${newReptileLimit} there ${reptilesTotal == 1 ? "is" : "are"} already ${reptilesTotal} ${reptilesTotal == 1 ? "reptile" : "reptile"}`
       );
-    }
-  }
+    };
+  };
+
+  private hasMethod(animal:Animal, methodName:string): boolean{
+    return typeof (animal as any)[methodName] === "function";
+  };
+
+  public report(){
+    let animalsWhoJump = 0;
+    let animalsWhoRun = 0;
+    this.animals.forEach(animal=>this.hasMethod(animal, "jump") ? animalsWhoJump++: animalsWhoJump+=0);
+    this.animals.forEach(animal=>this.hasMethod(animal, "run") ? animalsWhoRun++: animalsWhoRun+=0);
+    let anaimalsWhoClimbTrees =  this.animals.filter(animal=>animal._canClimbTrees).length;
+
+    console.log(animalsWhoJump +` animals can jump`);
+    console.log(animalsWhoRun +` animals can run`);
+    console.log(anaimalsWhoClimbTrees +` animals can climb trees`);
+  };
 
 
   showAnimals() {

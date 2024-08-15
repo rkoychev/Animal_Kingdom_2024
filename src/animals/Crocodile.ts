@@ -9,6 +9,7 @@ export default class Crocodile extends Reptile {
   private numberOfBabiesBorn = NUMBER_OF_BABY_CROCODILES_BORN;
   private numberOfBabiesBornRandomGender = NUMBER_OF_BABY_CROCODILES_BORN_RANDOM_GENDER;
 
+
   constructor(name: string, age: number, isMale: boolean, length: number) {
     super(name, age, isMale);
     this._canHaveFamily = true;
@@ -16,6 +17,7 @@ export default class Crocodile extends Reptile {
       throw new Error("Length must be greater than zero");
     }
     this.length = length;
+    this._canClimbTrees =true;
   }
 
   public giveBirth(): void {
