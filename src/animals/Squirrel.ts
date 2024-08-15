@@ -2,11 +2,14 @@ import { TreeType } from "../customTypes";
 import { squirrels } from "../app";
 import { AnimalCandidate } from "../hierarchy/Animal";
 import Mammal from "../hierarchy/Mammal";
-export default class Squirrel extends Mammal {
+import { ICanJump } from "../interfaces/ICanJump";
+const NUMBER_OF_BABY_SQUIRRELS_BORN = 5;
+export default class Squirrel extends Mammal implements ICanJump {
   private treeType: TreeType;
   private treeAge: number;
   private holeSize: number;
   private storedNuts = 0;
+  private numberOfBabiesBorn: number = NUMBER_OF_BABY_SQUIRRELS_BORN;
 
   constructor(
     name: string,
@@ -25,7 +28,10 @@ export default class Squirrel extends Mammal {
     this.treeAge = treeAge;
     this.holeSize = holeSize;
     squirrels.push(this);
-  }
+  };
+  jump(): void {
+    console.log(`${this.name} is jumping`);
+  };
 
   addNuts(numberOfNuts: number): void {
     if (numberOfNuts < 0) {
@@ -41,7 +47,7 @@ export default class Squirrel extends Mammal {
       );
   };
   public giveBirth(): void {
-    const candidateSquirrels: AnimalCandidate[] = super.giveBirth() as AnimalCandidate[];
+    const candidateSquirrels: AnimalCandidate[] = this.generateBabyProperties(this.numberOfBabiesBorn);
     if (candidateSquirrels) {
       candidateSquirrels.forEach(squirrelObjectInfo => {
         const babySquirrel = new Squirrel(squirrelObjectInfo.name, 0, squirrelObjectInfo.isMale, this.treeType, this.treeAge, this.holeSize);
