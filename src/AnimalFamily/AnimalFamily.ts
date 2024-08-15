@@ -147,12 +147,12 @@ function getSpecificRequirements(
         ...specificRequirements,
       };
       break;
-      case "Giraffe":
-        specificRequirements = {
-          ...GIRAFFE_FAMILY_REQUIREMENTS,
-          ...specificRequirements,
-        };
-        break;
+    case "Giraffe":
+      specificRequirements = {
+        ...GIRAFFE_FAMILY_REQUIREMENTS,
+        ...specificRequirements,
+      };
+      break;
     default:
       break;
   }

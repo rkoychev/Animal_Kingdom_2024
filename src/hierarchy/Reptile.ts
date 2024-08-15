@@ -8,7 +8,7 @@ export default abstract class Reptile extends Animal implements ICanSwim {
     console.log(`${this.name} is swiming`);
   }
 
-  public generateBabyProperties(numberOfChildren:number, numberOfChildrenWithRandomGender:number): AnimalCandidate[] {
+  public generateBabyProperties(numberOfChildren: number, numberOfChildrenWithRandomGender: number): AnimalCandidate[] {
     const candidatesforAnimals: AnimalCandidate[] = [];
     if (this.canGiveBirth()) {
       this.timesGivenBirth++;

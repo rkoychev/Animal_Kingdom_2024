@@ -15,8 +15,8 @@ export default class Tortoise extends Reptile {
   };
 
   public giveBirth(): void {
-    const candidateTortoises: AnimalCandidate[] = 
-    this.generateBabyProperties(this.numberOfBabiesBorn,this.numberOfBabiesBornRandomGender);
+    const candidateTortoises: AnimalCandidate[] =
+      this.generateBabyProperties(this.numberOfBabiesBorn, this.numberOfBabiesBornRandomGender);
     if (candidateTortoises) {
       candidateTortoises.forEach(tortoiseObjectInfo => {
         const babyTortoise = new Tortoise(tortoiseObjectInfo.name, 0, tortoiseObjectInfo.isMale);

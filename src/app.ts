@@ -98,10 +98,10 @@ try {
 
 (<Lion>lionsFamily2.animals[2]).giveBirth();
 console.log(lionsFamily2.animals[2]);
-lion1.walk(); 
+lion1.walk();
 lion1.talk();
 lion1.run();
-lion1.jump(); 
+lion1.jump();
 lion1.giveBirth();
 lion1.showHome();
 console.log(lionsFamily2);
@@ -123,10 +123,10 @@ squirrel2.giveBirth();
 console.log(squirrels);
 
 console.log("\n--- Crocodile Section ---");
-try{
+try {
   const crocodile51 = new Crocodile("Croco", 10, false, -23);
 }
-catch(error){
+catch (error) {
   if (error instanceof Error) {
     console.error(error.message);
   }
@@ -235,10 +235,10 @@ animalShelter.setMammalLimit(-3);
 animalShelter.setReptileLimit(0);
 
 
-const el1 = new Elephant("s",2,true,5,350);
-const el2 = new Elephant("a",2,true,5,350);
-const el3 = new Elephant("d",2,false,5,350);
-const el4 = new Elephant("w",2,false,5,350);
+const el1 = new Elephant("s", 2, true, 5, 350);
+const el2 = new Elephant("a", 2, true, 5, 350);
+const el3 = new Elephant("d", 2, false, 5, 350);
+const el4 = new Elephant("w", 2, false, 5, 350);
 
 const elephantHerd = new AnimalFamily("Long Horns", [
   el1,
@@ -270,19 +270,19 @@ try {
   }
 }
 try {
-  const giraffe1 = new Giraffe("high in the sky",4,false,-5);
+  const giraffe1 = new Giraffe("high in the sky", 4, false, -5);
 } catch (error) {
   if (error instanceof Error) {
     console.error(error.message);
   }
 }
 
-const giraffe1 = new Giraffe("high in the sky",4,false,5);
+const giraffe1 = new Giraffe("high in the sky", 4, false, 5);
 
-try{
+try {
   giraffe1.giveBirth();
 }
-catch(error) {
+catch (error) {
   if (error instanceof Error) {
     console.error(error.message);
   }

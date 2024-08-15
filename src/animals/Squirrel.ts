@@ -9,7 +9,7 @@ export default class Squirrel extends Mammal implements ICanJump {
   private treeAge: number;
   private holeSize: number;
   private storedNuts = 0;
-  private numberOfBabiesBorn:number = NUMBER_OF_BABY_SQUIRRELS_BORN;
+  private numberOfBabiesBorn: number = NUMBER_OF_BABY_SQUIRRELS_BORN;
 
   constructor(
     name: string,
