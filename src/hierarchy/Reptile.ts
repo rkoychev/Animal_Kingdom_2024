@@ -25,7 +25,6 @@ export default abstract class Reptile extends Animal implements ICanSwim {
         }
         candidatesforAnimals.push({ name: name, isMale: isMale });
       }
-      console.log(`${this.name} lays eggs`);
     }
     return candidatesforAnimals;
   }

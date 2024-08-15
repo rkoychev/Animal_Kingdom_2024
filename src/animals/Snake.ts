@@ -2,8 +2,8 @@ import { SnakeType } from "../customTypes";
 import { snakes } from "../app";
 import Reptile from "../hierarchy/Reptile";
 import { AnimalCandidate } from "../hierarchy/Animal";
-const NUMBER_OF_BABY_SNAKES_BORN = 8;
-const NUMBER_OF_BABY_SNAKES_BORN_RANDOM_GENDER = 5;
+export const NUMBER_OF_BABY_SNAKES_BORN = 8;
+export const NUMBER_OF_BABY_SNAKES_BORN_RANDOM_GENDER = 5;
 
 import {
   EMPTY_COLOR_ERROR_MESSAGE,

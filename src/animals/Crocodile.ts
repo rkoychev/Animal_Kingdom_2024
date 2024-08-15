@@ -2,8 +2,8 @@ import { NEGATIVE_LENGTH_ERROR_MESSAGE } from "../../tests/errorMessages";
 import { families } from "../app";
 import { AnimalCandidate } from "../hierarchy/Animal";
 import Reptile from "../hierarchy/Reptile";
-const NUMBER_OF_BABY_CROCODILES_BORN = 8;
-const NUMBER_OF_BABY_CROCODILES_BORN_RANDOM_GENDER = 5;
+export const NUMBER_OF_BABY_CROCODILES_BORN = 8;
+export const NUMBER_OF_BABY_CROCODILES_BORN_RANDOM_GENDER = 5;
 
 export default class Crocodile extends Reptile {
   private length: number;
@@ -21,7 +21,7 @@ export default class Crocodile extends Reptile {
   }
 
   public giveBirth(): void {
-    const family = families.find((crocodile) => crocodile.name == this.home);
+    const family = families.find((crcodile) => crcodile.name == this.home);
     const candidateCrocks: AnimalCandidate[] = this.generateBabyProperties(
       this.numberOfBabiesBorn,
       this.numberOfBabiesBornRandomGender

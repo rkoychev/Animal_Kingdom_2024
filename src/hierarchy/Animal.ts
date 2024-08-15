@@ -1,6 +1,8 @@
 import {
   EMPTY_NAME_ERROR_MESSAGE,
+  GIVING_BIRTH_WITHOUT_HOME,
   NEGATIVE_AGE_ERROR_MESSAGE,
+  TELLING_MALE_TO_GIVE_BIRTH,
 } from "../../tests/errorMessages";
 import AnimalFamily from "../animalFamily/AnimalFamily";
 import { families } from "../app";
@@ -41,11 +43,11 @@ export default abstract class Animal implements ICanWalk {
     return `${this.name} is walking`;
   }
 
-  showHome(): void {
+  showHome(): string {
     if (this.home === undefined) {
-      console.log(`${this.name} doesn't have a home yet`);
+      return `${this.name} doesn't have a home yet`;
     } else {
-      console.log(`${this.name} lives in ${this.home}`);
+      return `${this.name} lives in ${this.home}`;
     }
   }
   getName(): string {
@@ -75,15 +77,9 @@ export default abstract class Animal implements ICanWalk {
 
   protected canGiveBirth(): boolean {
     if (this.isMale) {
-      console.error(
-        `Only Females can give birth and ${this.name} is a proud male ${this.constructor.name}`
-      );
-      return false;
+      throw new Error(TELLING_MALE_TO_GIVE_BIRTH);
     } else if (this.home === undefined) {
-      console.error(
-        `${this.name} can't give birth because she doesn't have a home to meet a male`
-      );
-      return false;
+      throw new Error(GIVING_BIRTH_WITHOUT_HOME);
     }
     return true;
   }
