@@ -2,6 +2,10 @@ import { SnakeType } from "../customTypes";
 import { snakes } from "../app";
 import Reptile from "../hierarchy/Reptile";
 import { AnimalCandidate } from "../hierarchy/Animal";
+import {
+  EMPTY_COLOR_ERROR_MESSAGE,
+  NEGATIVE_LENGTH_ERROR_MESSAGE,
+} from "../../tests/errorMessages";
 export default class Snake extends Reptile {
   private type: SnakeType;
   private color: string;
@@ -17,7 +21,10 @@ export default class Snake extends Reptile {
   ) {
     super(name, age, isMale);
     if (length <= 0) {
-      throw new Error("Length must be greater than zero");
+      throw new Error(NEGATIVE_LENGTH_ERROR_MESSAGE);
+    }
+    if (color.length <= 0) {
+      throw new Error(EMPTY_COLOR_ERROR_MESSAGE);
     }
     this.type = type;
     this.color = color;
@@ -25,19 +32,27 @@ export default class Snake extends Reptile {
     this.home = "hole";
     snakes.push(this);
   }
-  override walk(): void {
-    console.log(`${this.name} is sliding`);
+  override walk(): string {
+    return `${this.name} is sliding`;
   }
 
   public giveBirth(): void {
-    const candidateSnakes: AnimalCandidate[] = super.giveBirth() as AnimalCandidate[];
+    const candidateSnakes: AnimalCandidate[] =
+      super.giveBirth() as AnimalCandidate[];
     let length: number;
     if (candidateSnakes) {
-      candidateSnakes.forEach(snakeObjectInfo => {
-        length = Math.floor(Math.random() * 3)+ 1;
-        const babySnake = new Snake(snakeObjectInfo.name, 0, this.type, snakeObjectInfo.isMale, this.color, length);
+      candidateSnakes.forEach((snakeObjectInfo) => {
+        length = Math.floor(Math.random() * 3) + 1;
+        const babySnake = new Snake(
+          snakeObjectInfo.name,
+          0,
+          this.type,
+          snakeObjectInfo.isMale,
+          this.color,
+          length
+        );
         babySnake.home = this.home;
       });
-    };
-  };
+    }
+  }
 }

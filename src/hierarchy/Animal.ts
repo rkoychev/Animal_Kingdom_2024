@@ -1,3 +1,7 @@
+import {
+  EMPTY_NAME_ERROR_MESSAGE,
+  NEGATIVE_AGE_ERROR_MESSAGE,
+} from "../../tests/errorMessages";
 import AnimalFamily from "../animalFamily/AnimalFamily";
 import { families } from "../app";
 import { ICanWalk } from "../interfaces/ICanWalk";
@@ -17,10 +21,10 @@ export default abstract class Animal implements ICanWalk {
   protected _canHaveFamily: boolean = false;
   constructor(name: string, age: number, isMale: boolean) {
     if (age < 0) {
-      throw new Error("Age cannot be negative");
+      throw new Error(NEGATIVE_AGE_ERROR_MESSAGE);
     }
     if (name === "") {
-      throw new Error("Name cannot be empty");
+      throw new Error(EMPTY_NAME_ERROR_MESSAGE);
     }
     this.name = name;
     this.isMale = isMale;
@@ -33,8 +37,8 @@ export default abstract class Animal implements ICanWalk {
     this.timesGivenBirth = 0;
   }
 
-  walk(): void {
-    console.log(`${this.name} is walking`);
+  walk(): string {
+    return `${this.name} is walking`;
   }
 
   showHome(): void {

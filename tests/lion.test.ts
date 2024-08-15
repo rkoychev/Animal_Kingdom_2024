@@ -1,15 +1,16 @@
 import Lion from "../src/animals/Lion";
-test("should log an error if age is negative", () => {
-  expect(() => {
-    const lion = new Lion("Simba", -5, true);
-  }).toThrow("Age cannot be negative");
-});
-test("should log an error if name is an empty string", () => {
-  expect(() => {
-    const lion = new Lion("", 5, true);
-  }).toThrow("Name cannot be empty");
-});
+
 describe("Lion Class Tests", () => {
+  test("should log an error if age is negative", () => {
+    expect(() => {
+      const lion = new Lion("Simba", -5, true);
+    }).toThrow("Age cannot be negative");
+  });
+  test("should log an error if name is an empty string", () => {
+    expect(() => {
+      const lion = new Lion("", 5, true);
+    }).toThrow("Name cannot be empty");
+  });
   test("should create a Lion instance with valid age", () => {
     const lion = new Lion("Simba", 5, true);
     expect(lion.getName()).toBe("Simba");
