@@ -12,7 +12,7 @@ export const families: AnimalFamily[] = [];
 export const squirrels: Squirrel[] = [];
 export const snakes: Snake[] = [];
 export const tortoises: Tortoise[] = [];
-
+/* 
 console.log("Starting");
 
 console.log("\n--- Lion Section ---");
@@ -301,4 +301,4 @@ try {
   if (error instanceof Error) {
     console.error(error.message);
   }
-}
+} */

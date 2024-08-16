@@ -27,7 +27,7 @@ export default class Snake extends Reptile {
     this.type = type;
     this.color = color;
     this.length = length;
-    this.home = "hole";
+   this.setHome("hole");
     snakes.push(this);
   }
   override walk(): void {

@@ -4,9 +4,15 @@ import { AnimalCandidate } from "./Animal";
 
 export default abstract class Mammal extends Animal {
     generateRandomHeight(lowBound: number, highBound: number) {
+        if(lowBound || highBound <0){
+            throw new Error("Both values must be positive!");
+        }
         return Math.round((Math.random() * (highBound - lowBound) + lowBound) * 100) / 100;
-    }
+   }
     generateRandomWeight(lowBound: number, highBound: number) {
+        if(lowBound || highBound <0){
+            throw new Error("Both values must be positive!");
+        }
         return Math.round((Math.random() * (highBound - lowBound) + lowBound));
     }
 

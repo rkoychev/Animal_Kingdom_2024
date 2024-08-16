@@ -23,10 +23,14 @@ export default class Squirrel extends Mammal implements ICanJump {
     if (holeSize <= 0) {
       throw new Error("Hole size must be greater than zero");
     }
+    if(treeAge<=0){
+      throw new Error("Tree age must be greater than zero");
+    }
 
     this.treeType = treeType;
     this.treeAge = treeAge;
     this.holeSize = holeSize;
+    this.setHome(treeType + " tree");
     squirrels.push(this);
   };
   jump(): void {
@@ -35,13 +39,13 @@ export default class Squirrel extends Mammal implements ICanJump {
 
   addNuts(numberOfNuts: number): void {
     if (numberOfNuts < 0) {
-      console.log(`Cannot add a negative number of Nuts`);
+      console.error(`Cannot add a negative number of Nuts`);
       return;
     }
     if (this.storedNuts + numberOfNuts <= this.holeSize) {
       this.storedNuts += numberOfNuts;
     } else
-      console.log(
+      console.error(
         `${this.name} hole has space left only for ${this.holeSize - this.storedNuts
         } nuts`
       );
@@ -56,7 +60,11 @@ export default class Squirrel extends Mammal implements ICanJump {
     };
   };
 
-  setHome(home: string | undefined): void {
-    this.home = home;
+  getHoleSize(){
+    return this.holeSize;
+  };
+
+  getStoredNuts(){
+    return this.storedNuts;
   };
 }
