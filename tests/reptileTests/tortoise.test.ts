@@ -7,7 +7,7 @@ import {
   GIVING_BIRTH_WITHOUT_HOME,
   NEGATIVE_AGE_ERROR_MESSAGE,
   TELLING_MALE_TO_GIVE_BIRTH,
-} from "../errorMessages";
+} from "../../messages/errorMessages";
 
 describe("turtle Class Tests", () => {
   test("should throw an error if age is negative", () => {
@@ -55,12 +55,18 @@ describe("turtle Class Tests", () => {
     }).toThrow(GIVING_BIRTH_WITHOUT_HOME);
   });
   test("should call give birth method correctly", () => {
-    //making an animal family to add the crocodile in
     const turtle = new Tortoise("Turtle", 4, false);
-    const initialNumberOfturtles = tortoises.length;
-    turtle.giveBirth();
-    expect(tortoises.length).toBe(
-      initialNumberOfturtles + NUMBER_OF_BABY_TORTOISES_BORN
-    );
+    const babies = turtle.giveBirth();
+    expect(babies.length).toBe(NUMBER_OF_BABY_TORTOISES_BORN);
+  });
+  test("should call give birth method correctly with at least 2 males and 1 female", () => {
+    const turtle = new Tortoise("Turtle", 4, false);
+    const babies = turtle.giveBirth();
+    const maleCount = babies.filter((baby) => baby.getIsMale() === true).length;
+    expect(maleCount).toBeGreaterThanOrEqual(2);
+    const femaleCount = babies.filter(
+      (baby) => baby.getIsMale() === false
+    ).length;
+    expect(femaleCount).toBeGreaterThanOrEqual(1);
   });
 });

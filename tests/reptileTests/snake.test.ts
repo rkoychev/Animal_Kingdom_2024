@@ -1,12 +1,13 @@
 import Snake, { NUMBER_OF_BABY_SNAKES_BORN } from "../../src/animals/Snake";
 import { snakes } from "../../src/app";
 import {
+  EMPTY_COLOR_ERROR_MESSAGE,
   EMPTY_NAME_ERROR_MESSAGE,
   GIVING_BIRTH_WITHOUT_HOME,
   NEGATIVE_AGE_ERROR_MESSAGE,
   NEGATIVE_LENGTH_ERROR_MESSAGE,
   TELLING_MALE_TO_GIVE_BIRTH,
-} from "../errorMessages";
+} from "../../messages/errorMessages";
 
 describe("Snake Class Tests", () => {
   test("should log an error if length is negative", () => {
@@ -31,8 +32,8 @@ describe("Snake Class Tests", () => {
   });
   test("should throw an error if color is empty", () => {
     expect(() => {
-      const snake = new Snake("", 3, "Anaconda", false, "", 4);
-    }).toThrow(EMPTY_NAME_ERROR_MESSAGE);
+      const snake = new Snake("Ssss", 3, "Anaconda", false, "", 4);
+    }).toThrow(EMPTY_COLOR_ERROR_MESSAGE);
   });
   test("should create a Snake instance with valid inputs", () => {
     const snake = new Snake("Sssnake", 3, "Anaconda", false, "Red", 4);
@@ -69,12 +70,19 @@ describe("Snake Class Tests", () => {
     }).toThrow(GIVING_BIRTH_WITHOUT_HOME);
   });
   test("should call give birth method correctly", () => {
-    //making an animal family to add the crocodile in
     const snake = new Snake("Sssnake", 3, "Anaconda", false, "Red", 4);
-    const initialNumberOfSnakes = snakes.length;
-    snake.giveBirth();
-    expect(snakes.length).toBe(
-      initialNumberOfSnakes + NUMBER_OF_BABY_SNAKES_BORN
-    );
+    const babies = snake.giveBirth();
+    expect(babies.length).toBe(NUMBER_OF_BABY_SNAKES_BORN);
+  });
+  test("should call give birth method correctly with at least 2 males and 1 female", () => {
+    const snake = new Snake("Sssnake", 3, "Anaconda", false, "Red", 4);
+    const babies = snake.giveBirth();
+    expect(babies.length).toBe(NUMBER_OF_BABY_SNAKES_BORN);
+    const maleCount = babies.filter((baby) => baby.getIsMale() === true).length;
+    expect(maleCount).toBeGreaterThanOrEqual(2);
+    const femaleCount = babies.filter(
+      (baby) => baby.getIsMale() === false
+    ).length;
+    expect(femaleCount).toBeGreaterThanOrEqual(1);
   });
 });

@@ -3,7 +3,7 @@ import {
   GIVING_BIRTH_WITHOUT_HOME,
   NEGATIVE_AGE_ERROR_MESSAGE,
   TELLING_MALE_TO_GIVE_BIRTH,
-} from "../../tests/errorMessages";
+} from "../../messages/errorMessages";
 import AnimalFamily from "../animalFamily/AnimalFamily";
 import { families } from "../app";
 import { ICanWalk } from "../interfaces/ICanWalk";
