@@ -20,7 +20,7 @@ describe("turtle Class Tests", () => {
       const turtle = new Tortoise("", 4, false);
     }).toThrow(EMPTY_NAME_ERROR_MESSAGE);
   });
-  test("should create a turtleoise instance with valid inputs", () => {
+  test("should create a Tortoise instance with valid inputs", () => {
     const turtle = new Tortoise("Turtle", 4, false);
     expect(turtle.getName()).toBe("Turtle");
     expect(turtle.getAge()).toBe(4);
