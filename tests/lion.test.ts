@@ -25,7 +25,7 @@ describe("Lion Class Tests", () => {
   });
 
   test("should call run method correctly", () => {
-    const logLock = jest.spyOn(console, "log").mockImplementation(() => {});
+    const logLock = jest.spyOn(console, "log").mockImplementation(() => { });
     const lion = new Lion("Simba", 5, true);
     const runSpy = jest.spyOn(lion, "run");
     lion.run();
@@ -35,7 +35,7 @@ describe("Lion Class Tests", () => {
   });
 
   test("should call talk method correctly", () => {
-    const logLock = jest.spyOn(console, "log").mockImplementation(() => {});
+    const logLock = jest.spyOn(console, "log").mockImplementation(() => { });
     const lion = new Lion("Simba", 5, true);
     const talkSpy = jest.spyOn(lion, "talk");
     lion.talk();

@@ -72,29 +72,29 @@ export default class AnimalShelter {
     };
   };
 
-  private hasMethod(animal:Animal, methodName:string): boolean{
+  private hasMethod(animal: Animal, methodName: string): boolean {
     return typeof (animal as any)[methodName] === "function";
   };
 
-  public report(){
+  public report() {
     let animalsWhoJump = 0;
     let animalsWhoRun = 0;
-    let anaimalsWhoClimbTrees =0
-    for(const animal of this.animals){
-      if(this.hasMethod(animal, "jump")){
+    let anaimalsWhoClimbTrees = 0
+    for (const animal of this.animals) {
+      if (this.hasMethod(animal, "jump")) {
         animalsWhoJump++
       }
-      if(this.hasMethod(animal, "run")){
+      if (this.hasMethod(animal, "run")) {
         animalsWhoRun++;
-      } 
-      if(animal._canClimbTrees){
+      }
+      if (animal._canClimbTrees) {
         anaimalsWhoClimbTrees++;
       }
     }
-    
-    console.log(animalsWhoJump +` animals can jump`);
-    console.log(animalsWhoRun +` animals can run`);
-    console.log(anaimalsWhoClimbTrees +` animals can climb trees`);
+
+    console.log(animalsWhoJump + ` animals can jump`);
+    console.log(animalsWhoRun + ` animals can run`);
+    console.log(anaimalsWhoClimbTrees + ` animals can climb trees`);
   };
 
 
