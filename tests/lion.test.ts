@@ -4,7 +4,7 @@ import {
   GIVING_BIRTH_WITHOUT_HOME,
   NEGATIVE_AGE_ERROR_MESSAGE,
   TELLING_MALE_TO_GIVE_BIRTH,
-} from "./errorMessages";
+} from "../messages/errorMessages";
 
 describe("Lion Class Tests", () => {
   test("should log an error if age is negative", () => {

@@ -7,7 +7,7 @@ import {
   NEGATIVE_AGE_ERROR_MESSAGE,
   NEGATIVE_LENGTH_ERROR_MESSAGE,
   TELLING_MALE_TO_GIVE_BIRTH,
-} from "../errorMessages";
+} from "../../messages/errorMessages";
 
 describe("Crocodile Class Tests", () => {
   test("should log an error if length is negative", () => {
@@ -70,12 +70,23 @@ describe("Crocodile Class Tests", () => {
   test("should call give birth method correctly", () => {
     const crocodile = new Crocodile("Croco", 4, false, 4);
     const crocodile2 = new Crocodile("Simona", 4, false, 4);
-    //making an animal family to add the crocodile in
     const crocsFamily = new AnimalFamily("Crocodiles", [crocodile, crocodile2]);
-    const initialFamilyLength = crocsFamily.animals.length;
-    crocodile.giveBirth();
-    expect(crocsFamily.animals.length).toBe(
-      initialFamilyLength + NUMBER_OF_BABY_CROCODILES_BORN
-    );
+    const babies = crocodile.giveBirth();
+    expect(babies.length).toBe(NUMBER_OF_BABY_CROCODILES_BORN);
+  });
+  test("should call give birth method correctly with at least 2 males and 1 female", () => {
+    const crocodile3 = new Crocodile("Croco", 4, false, 4);
+    const crocodile4 = new Crocodile("Simona", 4, false, 4);
+    const crocsFamily2 = new AnimalFamily("Crocodiles3", [
+      crocodile3,
+      crocodile4,
+    ]);
+    const babies = crocodile3.giveBirth();
+    const maleCount = babies.filter((baby) => baby.getIsMale() === true).length;
+    expect(maleCount).toBeGreaterThanOrEqual(2);
+    const femaleCount = babies.filter(
+      (baby) => baby.getIsMale() === false
+    ).length;
+    expect(femaleCount).toBeGreaterThanOrEqual(1);
   });
 });

@@ -8,7 +8,7 @@ export const NUMBER_OF_BABY_SNAKES_BORN_RANDOM_GENDER = 5;
 import {
   EMPTY_COLOR_ERROR_MESSAGE,
   NEGATIVE_LENGTH_ERROR_MESSAGE,
-} from "../../tests/errorMessages";
+} from "../../messages/errorMessages";
 export default class Snake extends Reptile {
   private type: SnakeType;
   private color: string;
@@ -42,12 +42,13 @@ export default class Snake extends Reptile {
     return `${this.name} is sliding`;
   }
 
-  public giveBirth(): void {
+  public giveBirth() {
     const candidateSnakes: AnimalCandidate[] = this.generateBabyProperties(
       this.numberOfBabiesBorn,
       this.numberOfBabiesBornRandomGender
     );
     let length: number;
+    const babies: Snake[] = [];
     if (candidateSnakes) {
       candidateSnakes.forEach((snakeObjectInfo) => {
         length = Math.floor(Math.random() * 3) + 1;
@@ -60,7 +61,9 @@ export default class Snake extends Reptile {
           length
         );
         babySnake.home = this.home;
+        babies.push(babySnake);
       });
     }
+    return babies;
   }
 }

@@ -15,11 +15,12 @@ export default class Tortoise extends Reptile {
     tortoises.push(this);
   }
 
-  public giveBirth(): void {
+  public giveBirth() {
     const candidateTortoises: AnimalCandidate[] = this.generateBabyProperties(
       this.numberOfBabiesBorn,
       this.numberOfBabiesBornRandomGender
     );
+    const babies: Tortoise[] = [];
     if (candidateTortoises) {
       candidateTortoises.forEach((tortoiseObjectInfo) => {
         const babyTortoise = new Tortoise(
@@ -28,7 +29,9 @@ export default class Tortoise extends Reptile {
           tortoiseObjectInfo.isMale
         );
         babyTortoise.home = this.home;
+        babies.push(babyTortoise);
       });
     }
+    return babies;
   }
 }

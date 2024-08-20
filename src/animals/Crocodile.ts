@@ -1,4 +1,4 @@
-import { NEGATIVE_LENGTH_ERROR_MESSAGE } from "../../tests/errorMessages";
+import { NEGATIVE_LENGTH_ERROR_MESSAGE } from "../../messages/errorMessages";
 import { families } from "../app";
 import { AnimalCandidate } from "../hierarchy/Animal";
 import Reptile from "../hierarchy/Reptile";
@@ -20,12 +20,13 @@ export default class Crocodile extends Reptile {
     this.length = length;
   }
 
-  public giveBirth(): void {
+  public giveBirth() {
     const family = families.find((crcodile) => crcodile.name == this.home);
     const candidateCrocks: AnimalCandidate[] = this.generateBabyProperties(
       this.numberOfBabiesBorn,
       this.numberOfBabiesBornRandomGender
     );
+    const babies: Crocodile[] = [];
     let length: number;
     if (candidateCrocks) {
       candidateCrocks.forEach((crockObjectInfo) => {
@@ -37,7 +38,9 @@ export default class Crocodile extends Reptile {
           length
         );
         family?.addAnimal(babyCrocodile, true);
+        babies.push(babyCrocodile);
       });
     }
+    return babies;
   }
 }
