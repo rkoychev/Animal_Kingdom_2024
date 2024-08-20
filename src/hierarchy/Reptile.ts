@@ -3,17 +3,18 @@ import Animal from "./Animal";
 import { AnimalCandidate } from "./Animal";
 
 export default abstract class Reptile extends Animal implements ICanSwim {
-
   swim() {
-    console.log(`${this.name} is swiming`);
+    return `${this.name} is swimming`;
   }
 
-  public generateBabyProperties(numberOfChildren: number, numberOfChildrenWithRandomGender: number): AnimalCandidate[] {
+  public generateBabyProperties(
+    numberOfChildren: number,
+    numberOfChildrenWithRandomGender: number
+  ): AnimalCandidate[] {
     const candidatesforAnimals: AnimalCandidate[] = [];
     if (this.canGiveBirth()) {
       this.timesGivenBirth++;
       for (let i = 1; i <= numberOfChildren; i++) {
-
         const name: string =
           this.name + "-Baby-" + this.timesGivenBirth + "-" + i;
         let isMale: boolean = true; // default Value
@@ -24,8 +25,7 @@ export default abstract class Reptile extends Animal implements ICanSwim {
         }
         candidatesforAnimals.push({ name: name, isMale: isMale });
       }
-      console.log(`${this.name} lays eggs`);
-    };
+    }
     return candidatesforAnimals;
-  };
+  }
 }

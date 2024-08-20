@@ -13,7 +13,7 @@ export const squirrels: Squirrel[] = [];
 export const snakes: Snake[] = [];
 export const tortoises: Tortoise[] = [];
 /* 
-console.log("Starting");
+/*console.log("Starting");
 
 console.log("\n--- Lion Section ---");
 const lion1 = new Lion("Simba", 5, true);
@@ -125,12 +125,10 @@ console.log(squirrels);
 console.log("\n--- Crocodile Section ---");
 try {
   const crocodile51 = new Crocodile("Croco", 10, false, -23);
-}
-catch (error) {
+} catch (error) {
   if (error instanceof Error) {
     console.error(error.message);
   }
-
 }
 const crocodile1 = new Crocodile("Croco", 10, false, 23);
 const crocodile2 = new Crocodile("Snapper", 5, true, 22);
@@ -234,18 +232,12 @@ console.log(animalShelter.getMammalLimit(), animalShelter.getReptileLimit());
 animalShelter.setMammalLimit(-3);
 animalShelter.setReptileLimit(0);
 
-
 const el1 = new Elephant("s", 2, true, 5, 350);
 const el2 = new Elephant("a", 2, true, 5, 350);
 const el3 = new Elephant("d", 2, false, 5, 350);
 const el4 = new Elephant("w", 2, false, 5, 350);
 
-const elephantHerd = new AnimalFamily("Long Horns", [
-  el1,
-  el2,
-  el3,
-  el4
-]);
+const elephantHerd = new AnimalFamily("Long Horns", [el1, el2, el3, el4]);
 el3.giveBirth();
 try {
   const el5 = new Elephant("d", 3, false, -10, 3);
@@ -281,8 +273,14 @@ const giraffe1 = new Giraffe("high in the sky", 4, false, 5);
 
 try {
   giraffe1.giveBirth();
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.message);
+  }
 }
-catch (error) {
+try {
+  const giraffesFamily = new AnimalFamily("Long Necks", [giraffe1]);
+} catch (error) {
   if (error instanceof Error) {
     console.error(error.message);
   }
@@ -292,9 +290,7 @@ catch (error) {
 giraffe1.giveBirth();
 
 try {
-  const giraffesFamily = new AnimalFamily("Long Necks", [
-    giraffe1, crocodile1
-  ]);
+  const giraffesFamily = new AnimalFamily("Long Necks", [giraffe1, crocodile1]);
 } catch (error) {
   if (error instanceof Error) {
     console.error(error.message);

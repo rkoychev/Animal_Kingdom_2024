@@ -1,15 +1,22 @@
 import Lion from "../src/animals/Lion";
-test("should log an error if age is negative", () => {
-  expect(() => {
-    const lion = new Lion("Simba", -5, true);
-  }).toThrow("Age cannot be negative");
-});
-test("should log an error if name is an empty string", () => {
-  expect(() => {
-    const lion = new Lion("", 5, true);
-  }).toThrow("Name cannot be empty");
-});
+import {
+  EMPTY_NAME_ERROR_MESSAGE,
+  GIVING_BIRTH_WITHOUT_HOME,
+  NEGATIVE_AGE_ERROR_MESSAGE,
+  TELLING_MALE_TO_GIVE_BIRTH,
+} from "../messages/errorMessages";
+
 describe("Lion Class Tests", () => {
+  test("should log an error if age is negative", () => {
+    expect(() => {
+      const lion = new Lion("Simba", -5, true);
+    }).toThrow(NEGATIVE_AGE_ERROR_MESSAGE);
+  });
+  test("should log an error if name is an empty string", () => {
+    expect(() => {
+      const lion = new Lion("", 5, true);
+    }).toThrow(EMPTY_NAME_ERROR_MESSAGE);
+  });
   test("should create a Lion instance with valid age", () => {
     const lion = new Lion("Simba", 5, true);
     expect(lion.getName()).toBe("Simba");
@@ -38,21 +45,16 @@ describe("Lion Class Tests", () => {
   });
 
   test("should log an error if a male lion calls giveBirth", () => {
-    const errorMock = jest.spyOn(console, "error").mockImplementation(() => {});
     const lion = new Lion("Simba", 5, true);
-    lion.giveBirth();
-    expect(errorMock).toHaveBeenCalledWith(
-      "Only Females can give birth and Simba is a proud male Lion"
-    );
-    errorMock.mockRestore();
+    expect(() => {
+      lion.giveBirth();
+    }).toThrow(TELLING_MALE_TO_GIVE_BIRTH);
   });
-  test("should log an error if a lion with no home calls giveBirth", () => {
+  test("should throw an error if a lion with no home calls giveBirth", () => {
     const lion = new Lion("Nala", 4, false);
-    const errorMock = jest.spyOn(console, "error").mockImplementation(() => {});
-    lion.giveBirth();
-    expect(errorMock).toHaveBeenCalledWith(
-      "Nala can't give birth because she doesn't have a home to meet a male"
-    );
-    errorMock.mockRestore();
+    lion.setHome(undefined);
+    expect(() => {
+      lion.giveBirth();
+    }).toThrow(GIVING_BIRTH_WITHOUT_HOME);
   });
 });

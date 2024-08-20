@@ -3,3 +3,4 @@ Running the Setup:
 Install Dependencies: Run npm install to install all necessary packages.
 Run Tests: Execute npm test to run Jest tests.
 Start Development Server: Use npm start to start the Webpack development server
+Check coverage report:Use npx jest --coverage
