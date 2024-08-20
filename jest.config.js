@@ -6,4 +6,6 @@ module.exports = {
     transform: {
         '^.+\\.tsx?$': 'ts-jest',
     },
+    coverageDirectory: "coverage",
+    coverageReporters: ["json", "lcov", "text", "clover"],
 };
