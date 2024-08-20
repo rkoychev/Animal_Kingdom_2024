@@ -1,3 +1,4 @@
+import { GIRAFFE_HEIGHT_NEGATIVE } from "../../messages/errorMessages";
 import { families } from "../app";
 import Animal, { AnimalCandidate } from "../hierarchy/Animal";
 import Mammal from "../hierarchy/Mammal";
@@ -16,20 +17,21 @@ export default class Giraffe extends Mammal implements ICanRun {
   ) {
     super(name, age, isMale);
     if (height <= 0) {
-      throw Error("Elephant height must be greater than zero!")
+      throw Error(GIRAFFE_HEIGHT_NEGATIVE)
     };
     this._canHaveFamily = true;
     this.height = height;
   };
 
-  run(): void {
-    console.log(`${this.name} is running`);
+  run(): string {
+    return `${this.name} is running`;
   };
 
 
-  public giveBirth(): void {
+  public giveBirth() {
     const family = families.find(giraffe => giraffe.name == this.home);
     const candidateGiraffes: AnimalCandidate[] = this.generateBabyProperties(this.numberOfBabiesBorn);
+    const babies: Giraffe[] = [];
     if (candidateGiraffes) {
       candidateGiraffes.forEach(giraffeObjectInfo => {
         const babyGiraffeHeight = this.generateRandomHeight(1.5, 1.8);
@@ -39,8 +41,10 @@ export default class Giraffe extends Mammal implements ICanRun {
           giraffeObjectInfo.isMale,
           babyGiraffeHeight
         );
-        family?.addAnimal(babyGiraffe, true);
+        family!.addAnimal(babyGiraffe, true);
+        babies.push(babyGiraffe);
       });
     };
+    return babies;
   };
 };
