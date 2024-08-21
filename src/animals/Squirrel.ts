@@ -1,9 +1,11 @@
 import { TreeType } from "../customTypes";
 import { squirrels } from "../app";
-import { AnimalCandidate } from "../hierarchy/Animal";
+import { AGE_TO_BE_ADULT, AnimalCandidate } from "../hierarchy/Animal";
 import Mammal from "../hierarchy/Mammal";
 import { ICanJump } from "../interfaces/ICanJump";
 const NUMBER_OF_BABY_SQUIRRELS_BORN = 5;
+export const SQUIRREL_SPACE_NEEDED_AS_ADULT = 40;
+export const SQUIRREL_SPACE_NEEDED_AS_CHILD = 20;
 export default class Squirrel extends Mammal implements ICanJump {
   private treeType: TreeType;
   private treeAge: number;
@@ -28,10 +30,10 @@ export default class Squirrel extends Mammal implements ICanJump {
     this.treeAge = treeAge;
     this.holeSize = holeSize;
     squirrels.push(this);
-  };
+  }
   jump(): void {
     console.log(`${this.name} is jumping`);
-  };
+  }
 
   addNuts(numberOfNuts: number): void {
     if (numberOfNuts < 0) {
@@ -42,21 +44,38 @@ export default class Squirrel extends Mammal implements ICanJump {
       this.storedNuts += numberOfNuts;
     } else
       console.log(
-        `${this.name} hole has space left only for ${this.holeSize - this.storedNuts
+        `${this.name} hole has space left only for ${
+          this.holeSize - this.storedNuts
         } nuts`
       );
-  };
+  }
+  public getSpaceNeeded(): number {
+    if (this.isAdult === true) {
+      return SQUIRREL_SPACE_NEEDED_AS_ADULT;
+    } else {
+      return SQUIRREL_SPACE_NEEDED_AS_CHILD;
+    }
+  }
   public giveBirth(): void {
-    const candidateSquirrels: AnimalCandidate[] = this.generateBabyProperties(this.numberOfBabiesBorn);
+    const candidateSquirrels: AnimalCandidate[] = this.generateBabyProperties(
+      this.numberOfBabiesBorn
+    );
     if (candidateSquirrels) {
-      candidateSquirrels.forEach(squirrelObjectInfo => {
-        const babySquirrel = new Squirrel(squirrelObjectInfo.name, 0, squirrelObjectInfo.isMale, this.treeType, this.treeAge, this.holeSize);
+      candidateSquirrels.forEach((squirrelObjectInfo) => {
+        const babySquirrel = new Squirrel(
+          squirrelObjectInfo.name,
+          0,
+          squirrelObjectInfo.isMale,
+          this.treeType,
+          this.treeAge,
+          this.holeSize
+        );
         babySquirrel.home = this.home;
       });
-    };
-  };
+    }
+  }
 
   setHome(home: string | undefined): void {
     this.home = home;
-  };
+  }
 }

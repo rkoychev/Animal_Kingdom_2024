@@ -5,33 +5,49 @@ import { AnimalCandidate } from "../hierarchy/Animal";
 import Mammal from "../hierarchy/Mammal";
 import { ICanJump } from "../interfaces/ICanJump";
 const NUMBER_OF_BABY_LIONS_BORN = 5;
-
-export default class Lion extends Mammal implements ICanRun, ICanTalk, ICanJump {
+export const LION_SPACE_NEEDED_AS_ADULT = 200;
+export const LION_SPACE_NEEDED_AS_CHILD = 100;
+export default class Lion
+  extends Mammal
+  implements ICanRun, ICanTalk, ICanJump
+{
   private numberOfBabiesBorn = NUMBER_OF_BABY_LIONS_BORN;
   constructor(name: string, age: number, isMale: boolean) {
     super(name, age, isMale);
     this._canHaveFamily = true;
-  };
+  }
 
   jump(): void {
     console.log(`${this.name} is jumping`);
-  };
+  }
   run(): void {
     console.log(`${this.name} is running`);
-  };
+  }
   talk(): void {
     console.log(`${this.name} is talking`);
-  };
-
+  }
+  public getSpaceNeeded(): number {
+    if (this.isAdult === true) {
+      return LION_SPACE_NEEDED_AS_ADULT;
+    } else {
+      return LION_SPACE_NEEDED_AS_CHILD;
+    }
+  }
   public giveBirth(): void {
-    const family = families.find(x => x.name == this.home);
-    const candidateLions: AnimalCandidate[] = this.generateBabyProperties(this.numberOfBabiesBorn);
+    const family = families.find((x) => x.name == this.home);
+    const candidateLions: AnimalCandidate[] = this.generateBabyProperties(
+      this.numberOfBabiesBorn
+    );
 
     if (candidateLions) {
-      candidateLions.forEach(lionObjectInfo => {
-        const babyLion = new Lion(lionObjectInfo.name, 0, lionObjectInfo.isMale);
+      candidateLions.forEach((lionObjectInfo) => {
+        const babyLion = new Lion(
+          lionObjectInfo.name,
+          0,
+          lionObjectInfo.isMale
+        );
         family?.addAnimal(babyLion, true);
       });
-    };
-  };
-};
+    }
+  }
+}

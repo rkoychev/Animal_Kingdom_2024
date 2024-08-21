@@ -1,7 +1,8 @@
 import Tortoise, {
   NUMBER_OF_BABY_TORTOISES_BORN,
+  TOIRTOISE_SPACE_NEEDED_AS_ADULT,
+  TOIRTOISE_SPACE_NEEDED_AS_CHILD,
 } from "../../src/animals/Tortoise";
-import { tortoises } from "../../src/app";
 import {
   EMPTY_NAME_ERROR_MESSAGE,
   GIVING_BIRTH_WITHOUT_HOME,
@@ -53,6 +54,12 @@ describe("turtle Class Tests", () => {
     expect(() => {
       turtle.giveBirth();
     }).toThrow(GIVING_BIRTH_WITHOUT_HOME);
+  });
+  test("should call get space needed method correctly", () => {
+    const t1 = new Tortoise("Toiroise1", 4, true);
+    const t2 = new Tortoise("Toiroise2", 1, true);
+    expect(t1.getSpaceNeeded()).toBe(TOIRTOISE_SPACE_NEEDED_AS_ADULT);
+    expect(t2.getSpaceNeeded()).toBe(TOIRTOISE_SPACE_NEEDED_AS_CHILD);
   });
   test("should call give birth method correctly", () => {
     const turtle = new Tortoise("Turtle", 4, false);

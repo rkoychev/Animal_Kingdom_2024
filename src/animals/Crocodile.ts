@@ -4,6 +4,8 @@ import { AnimalCandidate } from "../hierarchy/Animal";
 import Reptile from "../hierarchy/Reptile";
 export const NUMBER_OF_BABY_CROCODILES_BORN = 8;
 export const NUMBER_OF_BABY_CROCODILES_BORN_RANDOM_GENDER = 5;
+export const CROCS_SPACE_NEEDED_AS_ADULT = 300;
+export const CROCS_SPACE_NEEDED_AS_CHILD = 150;
 
 export default class Crocodile extends Reptile {
   private length: number;
@@ -19,7 +21,13 @@ export default class Crocodile extends Reptile {
     }
     this.length = length;
   }
-
+  public getSpaceNeeded(): number {
+    if (this.isAdult === true) {
+      return CROCS_SPACE_NEEDED_AS_ADULT;
+    } else {
+      return CROCS_SPACE_NEEDED_AS_CHILD;
+    }
+  }
   public giveBirth() {
     const family = families.find((crcodile) => crcodile.name == this.home);
     const candidateCrocks: AnimalCandidate[] = this.generateBabyProperties(

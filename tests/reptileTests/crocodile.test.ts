@@ -1,5 +1,8 @@
 import AnimalFamily from "../../src/animalFamily/AnimalFamily";
-import Crocodile from "../../src/animals/Crocodile";
+import Crocodile, {
+  CROCS_SPACE_NEEDED_AS_ADULT,
+  CROCS_SPACE_NEEDED_AS_CHILD,
+} from "../../src/animals/Crocodile";
 import { NUMBER_OF_BABY_CROCODILES_BORN } from "../../src/animals/Crocodile";
 import {
   EMPTY_NAME_ERROR_MESSAGE,
@@ -54,6 +57,12 @@ describe("Crocodile Class Tests", () => {
       crocodile2,
     ]);
     expect(crocodile.showHome()).toBe("Croco lives in Crocodiles2");
+  });
+  test("should get space needed correctly", () => {
+    const crocodile = new Crocodile("Croco", 4, false, 4);
+    const crocodile2 = new Crocodile("Simona", 1, false, 4);
+    expect(crocodile.getSpaceNeeded()).toBe(CROCS_SPACE_NEEDED_AS_ADULT);
+    expect(crocodile2.getSpaceNeeded()).toBe(CROCS_SPACE_NEEDED_AS_CHILD);
   });
   test("should throw an error if a male is giving birth", () => {
     const crocodile = new Crocodile("Croco", 4, true, 4);

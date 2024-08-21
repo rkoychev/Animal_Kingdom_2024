@@ -1,5 +1,8 @@
-import Snake, { NUMBER_OF_BABY_SNAKES_BORN } from "../../src/animals/Snake";
-import { snakes } from "../../src/app";
+import Snake, {
+  NUMBER_OF_BABY_SNAKES_BORN,
+  SNAKE_SPACE_NEEDED_AS_ADULT,
+  SNAKE_SPACE_NEEDED_AS_CHILD,
+} from "../../src/animals/Snake";
 import {
   EMPTY_COLOR_ERROR_MESSAGE,
   EMPTY_NAME_ERROR_MESSAGE,
@@ -55,6 +58,12 @@ describe("Snake Class Tests", () => {
     expect(snake.showHome()).toBe("Sssnake lives in hole");
     snake.setHome(undefined);
     expect(snake.showHome()).toBe("Sssnake doesn't have a home yet");
+  });
+  test("should call get space needed method correctly", () => {
+    const snake = new Snake("Snake", 4, "Cobra", false, "Black", 33);
+    const snake2 = new Snake("Snake", 1, "Cobra", false, "Black", 33);
+    expect(snake.getSpaceNeeded()).toBe(SNAKE_SPACE_NEEDED_AS_ADULT);
+    expect(snake2.getSpaceNeeded()).toBe(SNAKE_SPACE_NEEDED_AS_CHILD);
   });
   test("should throw an error if a male is giving birth", () => {
     const snake = new Snake("Sssnake", 3, "Anaconda", true, "Red", 4);
