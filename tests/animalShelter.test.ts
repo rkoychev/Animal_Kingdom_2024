@@ -6,6 +6,7 @@ import {
   NO_SPACE_FOR_MORE_MAMMALS,
   NO_SPACE_FOR_MORE_REPTILES,
 } from "../messages/errorMessages";
+import { SUCCESFULLY_ADDED_ANIMAL_IN_SHELTER } from "../messages/successMessages";
 import AnimalFamily from "../src/animalFamily/AnimalFamily";
 import AnimalShelter from "../src/animalShelter/AnimalShelter";
 import Crocodile from "../src/animals/Crocodile";
@@ -33,7 +34,7 @@ describe("Animal Shelter Tests", () => {
     expect(animalShelter.getMammalLimit()).toBe(oldMammalLimit);
   });
 
-  test("should fail to set repti limits to negative value", () => {
+  test("should fail to set reptile limits to negative value", () => {
     const animalShelter = AnimalShelter.getInstance();
     const oldReptileLimit = animalShelter.getReptileLimit();
     expect(animalShelter.setReptileLimit(-3)).toBe(
@@ -64,7 +65,7 @@ describe("Animal Shelter Tests", () => {
   test("should succesfully add an animal in the shelter", () => {
     const animalShelter = AnimalShelter.getInstance();
     expect(animalShelter.addAnimal(new Tortoise("t1", 5, true))).toBe(
-      "t1 has been added to the Animal Shelter"
+      "t1 " + SUCCESFULLY_ADDED_ANIMAL_IN_SHELTER
     );
   });
   test("should fail to add another mammal if it will exceed the mammal limit", () => {

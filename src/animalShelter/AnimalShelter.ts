@@ -15,6 +15,11 @@ import {
   NO_SPACE_FOR_MORE_MAMMALS,
   NO_SPACE_FOR_MORE_REPTILES,
 } from "../../messages/errorMessages";
+import {
+  SUCCESFULLY_ADDED_ANIMAL_IN_SHELTER,
+  SUCCESFULLY_SET_NEW_MAMMAL_LIMIT,
+  SUCCESFULLY_SET_NEW_REPTILE_LIMIT,
+} from "../../messages/successMessages";
 const DEFAULT_MAMMAL_LIMIT = 20;
 const DEFAULT_REPTILE_LIMIT = 19;
 export default class AnimalShelter {
@@ -50,7 +55,7 @@ export default class AnimalShelter {
     const mamalsTotal = this.getMammalsCount();
     if (newMammalLimit >= mamalsTotal) {
       this._mammalLimit = newMammalLimit;
-      return "Succesfully set new mammal limit";
+      return SUCCESFULLY_SET_NEW_MAMMAL_LIMIT;
     } else {
       return NEW_MAMMAL_LIMIT_LESS_THAN_CURRENT_MAMMALS;
     }
@@ -63,12 +68,12 @@ export default class AnimalShelter {
   }
   setReptileLimit(newReptileLimit: number): string {
     if (newReptileLimit < 0) {
-      return `Limit cannot be negative`;
+      return NEGATIVE_LIMIT_ERROR_MESSAGE;
     }
     const reptilesTotal = this.getReptileCount();
     if (newReptileLimit >= reptilesTotal) {
       this._reptileLimit = newReptileLimit;
-      return "Succesfully set new reptile limit";
+      return SUCCESFULLY_SET_NEW_REPTILE_LIMIT;
     } else {
       return NEW_REPTILE_LIMIT_LESS_THAN_CURRENT_REPTILES;
     }
@@ -115,7 +120,7 @@ export default class AnimalShelter {
     if (!family || family.removeAnimal(animal)) {
       this.animals.push(animal);
       animal.setHome("Animal Shelter");
-      return `${animal.getName()} has been added to the Animal Shelter`;
+      return `${animal.getName()} ${SUCCESFULLY_ADDED_ANIMAL_IN_SHELTER}`;
     } else return FAILED_TO_REMOVE_ANIMAL_FROM_FAMILY;
   }
 }
