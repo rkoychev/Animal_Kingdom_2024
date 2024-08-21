@@ -73,15 +73,12 @@ export default class AnimalShelter {
 
 
   showAnimals() {
-
     console.log(this.animals);
     console.log("mammals: " + this.getMammalsCount());
     console.log("reptiles: " + this.getReptileCount());
-    console.log(`lions: ${this.animals.filter(lion => lion instanceof Lion).length}`);
-    console.log(`crocodiles: ${this.animals.filter(crocodile => crocodile instanceof Crocodile).length}`);
-    console.log(`squirrels: ${this.animals.filter(squirrel => squirrel instanceof Squirrel).length}`);
-    console.log(`snakes: ${this.animals.filter(snake => snake instanceof Snake).length}`);
-    console.log(`tortoises: ${this.animals.filter(tortoise => tortoise instanceof Tortoise).length}`);
+    [Lion, Crocodile, Squirrel, Snake, Tortoise].forEach(animalType => {
+      console.log(`${animalType.name}: ${this.animals.filter(animal => animal instanceof animalType).length}`);
+    })
   }
 
   addAnimal(animal: Animal): void {
