@@ -1,6 +1,4 @@
-import { ICanJump } from "../interfaces/ICanJump";
-import Animal from "./Animal";
-import { AnimalCandidate } from "./Animal";
+import Animal, { AnimalCandidate } from "./Animal";
 
 export default abstract class Mammal extends Animal {
     generateRandomHeight(lowBound: number, highBound: number) {

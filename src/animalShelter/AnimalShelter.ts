@@ -8,6 +8,8 @@ import Snake from "../animals/Snake";
 import Animal from "../hierarchy/Animal";
 import Reptile from "../hierarchy/Reptile";
 import { forEach } from "lodash";
+import { ICanJump } from "../interfaces/ICanJump";
+import { ICanRun } from "../interfaces/ICanRun";
 const DEFAULT_MAMMAL_LIMIT = 20;
 const DEFAULT_REPTILE_LIMIT = 19;
 export default class AnimalShelter {
@@ -72,19 +74,15 @@ export default class AnimalShelter {
     };
   };
 
-  private hasMethod(animal: Animal, methodName: string): boolean {
-    return typeof (animal as any)[methodName] === "function";
-  };
-
   public report() {
     let animalsWhoJump = 0;
     let animalsWhoRun = 0;
     let anaimalsWhoClimbTrees = 0
     for (const animal of this.animals) {
-      if (this.hasMethod(animal, "jump")) {
+      if ((animal as unknown as ICanJump).jump) {
         animalsWhoJump++
       }
-      if (this.hasMethod(animal, "run")) {
+      if ((animal as unknown as ICanRun).run) {
         animalsWhoRun++;
       }
       if (animal.canClimbTrees) {
