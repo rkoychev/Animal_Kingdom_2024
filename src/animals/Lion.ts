@@ -11,7 +11,7 @@ export default class Lion extends Mammal implements ICanRun, ICanTalk, ICanJump 
   constructor(name: string, age: number, isMale: boolean) {
     super(name, age, isMale);
     this._canHaveFamily = true;
-    this._canClimbTrees = true;
+    this.canClimbTrees = true;
   };
 
   jump(): void {

@@ -12,7 +12,7 @@ export default class Tortoise extends Reptile {
     super(name, age, isMale);
 
     this.home = "Animal Kingdom";
-    this._canClimbTrees = true;
+    this.canClimbTrees = true;
     tortoises.push(this);
   }
 

@@ -87,7 +87,7 @@ export default class AnimalShelter {
       if (this.hasMethod(animal, "run")) {
         animalsWhoRun++;
       }
-      if (animal._canClimbTrees) {
+      if (animal.canClimbTrees) {
         anaimalsWhoClimbTrees++;
       }
     }

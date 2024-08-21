@@ -19,7 +19,7 @@ export default class Crocodile extends Reptile {
       throw new Error(NEGATIVE_LENGTH_ERROR_MESSAGE);
     }
     this.length = length;
-    this._canClimbTrees = true;
+    this.canClimbTrees = true;
   }
 
   public giveBirth() {
