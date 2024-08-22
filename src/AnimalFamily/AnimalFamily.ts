@@ -92,7 +92,6 @@ export default class AnimalFamily {
       console.log(`Removed ${animal.getName()} from ${this.name}`);
       animal.setHome(undefined);
       return true;
-      return true;
     } else {
       console.log(`Cannot remove ${animal.getName()} from family`);
       console.log(verificationResult);
@@ -120,12 +119,12 @@ function getSpecificRequirements(
   const ELEPHANT_FAMILY_REQUIREMENTS: VerificationProps = {
     animals: [],
     minMaleAdults: 2,
-    minFemaleAdults: 2
+    minFemaleAdults: 2,
   };
   const GIRAFFE_FAMILY_REQUIREMENTS: VerificationProps = {
     animals: [],
     minAnimals: 10,
-    maxAnimals: 20
+    maxAnimals: 20,
   };
   const animalClass = animal.constructor.name;
   switch (animalClass) {
