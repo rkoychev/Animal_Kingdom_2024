@@ -11,6 +11,7 @@ import {
   NEGATIVE_LENGTH_ERROR_MESSAGE,
   TELLING_MALE_TO_GIVE_BIRTH,
 } from "../../messages/errorMessages";
+import { AGE_TO_BE_ADULT } from "../../src/hierarchy/Animal";
 
 describe("Snake Class Tests", () => {
   test("should log an error if length is negative", () => {
@@ -61,9 +62,19 @@ describe("Snake Class Tests", () => {
   });
   test("should call get space needed method correctly", () => {
     const snake = new Snake("Snake", 4, "Cobra", false, "Black", 33);
-    const snake2 = new Snake("Snake", 1, "Cobra", false, "Black", 33);
+    const snake2 = new Snake("Snake2", 1, "Cobra", false, "Black", 33);
+    const snake3 = new Snake(
+      "Snake3",
+      AGE_TO_BE_ADULT,
+      "Cobra",
+      false,
+      "Black",
+      33
+    );
+
     expect(snake.getSpaceNeeded()).toBe(SNAKE_SPACE_NEEDED_AS_ADULT);
     expect(snake2.getSpaceNeeded()).toBe(SNAKE_SPACE_NEEDED_AS_CHILD);
+    expect(snake3.getSpaceNeeded()).toBe(SNAKE_SPACE_NEEDED_AS_ADULT);
   });
   test("should throw an error if a male is giving birth", () => {
     const snake = new Snake("Sssnake", 3, "Anaconda", true, "Red", 4);

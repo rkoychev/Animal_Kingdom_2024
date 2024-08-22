@@ -9,6 +9,7 @@ import {
   NEGATIVE_AGE_ERROR_MESSAGE,
   TELLING_MALE_TO_GIVE_BIRTH,
 } from "../../messages/errorMessages";
+import { AGE_TO_BE_ADULT } from "../../src/hierarchy/Animal";
 
 describe("turtle Class Tests", () => {
   test("should throw an error if age is negative", () => {
@@ -58,8 +59,11 @@ describe("turtle Class Tests", () => {
   test("should call get space needed method correctly", () => {
     const t1 = new Tortoise("Toiroise1", 4, true);
     const t2 = new Tortoise("Toiroise2", 1, true);
+    const t3 = new Tortoise("Toiroise3", AGE_TO_BE_ADULT, true);
+
     expect(t1.getSpaceNeeded()).toBe(TOIRTOISE_SPACE_NEEDED_AS_ADULT);
     expect(t2.getSpaceNeeded()).toBe(TOIRTOISE_SPACE_NEEDED_AS_CHILD);
+    expect(t3.getSpaceNeeded()).toBe(TOIRTOISE_SPACE_NEEDED_AS_ADULT);
   });
   test("should call give birth method correctly", () => {
     const turtle = new Tortoise("Turtle", 4, false);

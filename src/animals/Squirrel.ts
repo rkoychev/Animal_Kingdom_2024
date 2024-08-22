@@ -1,6 +1,6 @@
 import { TreeType } from "../customTypes";
 import { squirrels } from "../app";
-import { AGE_TO_BE_ADULT, AnimalCandidate } from "../hierarchy/Animal";
+import { AnimalCandidate } from "../hierarchy/Animal";
 import Mammal from "../hierarchy/Mammal";
 import { ICanJump } from "../interfaces/ICanJump";
 const NUMBER_OF_BABY_SQUIRRELS_BORN = 5;
