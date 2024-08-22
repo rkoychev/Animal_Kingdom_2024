@@ -23,17 +23,15 @@ export default class Lion extends Mammal implements ICanRun, ICanTalk, ICanJump 
     return `${this.name} is talking`;
   };
 
-  public giveBirth() {
+  public giveBirth(): Lion[] {
     const family = families.find(x => x.name == this.home);
     const candidateLions: AnimalCandidate[] = this.generateBabyProperties(this.numberOfBabiesBorn);
     const babies: Lion[] = [];
-    if (candidateLions) {
-      candidateLions.forEach(lionObjectInfo => {
-        const babyLion = new Lion(lionObjectInfo.name, 0, lionObjectInfo.isMale);
-        family!.addAnimal(babyLion, true);
-        babies.push(babyLion);
-      });
-    };
+    candidateLions.forEach(lionObjectInfo => {
+      const babyLion = new Lion(lionObjectInfo.name, 0, lionObjectInfo.isMale);
+      family!.addAnimal(babyLion, true);
+      babies.push(babyLion);
+    });
     return babies;
   };
 };
