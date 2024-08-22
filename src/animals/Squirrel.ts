@@ -55,7 +55,7 @@ export default class Squirrel extends Mammal implements ICanJump {
     } else
       console.log(
         `${this.name} hole has space left only for ${
-          this.holeSize - this.storedNuts
+          this.nutsLimit - this.storedNuts
         } nuts`
       );
   }
@@ -71,7 +71,7 @@ export default class Squirrel extends Mammal implements ICanJump {
           squirrelObjectInfo.isMale,
           this.treeType,
           this.treeAge,
-          this.holeSize
+          this.nutsLimit
         );
         babySquirrel.home = this.home;
       });
