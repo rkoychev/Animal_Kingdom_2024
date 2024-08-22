@@ -37,11 +37,10 @@ export default class AnimalShelter {
     }
     return AnimalShelter.instance;
   }
-  static resetInstance() {
-    const animmalShelter = AnimalShelter.getInstance();
-    animmalShelter.animals = [];
-    animmalShelter._mammalLimit = DEFAULT_MAMMAL_LIMIT;
-    animmalShelter._reptileLimit = DEFAULT_REPTILE_LIMIT;
+  public resetInstance() {
+    this.animals = [];
+    this._mammalLimit = DEFAULT_MAMMAL_LIMIT;
+    this._reptileLimit = DEFAULT_REPTILE_LIMIT;
   }
 
   private getMammalsCount() {

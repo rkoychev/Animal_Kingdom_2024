@@ -14,7 +14,8 @@ import Lion from "../src/animals/Lion";
 import Squirrel from "../src/animals/Squirrel";
 import Tortoise from "../src/animals/Tortoise";
 beforeEach(() => {
-  AnimalShelter.resetInstance();
+  const animalShelter = AnimalShelter.getInstance();
+  animalShelter.resetInstance();
 });
 describe("Animal Shelter Tests", () => {
   test("should fail to set mammal limits to negative value", () => {
