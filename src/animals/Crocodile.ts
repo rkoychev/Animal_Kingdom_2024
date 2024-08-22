@@ -13,7 +13,6 @@ export default class Crocodile extends Reptile {
   private numberOfBabiesBornRandomGender =
     NUMBER_OF_BABY_CROCODILES_BORN_RANDOM_GENDER;
 
-
   constructor(name: string, age: number, isMale: boolean, length: number) {
     super(name, age, isMale);
     this._canHaveFamily = true;
@@ -30,7 +29,7 @@ export default class Crocodile extends Reptile {
       return CROCS_SPACE_NEEDED_AS_CHILD;
     }
   }
-  public giveBirth() {
+  public giveBirth(): Crocodile[] {
     const family = families.find((crcodile) => crcodile.name == this.home);
     const candidateCrocks: AnimalCandidate[] = this.generateBabyProperties(
       this.numberOfBabiesBorn,
@@ -38,19 +37,19 @@ export default class Crocodile extends Reptile {
     );
     const babies: Crocodile[] = [];
     let length: number;
-    if (candidateCrocks) {
-      candidateCrocks.forEach((crockObjectInfo) => {
-        length = Math.floor(Math.random() * 4) + 1;
-        const babyCrocodile = new Crocodile(
-          crockObjectInfo.name,
-          0,
-          crockObjectInfo.isMale,
-          length
-        );
-        family?.addAnimal(babyCrocodile, true);
-        babies.push(babyCrocodile);
-      });
-    }
+
+    candidateCrocks?.forEach((crockObjectInfo) => {
+      length = Math.floor(Math.random() * 4) + 1;
+      const babyCrocodile = new Crocodile(
+        crockObjectInfo.name,
+        0,
+        crockObjectInfo.isMale,
+        length
+      );
+      family?.addAnimal(babyCrocodile, true);
+      babies.push(babyCrocodile);
+    });
+
     return babies;
   }
 }

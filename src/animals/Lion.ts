@@ -4,7 +4,7 @@ import { families } from "../app";
 import { AnimalCandidate } from "../hierarchy/Animal";
 import Mammal from "../hierarchy/Mammal";
 import { ICanJump } from "../interfaces/ICanJump";
-const NUMBER_OF_BABY_LIONS_BORN = 5;
+export const NUMBER_OF_BABY_LIONS_BORN = 5;
 export const LION_SPACE_NEEDED_AS_ADULT = 200;
 export const LION_SPACE_NEEDED_AS_CHILD = 100;
 export default class Lion
@@ -29,13 +29,7 @@ export default class Lion
   talk(): void {
     console.log(`${this.name} is talking`);
   }
-  public getSpaceNeeded(): number {
-    if (this.isAdult === true) {
-      return LION_SPACE_NEEDED_AS_ADULT;
-    } else {
-      return LION_SPACE_NEEDED_AS_CHILD;
-    }
-  }
+
   public giveBirth(): void {
     const family = families.find((x) => x.name == this.home);
     const candidateLions: AnimalCandidate[] = this.generateBabyProperties(

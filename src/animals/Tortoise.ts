@@ -23,23 +23,21 @@ export default class Tortoise extends Reptile {
       return TOIRTOISE_SPACE_NEEDED_AS_CHILD;
     }
   }
-  public giveBirth() {
+  public giveBirth(): Tortoise[] {
     const candidateTortoises: AnimalCandidate[] = this.generateBabyProperties(
       this.numberOfBabiesBorn,
       this.numberOfBabiesBornRandomGender
     );
     const babies: Tortoise[] = [];
-    if (candidateTortoises) {
-      candidateTortoises.forEach((tortoiseObjectInfo) => {
-        const babyTortoise = new Tortoise(
-          tortoiseObjectInfo.name,
-          0,
-          tortoiseObjectInfo.isMale
-        );
-        babyTortoise.home = this.home;
-        babies.push(babyTortoise);
-      });
-    }
+    candidateTortoises?.forEach((tortoiseObjectInfo) => {
+      const babyTortoise = new Tortoise(
+        tortoiseObjectInfo.name,
+        0,
+        tortoiseObjectInfo.isMale
+      );
+      babyTortoise.home = this.home;
+      babies.push(babyTortoise);
+    });
     return babies;
   }
 }
