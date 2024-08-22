@@ -8,7 +8,6 @@ export const families: AnimalFamily[] = [];
 export const squirrels: Squirrel[] = [];
 export const snakes: Snake[] = [];
 export const tortoises: Tortoise[] = [];
-export const animalShelter = AnimalShelter.getInstance();
 /*console.log("Starting");
 
 console.log("\n--- Lion Section ---");

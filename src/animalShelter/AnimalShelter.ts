@@ -38,7 +38,10 @@ export default class AnimalShelter {
     return AnimalShelter.instance;
   }
   static resetInstance() {
-    AnimalShelter.instance = new AnimalShelter();
+    const animmalShelter = AnimalShelter.getInstance();
+    animmalShelter.animals = [];
+    animmalShelter._mammalLimit = DEFAULT_MAMMAL_LIMIT;
+    animmalShelter._reptileLimit = DEFAULT_REPTILE_LIMIT;
   }
 
   private getMammalsCount() {
@@ -95,10 +98,10 @@ export default class AnimalShelter {
       crocodiles: this.animals.filter(
         (crocodile) => crocodile instanceof Crocodile
       ).length,
-      squirrels: this.animals.filter((squirrel) => squirrel instanceof Squirrel)
+      squirrels: this.animals.filter((animal) => animal instanceof Squirrel)
         .length,
-      snakes: this.animals.filter((snake) => snake instanceof Snake).length,
-      tortoises: this.animals.filter((tortoise) => tortoise instanceof Tortoise)
+      snakes: this.animals.filter((animal) => animal instanceof Snake).length,
+      tortoises: this.animals.filter((animal) => animal instanceof Tortoise)
         .length,
     };
     return animalNumbers;
