@@ -1,10 +1,12 @@
-import Lion from "../src/animals/Lion";
+import Lion, { NUMBER_OF_BABY_LIONS_BORN } from "../../src/animals/Lion";
 import {
   EMPTY_NAME_ERROR_MESSAGE,
   GIVING_BIRTH_WITHOUT_HOME,
   NEGATIVE_AGE_ERROR_MESSAGE,
   TELLING_MALE_TO_GIVE_BIRTH,
-} from "../messages/errorMessages";
+} from "../../messages/errorMessages";
+import AnimalFamily from "../../src/animalFamily/AnimalFamily";
+import { NUMBER_OF_BABY_ELEPHANTS_BORN } from "../../src/animals/Elephant";
 
 describe("Lion Class Tests", () => {
   test("should log an error if age is negative", () => {
@@ -17,7 +19,7 @@ describe("Lion Class Tests", () => {
       const lion = new Lion("", 5, true);
     }).toThrow(EMPTY_NAME_ERROR_MESSAGE);
   });
-  test("should create a Lion instance with valid age", () => {
+  test("should create a Lion instance with valid props", () => {
     const lion = new Lion("Simba", 5, true);
     expect(lion.getName()).toBe("Simba");
     expect(lion.getAge()).toBe(5);
@@ -25,23 +27,17 @@ describe("Lion Class Tests", () => {
   });
 
   test("should call run method correctly", () => {
-    const logLock = jest.spyOn(console, "log").mockImplementation(() => {});
     const lion = new Lion("Simba", 5, true);
-    const runSpy = jest.spyOn(lion, "run");
-    lion.run();
-    expect(runSpy).toHaveBeenCalled();
-    expect(logLock).toHaveBeenCalledWith("Simba is running");
-    logLock.mockRestore();
+    expect(lion.run()).toBe("Simba is running");
   });
 
   test("should call talk method correctly", () => {
-    const logLock = jest.spyOn(console, "log").mockImplementation(() => {});
     const lion = new Lion("Simba", 5, true);
-    const talkSpy = jest.spyOn(lion, "talk");
-    lion.talk();
-    expect(talkSpy).toHaveBeenCalled();
-    expect(logLock).toHaveBeenCalledWith("Simba is talking");
-    logLock.mockRestore();
+    expect(lion.talk()).toBe("Simba is talking");
+  });
+  test("should call jump method correctly", () => {
+    const lion = new Lion("Simba", 5, true);
+    expect(lion.jump()).toBe("Simba is jumping");
   });
 
   test("should log an error if a male lion calls giveBirth", () => {
@@ -56,5 +52,18 @@ describe("Lion Class Tests", () => {
     expect(() => {
       lion.giveBirth();
     }).toThrow(GIVING_BIRTH_WITHOUT_HOME);
+  });
+  test("should call  giveBirth correctly", () => {
+    const lion = new Lion("Nala", 4, false);
+    const lion2 = new Lion("imba", 4, false);
+    const lion3 = new Lion("Nala", 4, false);
+    const lion4 = new Lion("Nala", 4, false);
+    const lion5 = new Lion("Nala", 4, false);
+    const lion6 = new Lion("Nala", 4, false);
+    const lion7 = new Lion("Nala", 4, false);
+    const lion8 = new Lion("Nala", 4, false);
+    const lions = new AnimalFamily("Lions", [lion, lion2, lion3, lion4, lion5, lion6, lion7, lion8]);
+    const babies = lion.giveBirth();
+    expect(babies.length).toBe(NUMBER_OF_BABY_LIONS_BORN);
   });
 });

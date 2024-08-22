@@ -3,11 +3,12 @@ import { squirrels } from "../app";
 import { AnimalCandidate } from "../hierarchy/Animal";
 import Mammal from "../hierarchy/Mammal";
 import { ICanJump } from "../interfaces/ICanJump";
-const NUMBER_OF_BABY_SQUIRRELS_BORN = 5;
+import { NEGATIVE_HOLE_SIZE, NEGATIVE_NUTS_ADDED, NEGATIVE_TREE_AGE } from "../../messages/errorMessages";
+export const NUMBER_OF_BABY_SQUIRRELS_BORN = 5;
 export default class Squirrel extends Mammal implements ICanJump {
   private treeType: TreeType;
   private treeAge: number;
-  private holeSize: number;
+  private nutsLimit: number;
   private storedNuts = 0;
   private numberOfBabiesBorn: number = NUMBER_OF_BABY_SQUIRRELS_BORN;
 
@@ -17,48 +18,49 @@ export default class Squirrel extends Mammal implements ICanJump {
     isMale: boolean,
     treeType: TreeType,
     treeAge: number,
-    holeSize: number
+    nutsLimit: number
   ) {
     super(name, age, isMale);
-    if (holeSize <= 0) {
-      throw new Error("Hole size must be greater than zero");
+    if (nutsLimit <= 0) {
+      throw new Error(NEGATIVE_HOLE_SIZE);
+    }
+    if (treeAge <= 0) {
+      throw new Error(NEGATIVE_TREE_AGE);
     }
 
     this.treeType = treeType;
     this.treeAge = treeAge;
-    this.holeSize = holeSize;
+    this.nutsLimit = nutsLimit;
+    this.setHome(treeType + " tree");
     this.canClimbTrees = true;
     this.canJump = true;
     squirrels.push(this);
   };
-  jump(): void {
-    console.log(`${this.name} is jumping`);
+  jump(): string {
+    return `${this.name} is jumping`;
   };
 
-  addNuts(numberOfNuts: number): void {
+  addNuts(numberOfNuts: number) {
     if (numberOfNuts < 0) {
-      console.log(`Cannot add a negative number of Nuts`);
-      return;
+      throw Error(NEGATIVE_NUTS_ADDED);
     }
-    if (this.storedNuts + numberOfNuts <= this.holeSize) {
+    if (this.storedNuts + numberOfNuts <= this.nutsLimit) {
       this.storedNuts += numberOfNuts;
     } else
-      console.log(
-        `${this.name} hole has space left only for ${this.holeSize - this.storedNuts
+      throw Error(
+        `${this.name} hole has space left only for ${this.nutsLimit - this.storedNuts
         } nuts`
       );
   };
-  public giveBirth(): void {
+  public giveBirth(): Squirrel[] {
     const candidateSquirrels: AnimalCandidate[] = this.generateBabyProperties(this.numberOfBabiesBorn);
-    if (candidateSquirrels) {
-      candidateSquirrels.forEach(squirrelObjectInfo => {
-        const babySquirrel = new Squirrel(squirrelObjectInfo.name, 0, squirrelObjectInfo.isMale, this.treeType, this.treeAge, this.holeSize);
-        babySquirrel.home = this.home;
-      });
-    };
+    const babies: Squirrel[] = [];
+    candidateSquirrels?.forEach(squirrelObjectInfo => {
+      const babySquirrel = new Squirrel(squirrelObjectInfo.name, 0, squirrelObjectInfo.isMale, this.treeType, this.treeAge, this.nutsLimit);
+      babySquirrel.home = this.home;
+      babies.push(babySquirrel);
+    });
+    return babies;
   };
 
-  setHome(home: string | undefined): void {
-    this.home = home;
-  };
 }

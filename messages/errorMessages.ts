@@ -16,3 +16,11 @@ export const NO_SPACE_FOR_MORE_MAMMALS =
   "Sorry, there is no space for another mammal in the Animal Shelter";
 export const FAILED_TO_REMOVE_ANIMAL_FROM_FAMILY =
   "Sorry, cannot remove the animal from its family";
+export const NEGATIVE_NUTS_ADDED = "Cannot add a negative number of nuts";
+export const NEGATIVE_HOLE_SIZE = "Hole size must be greater than zero";
+export const NEGATIVE_TREE_AGE = "Tree age must be greater than zero";
+export const NEGATIVE_VALUES = "Both values must be positive";
+export const ELEPHANT_HEIGHT_NEGATIVE = "Elephant height must be greater than zero";
+export const ELEPHANT_wEIGHT_NEGATIVE = "Elephant weight must be greater than zero";
+export const GIRAFFE_HEIGHT_NEGATIVE = "Giraffe height must be greater than zero";
+
