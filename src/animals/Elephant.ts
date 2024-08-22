@@ -26,6 +26,7 @@ export default class Elephant extends Mammal implements ICanRun, ICanTalk {
       throw Error("Elephant weight must be greater than zero!");
     }
     this._canHaveFamily = true;
+    this.canRun = true;
     this.height = height;
     this.weight = weight;
   }

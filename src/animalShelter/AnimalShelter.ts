@@ -7,6 +7,9 @@ import Tortoise from "../animals/Tortoise";
 import Snake from "../animals/Snake";
 import Animal from "../hierarchy/Animal";
 import Reptile from "../hierarchy/Reptile";
+import { forEach } from "lodash";
+import { ICanJump } from "../interfaces/ICanJump";
+import { ICanRun } from "../interfaces/ICanRun";
 import {
   FAILED_TO_REMOVE_ANIMAL_FROM_FAMILY,
   NEGATIVE_LIMIT_ERROR_MESSAGE,
@@ -78,8 +81,29 @@ export default class AnimalShelter {
       return SUCCESFULLY_SET_NEW_REPTILE_LIMIT;
     } else {
       return NEW_REPTILE_LIMIT_LESS_THAN_CURRENT_REPTILES;
+    };
+  };
+
+  public report() {
+    let animalsWhoJump = 0;
+    let animalsWhoRun = 0;
+    let anaimalsWhoClimbTrees = 0
+    for (const animal of this.animals) {
+      if (animal.canJump) {
+        animalsWhoJump++
+      }
+      if (animal.canRun) {
+        animalsWhoRun++;
+      }
+      if (animal.canClimbTrees) {
+        anaimalsWhoClimbTrees++;
+      }
     }
-  }
+
+    console.log(animalsWhoJump + ` animals can jump`);
+    console.log(animalsWhoRun + ` animals can run`);
+    console.log(anaimalsWhoClimbTrees + ` animals can climb trees`);
+  };
 
   showAnimals() {
     const animalNumbers: {

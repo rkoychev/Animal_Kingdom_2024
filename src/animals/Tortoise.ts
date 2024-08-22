@@ -13,6 +13,7 @@ export default class Tortoise extends Reptile {
     super(name, age, isMale);
 
     this.home = "Animal Kingdom";
+    this.canClimbTrees = true;
     tortoises.push(this);
   }
   public getSpaceNeeded(): number {

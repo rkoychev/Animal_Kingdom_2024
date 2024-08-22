@@ -15,6 +15,7 @@ export default class Giraffe extends Mammal implements ICanRun {
       throw Error("Elephant height must be greater than zero!");
     }
     this._canHaveFamily = true;
+    this.canRun = true;
     this.height = height;
   }
 

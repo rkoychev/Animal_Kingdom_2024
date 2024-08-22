@@ -29,6 +29,8 @@ export default class Squirrel extends Mammal implements ICanJump {
     this.treeType = treeType;
     this.treeAge = treeAge;
     this.holeSize = holeSize;
+    this.canClimbTrees = true;
+    this.canJump = true;
     squirrels.push(this);
   }
   jump(): void {
