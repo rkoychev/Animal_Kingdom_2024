@@ -79,10 +79,10 @@ export default class AnimalShelter {
     let animalsWhoRun = 0;
     let anaimalsWhoClimbTrees = 0
     for (const animal of this.animals) {
-      if ((animal as unknown as ICanJump).jump) {
+      if (animal.canJump) {
         animalsWhoJump++
       }
-      if ((animal as unknown as ICanRun).run) {
+      if (animal.canRun) {
         animalsWhoRun++;
       }
       if (animal.canClimbTrees) {
