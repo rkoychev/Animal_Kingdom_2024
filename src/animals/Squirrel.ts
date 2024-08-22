@@ -42,8 +42,8 @@ export default class Squirrel extends Mammal implements ICanJump {
     this.canJump = true;
     squirrels.push(this);
   }
-  jump(): void {
-    console.log(`${this.name} is jumping`);
+  jump(): string {
+    return `${this.name} is jumping`;
   }
 
   addNuts(numberOfNuts: number) {
@@ -53,29 +53,30 @@ export default class Squirrel extends Mammal implements ICanJump {
     if (this.storedNuts + numberOfNuts <= this.nutsLimit) {
       this.storedNuts += numberOfNuts;
     } else
-      console.log(
+      throw Error(
         `${this.name} hole has space left only for ${
           this.nutsLimit - this.storedNuts
         } nuts`
       );
   }
-  public giveBirth(): void {
+  public giveBirth(): Squirrel[] {
     const candidateSquirrels: AnimalCandidate[] = this.generateBabyProperties(
       this.numberOfBabiesBorn
     );
-    if (candidateSquirrels) {
-      candidateSquirrels.forEach((squirrelObjectInfo) => {
-        const babySquirrel = new Squirrel(
-          squirrelObjectInfo.name,
-          0,
-          squirrelObjectInfo.isMale,
-          this.treeType,
-          this.treeAge,
-          this.nutsLimit
-        );
-        babySquirrel.home = this.home;
-      });
-    }
+    const babies: Squirrel[] = [];
+    candidateSquirrels?.forEach((squirrelObjectInfo) => {
+      const babySquirrel = new Squirrel(
+        squirrelObjectInfo.name,
+        0,
+        squirrelObjectInfo.isMale,
+        this.treeType,
+        this.treeAge,
+        this.nutsLimit
+      );
+      babySquirrel.home = this.home;
+      babies.push(babySquirrel);
+    });
+    return babies;
   }
 
   setHome(home: string | undefined): void {

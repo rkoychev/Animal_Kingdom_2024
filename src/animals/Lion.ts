@@ -20,31 +20,27 @@ export default class Lion
     this.canJump = true;
   }
 
-  jump(): void {
-    console.log(`${this.name} is jumping`);
+  jump(): string {
+    return `${this.name} is jumping`;
   }
-  run(): void {
-    console.log(`${this.name} is running`);
+  run(): string {
+    return `${this.name} is running`;
   }
-  talk(): void {
-    console.log(`${this.name} is talking`);
+  talk(): string {
+    return `${this.name} is talking`;
   }
 
-  public giveBirth(): void {
+  public giveBirth(): Lion[] {
     const family = families.find((x) => x.name == this.home);
     const candidateLions: AnimalCandidate[] = this.generateBabyProperties(
       this.numberOfBabiesBorn
     );
-
-    if (candidateLions) {
-      candidateLions.forEach((lionObjectInfo) => {
-        const babyLion = new Lion(
-          lionObjectInfo.name,
-          0,
-          lionObjectInfo.isMale
-        );
-        family?.addAnimal(babyLion, true);
-      });
-    }
+    const babies: Lion[] = [];
+    candidateLions.forEach((lionObjectInfo) => {
+      const babyLion = new Lion(lionObjectInfo.name, 0, lionObjectInfo.isMale);
+      family!.addAnimal(babyLion, true);
+      babies.push(babyLion);
+    });
+    return babies;
   }
 }

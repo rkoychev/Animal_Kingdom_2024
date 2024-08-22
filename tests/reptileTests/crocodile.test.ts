@@ -65,7 +65,7 @@ describe("Crocodile Class Tests", () => {
     const crocodile3 = new Crocodile("Simona2", AGE_TO_BE_ADULT, false, 2);
     expect(crocodile.getSpaceNeeded()).toBe(CROCS_SPACE_NEEDED_AS_ADULT);
     expect(crocodile2.getSpaceNeeded()).toBe(CROCS_SPACE_NEEDED_AS_CHILD);
-    expect(crocodile3.getSpaceNeeded()).toBe(CROCS_SPACE_NEEDED_AS_CHILD);
+    expect(crocodile3.getSpaceNeeded()).toBe(CROCS_SPACE_NEEDED_AS_ADULT);
   });
   test("should throw an error if a male is giving birth", () => {
     const crocodile = new Crocodile("Croco", 4, true, 4);
