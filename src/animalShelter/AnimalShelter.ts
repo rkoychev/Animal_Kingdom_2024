@@ -45,7 +45,7 @@ export default class AnimalShelter {
   }
 
   private getMammalsCount() {
-    return this.animals.filter((x) => x instanceof Mammal).length;
+    return this.animals.filter((animal) => animal instanceof Mammal).length;
   }
 
   getMammalLimit() {
@@ -64,7 +64,7 @@ export default class AnimalShelter {
     }
   }
   private getReptileCount() {
-    return this.animals.filter((x) => x instanceof Reptile).length;
+    return this.animals.filter((animal) => animal instanceof Reptile).length;
   }
   getReptileLimit() {
     return this._reptileLimit;
@@ -94,7 +94,7 @@ export default class AnimalShelter {
     } = {
       mamamls: this.getMammalsCount(),
       reptiles: this.getReptileCount(),
-      lions: this.animals.filter((lion) => lion instanceof Lion).length,
+      lions: this.animals.filter((animal) => animal instanceof Lion).length,
       crocodiles: this.animals.filter(
         (crocodile) => crocodile instanceof Crocodile
       ).length,
