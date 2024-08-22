@@ -28,23 +28,22 @@ export default class Giraffe extends Mammal implements ICanRun {
   };
 
 
-  public giveBirth() {
+  public giveBirth(): Giraffe[] {
     const family = families.find(giraffe => giraffe.name == this.home);
     const candidateGiraffes: AnimalCandidate[] = this.generateBabyProperties(this.numberOfBabiesBorn);
     const babies: Giraffe[] = [];
-    if (candidateGiraffes) {
-      candidateGiraffes.forEach(giraffeObjectInfo => {
-        const babyGiraffeHeight = this.generateRandomHeight(1.5, 1.8);
-        const babyGiraffe = new Giraffe(
-          giraffeObjectInfo.name,
-          0,
-          giraffeObjectInfo.isMale,
-          babyGiraffeHeight
-        );
-        family!.addAnimal(babyGiraffe, true);
-        babies.push(babyGiraffe);
-      });
-    };
+    candidateGiraffes?.forEach(giraffeObjectInfo => {
+      const babyGiraffeHeight = this.generateRandomHeight(1.5, 1.8);
+      const babyGiraffe = new Giraffe(
+        giraffeObjectInfo.name,
+        0,
+        giraffeObjectInfo.isMale,
+        babyGiraffeHeight
+      );
+      family!.addAnimal(babyGiraffe, true);
+      babies.push(babyGiraffe);
+    });
+    
     return babies;
   };
 };

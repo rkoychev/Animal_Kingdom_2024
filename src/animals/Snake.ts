@@ -42,28 +42,26 @@ export default class Snake extends Reptile {
     return `${this.name} is sliding`;
   }
 
-  public giveBirth() {
+  public giveBirth(): Snake[] {
     const candidateSnakes: AnimalCandidate[] = this.generateBabyProperties(
       this.numberOfBabiesBorn,
       this.numberOfBabiesBornRandomGender
     );
     let length: number;
     const babies: Snake[] = [];
-    if (candidateSnakes) {
-      candidateSnakes.forEach((snakeObjectInfo) => {
-        length = Math.floor(Math.random() * 3) + 1;
-        const babySnake = new Snake(
-          snakeObjectInfo.name,
-          0,
-          this.type,
-          snakeObjectInfo.isMale,
-          this.color,
-          length
-        );
-        babySnake.home = this.home;
-        babies.push(babySnake);
-      });
-    }
+    candidateSnakes?.forEach((snakeObjectInfo) => {
+      length = Math.floor(Math.random() * 3) + 1;
+      const babySnake = new Snake(
+        snakeObjectInfo.name,
+        0,
+        this.type,
+        snakeObjectInfo.isMale,
+        this.color,
+        length
+      );
+      babySnake.home = this.home;
+      babies.push(babySnake);
+    });
     return babies;
   }
 }

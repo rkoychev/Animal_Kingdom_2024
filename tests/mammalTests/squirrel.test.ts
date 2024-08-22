@@ -10,7 +10,7 @@ describe("Squirrel Class Tests", () => {
         }).toThrow(NEGATIVE_TREE_AGE);
     });
 
-    test("should log an error if holeSize is negative", () => {
+    test("should log an error if nutsLimit is negative", () => {
         expect(() => {
             const squirrel = new Squirrel("Kiki", 5, true, "Cedar", 5, -56);
         }).toThrow(NEGATIVE_HOLE_SIZE);
