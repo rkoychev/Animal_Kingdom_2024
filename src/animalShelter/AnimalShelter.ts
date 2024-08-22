@@ -25,14 +25,17 @@ import {
 } from "../../messages/successMessages";
 const DEFAULT_MAMMAL_LIMIT = 20;
 const DEFAULT_REPTILE_LIMIT = 19;
+const DEFAULT_SHELTER_TERRITORY = 1500;
 export default class AnimalShelter {
   private static instance: AnimalShelter;
   private _mammalLimit: number = DEFAULT_MAMMAL_LIMIT;
   private _reptileLimit: number = DEFAULT_REPTILE_LIMIT;
+  private _shelterTerritory: number = DEFAULT_SHELTER_TERRITORY;
+
 
   private animals: Animal[] = [];
 
-  private constructor() {}
+  private constructor() { }
 
   static getInstance() {
     if (!AnimalShelter.instance) {
@@ -44,6 +47,14 @@ export default class AnimalShelter {
     this.animals = [];
     this._mammalLimit = DEFAULT_MAMMAL_LIMIT;
     this._reptileLimit = DEFAULT_REPTILE_LIMIT;
+    this._shelterTerritory = DEFAULT_SHELTER_TERRITORY;
+  }
+  getShelterTerritory() {
+    return this._shelterTerritory;
+
+  }
+  setShelterTerritory(newTerritory: number) {
+    this._shelterTerritory = newTerritory;
   }
 
   private getMammalsCount() {
@@ -85,24 +96,28 @@ export default class AnimalShelter {
   };
 
   public report() {
-    let animalsWhoJump = 0;
-    let animalsWhoRun = 0;
-    let anaimalsWhoClimbTrees = 0
+    const animalNumbers: {
+      animalsWhoJump: number,
+      animalsWhoRun: number,
+      anaimalsWhoClimbTrees: number
+
+    } = {
+      animalsWhoJump: 0,
+      animalsWhoRun: 0,
+      anaimalsWhoClimbTrees: 0
+    }
     for (const animal of this.animals) {
       if (animal.canJump) {
-        animalsWhoJump++
+        animalNumbers.animalsWhoJump++
       }
       if (animal.canRun) {
-        animalsWhoRun++;
+        animalNumbers.animalsWhoRun++;
       }
       if (animal.canClimbTrees) {
-        anaimalsWhoClimbTrees++;
+        animalNumbers.anaimalsWhoClimbTrees++;
       }
     }
-
-    console.log(animalsWhoJump + ` animals can jump`);
-    console.log(animalsWhoRun + ` animals can run`);
-    console.log(anaimalsWhoClimbTrees + ` animals can climb trees`);
+    return animalNumbers;
   };
 
   showAnimals() {
