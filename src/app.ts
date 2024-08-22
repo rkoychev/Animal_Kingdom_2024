@@ -1,18 +1,13 @@
 import AnimalShelter from "./animalShelter/AnimalShelter";
-import Crocodile from "./animals/Crocodile";
-import Lion from "./animals/Lion";
 import Snake from "./animals/Snake";
 import Squirrel from "./animals/Squirrel";
 import Tortoise from "./animals/Tortoise";
 import AnimalFamily from "./animalFamily/AnimalFamily";
-import Elephant from "./animals/Elephant";
-import Giraffe from "./animals/Giraffe";
 
 export const families: AnimalFamily[] = [];
 export const squirrels: Squirrel[] = [];
 export const snakes: Snake[] = [];
 export const tortoises: Tortoise[] = [];
-
 /*console.log("Starting");
 
 console.log("\n--- Lion Section ---");
