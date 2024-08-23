@@ -1,3 +1,3 @@
 export interface ICanJump {
-  jump(): void;
+  jump(): void
 }
