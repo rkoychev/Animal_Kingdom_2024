@@ -32,7 +32,7 @@ export default class AnimalShelter {
 
   private animals: Animal[] = []
 
-  private constructor() {}
+  private constructor() { }
 
   static getInstance() {
     if (!AnimalShelter.instance) {
@@ -40,6 +40,13 @@ export default class AnimalShelter {
     }
     return AnimalShelter.instance
   }
+
+  public reportOfNeededSpace(animals: Animal[]): number {
+    let neededSpace = 0;
+    animals.forEach(animal => neededSpace += animal.getSpaceNeeded())
+    return neededSpace;
+  }
+
   public resetInstance() {
     this.animals = []
     this._mammalLimit = DEFAULT_MAMMAL_LIMIT

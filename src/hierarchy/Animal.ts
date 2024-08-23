@@ -78,6 +78,8 @@ export default abstract class Animal implements ICanWalk {
   }
   public abstract giveBirth(): void
 
+  public abstract getSpaceNeeded(): number;
+
   protected canGiveBirth(): boolean {
     if (this.isMale) {
       throw new Error(TELLING_MALE_TO_GIVE_BIRTH)
@@ -92,7 +94,7 @@ export default abstract class Animal implements ICanWalk {
       return
     }
     if (this.home === undefined) {
-      ;`${this.name} can't switch family because it is not part of a family`
+      ; `${this.name} can't switch family because it is not part of a family`
       return
     }
     const currentFamily = families.find((family) => family.name === this.home)
