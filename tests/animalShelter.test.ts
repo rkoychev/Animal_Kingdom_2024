@@ -1,6 +1,7 @@
 import {
   FAILED_TO_REMOVE_ANIMAL_FROM_FAMILY,
   NEGATIVE_LIMIT_ERROR_MESSAGE,
+  NEGATIVE_SHELTER_TERRITORY,
   NEW_MAMMAL_LIMIT_LESS_THAN_CURRENT_MAMMALS,
   NEW_REPTILE_LIMIT_LESS_THAN_CURRENT_REPTILES,
   NO_SPACE_FOR_MORE_MAMMALS,
@@ -120,6 +121,11 @@ describe("Animal Shelter Tests", () => {
     animalShelter.setShelterTerritory(2000);
     expect(animalShelter.getShelterTerritory()).toBe(2000);
   });
+  test("should throw an error if shelter trritory set to negative", () => {
+    const animalShelter = AnimalShelter.getInstance();
+    expect(() => { animalShelter.setShelterTerritory(-2000) }).toThrow(NEGATIVE_SHELTER_TERRITORY);
+  });
+
   test("report should return an object with the correct number of animals with specific abilities", () => {
     const animalShelter = AnimalShelter.getInstance();
     const tortoise = new Tortoise("t1", 3, false);

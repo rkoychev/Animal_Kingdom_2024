@@ -46,6 +46,14 @@ export default class Squirrel extends Mammal implements ICanJump {
     return `${this.name} is jumping`;
   }
 
+  public getSpaceNeeded(): number {
+    if (this.isAdult === true) {
+      return SQUIRREL_SPACE_NEEDED_AS_ADULT;
+    } else {
+      return SQUIRREL_SPACE_NEEDED_AS_CHILD;
+    }
+  }
+
   addNuts(numberOfNuts: number) {
     if (numberOfNuts < 0) {
       throw Error(NEGATIVE_NUTS_ADDED);

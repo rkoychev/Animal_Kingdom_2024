@@ -13,10 +13,12 @@ import { ICanRun } from "../interfaces/ICanRun";
 import {
   FAILED_TO_REMOVE_ANIMAL_FROM_FAMILY,
   NEGATIVE_LIMIT_ERROR_MESSAGE,
+  NEGATIVE_SHELTER_TERRITORY,
   NEW_MAMMAL_LIMIT_LESS_THAN_CURRENT_MAMMALS,
   NEW_REPTILE_LIMIT_LESS_THAN_CURRENT_REPTILES,
   NO_SPACE_FOR_MORE_MAMMALS,
   NO_SPACE_FOR_MORE_REPTILES,
+  SMALLER_TERRITORY_THAN_OCCUPIED,
 } from "../../messages/errorMessages";
 import {
   SUCCESFULLY_ADDED_ANIMAL_IN_SHELTER,
@@ -31,8 +33,6 @@ export default class AnimalShelter {
   private _mammalLimit: number = DEFAULT_MAMMAL_LIMIT;
   private _reptileLimit: number = DEFAULT_REPTILE_LIMIT;
   private _shelterTerritory: number = DEFAULT_SHELTER_TERRITORY;
-
-
   private animals: Animal[] = [];
 
   private constructor() { }
@@ -49,18 +49,19 @@ export default class AnimalShelter {
     this._reptileLimit = DEFAULT_REPTILE_LIMIT;
     this._shelterTerritory = DEFAULT_SHELTER_TERRITORY;
   }
-  getShelterTerritory() {
+  getShelterTerritory(): number {
     return this._shelterTerritory;
-
   }
   setShelterTerritory(newTerritory: number) {
+    if( newTerritory<=0){
+      throw new Error(NEGATIVE_SHELTER_TERRITORY);
+    }
     this._shelterTerritory = newTerritory;
   }
 
   private getMammalsCount() {
     return this.animals.filter((animal) => animal instanceof Mammal).length;
   }
-
   getMammalLimit() {
     return this._mammalLimit;
   }
@@ -100,7 +101,6 @@ export default class AnimalShelter {
       animalsWhoJump: number,
       animalsWhoRun: number,
       anaimalsWhoClimbTrees: number
-
     } = {
       animalsWhoJump: 0,
       animalsWhoRun: 0,
@@ -108,7 +108,7 @@ export default class AnimalShelter {
     }
     for (const animal of this.animals) {
       if (animal.canJump) {
-        animalNumbers.animalsWhoJump++
+        animalNumbers.animalsWhoJump++;
       }
       if (animal.canRun) {
         animalNumbers.animalsWhoRun++;

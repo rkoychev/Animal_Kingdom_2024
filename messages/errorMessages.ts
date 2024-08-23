@@ -23,4 +23,6 @@ export const NEGATIVE_VALUES = "Both values must be positive";
 export const ELEPHANT_HEIGHT_NEGATIVE = "Elephant height must be greater than zero";
 export const ELEPHANT_wEIGHT_NEGATIVE = "Elephant weight must be greater than zero";
 export const GIRAFFE_HEIGHT_NEGATIVE = "Giraffe height must be greater than zero";
+export const SMALLER_TERRITORY_THAN_OCCUPIED = "Occupied territory is bigger than the one you want to set";
+export const NEGATIVE_SHELTER_TERRITORY = "Shelter territory cannot bee set to a non-positive number";
 

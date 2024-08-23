@@ -19,6 +19,13 @@ export default class Lion
     this.canRun = true;
     this.canJump = true;
   }
+  public getSpaceNeeded(): number {
+    if (this.isAdult === true) {
+      return LION_SPACE_NEEDED_AS_ADULT;
+    } else {
+      return LION_SPACE_NEEDED_AS_CHILD;
+    }
+  }
 
   jump(): string {
     return `${this.name} is jumping`;
