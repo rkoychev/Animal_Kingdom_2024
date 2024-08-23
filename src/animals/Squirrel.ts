@@ -5,6 +5,8 @@ import Mammal from '../hierarchy/Mammal'
 import { ICanJump } from '../interfaces/ICanJump'
 import { NEGATIVE_HOLE_SIZE, NEGATIVE_NUTS_ADDED, NEGATIVE_TREE_AGE } from '../../messages/errorMessages'
 export const NUMBER_OF_BABY_SQUIRRELS_BORN = 5
+export const SQUIRREL_SPACE_NEEDED_AS_ADULT = 40
+export const SQUIRREL_SPACE_NEEDED_AS_CHILD = 20
 export default class Squirrel extends Mammal implements ICanJump {
   private treeType: TreeType
   private treeAge: number
@@ -40,6 +42,13 @@ export default class Squirrel extends Mammal implements ICanJump {
     if (this.storedNuts + numberOfNuts <= this.nutsLimit) {
       this.storedNuts += numberOfNuts
     } else throw Error(`${this.name} hole has space left only for ${this.nutsLimit - this.storedNuts} nuts`)
+  }
+  public getSpaceNeeded(): number {
+    if (this.isAdult === true) {
+      return SQUIRREL_SPACE_NEEDED_AS_ADULT
+    } else {
+      return SQUIRREL_SPACE_NEEDED_AS_CHILD
+    }
   }
   public giveBirth(): Squirrel[] {
     const candidateSquirrels: AnimalCandidate[] = this.generateBabyProperties(this.numberOfBabiesBorn)

@@ -4,6 +4,8 @@ import Animal, { AnimalCandidate } from '../hierarchy/Animal'
 import Mammal from '../hierarchy/Mammal'
 import { ICanRun } from '../interfaces/ICanRun'
 const NUMBER_OF_BABY_GIRAFFES_BORN = 1
+export const GIRAFFE_SPACE_NEEDED_AS_ADULT = 200
+export const GIRAFFE_SPACE_NEEDED_AS_CHILD = 100
 
 export default class Giraffe extends Mammal implements ICanRun {
   height: number
@@ -21,7 +23,13 @@ export default class Giraffe extends Mammal implements ICanRun {
   run(): string {
     return `${this.name} is running`
   }
-
+  public getSpaceNeeded(): number {
+    if (this.isAdult === true) {
+      return GIRAFFE_SPACE_NEEDED_AS_ADULT
+    } else {
+      return GIRAFFE_SPACE_NEEDED_AS_CHILD
+    }
+  }
   public giveBirth(): Giraffe[] {
     const family = families.find((giraffe) => giraffe.name == this.home)
     const candidateGiraffes: AnimalCandidate[] = this.generateBabyProperties(this.numberOfBabiesBorn)

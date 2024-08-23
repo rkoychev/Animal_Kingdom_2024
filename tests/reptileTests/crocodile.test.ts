@@ -1,5 +1,5 @@
 import AnimalFamily from '../../src/animalFamily/AnimalFamily'
-import Crocodile from '../../src/animals/Crocodile'
+import Crocodile, { CROCS_SPACE_NEEDED_AS_ADULT, CROCS_SPACE_NEEDED_AS_CHILD } from '../../src/animals/Crocodile'
 import { NUMBER_OF_BABY_CROCODILES_BORN } from '../../src/animals/Crocodile'
 import {
   EMPTY_NAME_ERROR_MESSAGE,
@@ -8,6 +8,7 @@ import {
   NEGATIVE_LENGTH_ERROR_MESSAGE,
   TELLING_MALE_TO_GIVE_BIRTH,
 } from '../../messages/errorMessages'
+import { AGE_TO_BE_ADULT } from '../../src/hierarchy/Animal'
 
 describe('Crocodile Class Tests', () => {
   test('should log an error if length is negative', () => {

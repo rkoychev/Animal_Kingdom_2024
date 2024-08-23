@@ -4,7 +4,8 @@ import Reptile from '../hierarchy/Reptile'
 import { AnimalCandidate } from '../hierarchy/Animal'
 export const NUMBER_OF_BABY_SNAKES_BORN = 8
 export const NUMBER_OF_BABY_SNAKES_BORN_RANDOM_GENDER = 5
-
+export const SNAKE_SPACE_NEEDED_AS_ADULT = 300
+export const SNAKE_SPACE_NEEDED_AS_CHILD = 150
 import { EMPTY_COLOR_ERROR_MESSAGE, NEGATIVE_LENGTH_ERROR_MESSAGE } from '../../messages/errorMessages'
 export default class Snake extends Reptile {
   private type: SnakeType
@@ -31,7 +32,13 @@ export default class Snake extends Reptile {
   override walk(): string {
     return `${this.name} is sliding`
   }
-
+  public getSpaceNeeded(): number {
+    if (this.isAdult === true) {
+      return SNAKE_SPACE_NEEDED_AS_ADULT
+    } else {
+      return SNAKE_SPACE_NEEDED_AS_CHILD
+    }
+  }
   public giveBirth(): Snake[] {
     const candidateSnakes: AnimalCandidate[] = this.generateBabyProperties(
       this.numberOfBabiesBorn,

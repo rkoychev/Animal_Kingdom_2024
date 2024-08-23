@@ -3,7 +3,8 @@ import { AnimalCandidate } from '../hierarchy/Animal'
 import Reptile from '../hierarchy/Reptile'
 export const NUMBER_OF_BABY_TORTOISES_BORN = 8
 export const NUMBER_OF_BABY_TORTOISES_BORN_RANDOM_GENDER = 5
-
+export const TOIRTOISE_SPACE_NEEDED_AS_ADULT = 300
+export const TOIRTOISE_SPACE_NEEDED_AS_CHILD = 150
 export default class Tortoise extends Reptile {
   private numberOfBabiesBorn = NUMBER_OF_BABY_TORTOISES_BORN
   private numberOfBabiesBornRandomGender = NUMBER_OF_BABY_TORTOISES_BORN_RANDOM_GENDER
@@ -14,7 +15,13 @@ export default class Tortoise extends Reptile {
     this.canClimbTrees = true
     tortoises.push(this)
   }
-
+  public getSpaceNeeded(): number {
+    if (this.isAdult === true) {
+      return TOIRTOISE_SPACE_NEEDED_AS_ADULT
+    } else {
+      return TOIRTOISE_SPACE_NEEDED_AS_CHILD
+    }
+  }
   public giveBirth(): Tortoise[] {
     const candidateTortoises: AnimalCandidate[] = this.generateBabyProperties(
       this.numberOfBabiesBorn,

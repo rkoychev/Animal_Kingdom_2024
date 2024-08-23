@@ -1,5 +1,8 @@
-import Snake, { NUMBER_OF_BABY_SNAKES_BORN } from '../../src/animals/Snake'
-import { snakes } from '../../src/app'
+import Snake, {
+  NUMBER_OF_BABY_SNAKES_BORN,
+  SNAKE_SPACE_NEEDED_AS_ADULT,
+  SNAKE_SPACE_NEEDED_AS_CHILD,
+} from '../../src/animals/Snake'
 import {
   EMPTY_COLOR_ERROR_MESSAGE,
   EMPTY_NAME_ERROR_MESSAGE,
@@ -8,6 +11,7 @@ import {
   NEGATIVE_LENGTH_ERROR_MESSAGE,
   TELLING_MALE_TO_GIVE_BIRTH,
 } from '../../messages/errorMessages'
+import { AGE_TO_BE_ADULT } from '../../src/hierarchy/Animal'
 
 describe('Snake Class Tests', () => {
   test('should log an error if length is negative', () => {

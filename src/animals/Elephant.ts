@@ -5,6 +5,8 @@ import Mammal from '../hierarchy/Mammal'
 import { ICanRun } from '../interfaces/ICanRun'
 import { ICanTalk } from '../interfaces/ICanTalk'
 export const NUMBER_OF_BABY_ELEPHANTS_BORN = 1
+export const ELEPHANT_SPACE_NEEDED_AS_ADULT = 200
+export const ELEPHANT_SPACE_NEEDED_AS_CHILD = 100
 
 export default class Elephant extends Mammal implements ICanRun, ICanTalk {
   private height: number
@@ -30,7 +32,13 @@ export default class Elephant extends Mammal implements ICanRun, ICanTalk {
   talk(): string {
     return `${this.name} is talking`
   }
-
+  public getSpaceNeeded(): number {
+    if (this.isAdult === true) {
+      return ELEPHANT_SPACE_NEEDED_AS_ADULT
+    } else {
+      return ELEPHANT_SPACE_NEEDED_AS_CHILD
+    }
+  }
   public giveBirth(): Elephant[] {
     const family = families.find((elephant) => elephant.name == this.home)
     const candidateElephants: AnimalCandidate[] = this.generateBabyProperties(this.numberOfBabiesBorn)

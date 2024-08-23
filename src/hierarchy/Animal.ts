@@ -12,7 +12,7 @@ export type AnimalCandidate = {
   isMale: boolean
 }
 
-const AGE_TO_BE_ADULT = 2
+export const AGE_TO_BE_ADULT = 2
 export default abstract class Animal implements ICanWalk {
   protected isAdult: boolean
   protected name: string
