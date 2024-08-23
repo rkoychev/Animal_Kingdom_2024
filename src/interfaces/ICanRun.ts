@@ -1,3 +1,3 @@
 export interface ICanRun {
-  run(): void;
+  run(): void
 }

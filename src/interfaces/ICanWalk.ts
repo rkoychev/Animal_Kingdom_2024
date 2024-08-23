@@ -1,3 +1,3 @@
 export interface ICanWalk {
-  walk(): void;
+  walk(): void
 }

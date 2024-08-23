@@ -1,3 +1,3 @@
 export interface ICanSwim {
-  swim(): void;
+  swim(): void
 }
