@@ -1,8 +1,4 @@
-import Tortoise, {
-  NUMBER_OF_BABY_TORTOISES_BORN,
-  TOIRTOISE_SPACE_NEEDED_AS_ADULT,
-  TOIRTOISE_SPACE_NEEDED_AS_CHILD,
-} from '../../src/animals/Tortoise'
+import Tortoise, { TOIRTOISE_SPACE_NEEDED_AS_ADULT, TOIRTOISE_SPACE_NEEDED_AS_CHILD } from '../../src/animals/Tortoise'
 import {
   EMPTY_NAME_ERROR_MESSAGE,
   GIVING_BIRTH_WITHOUT_HOME,
@@ -10,6 +6,7 @@ import {
   TELLING_MALE_TO_GIVE_BIRTH,
 } from '../../messages/errorMessages'
 import { AGE_TO_BE_ADULT } from '../../src/hierarchy/Animal'
+import Reptile from '../../src/hierarchy/Reptile'
 
 describe('turtle Class Tests', () => {
   test('should throw an error if age is negative', () => {
@@ -68,7 +65,7 @@ describe('turtle Class Tests', () => {
   test('should call give birth method correctly', () => {
     const turtle = new Tortoise('Turtle', 4, false)
     const babies = turtle.giveBirth()
-    expect(babies.length).toBe(NUMBER_OF_BABY_TORTOISES_BORN)
+    expect(babies.length).toBe(Reptile.NUMBER_OF_BABY_REPTILES_BORN)
   })
   test('should call give birth method correctly with at least 2 males and 1 female', () => {
     const turtle = new Tortoise('Turtle', 4, false)

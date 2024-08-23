@@ -2,15 +2,11 @@ import { NEGATIVE_LENGTH_ERROR_MESSAGE } from '../../messages/errorMessages'
 import { families } from '../app'
 import { AnimalCandidate } from '../hierarchy/Animal'
 import Reptile from '../hierarchy/Reptile'
-export const NUMBER_OF_BABY_CROCODILES_BORN = 8
-export const NUMBER_OF_BABY_CROCODILES_BORN_RANDOM_GENDER = 5
 export const CROCS_SPACE_NEEDED_AS_ADULT = 300
 export const CROCS_SPACE_NEEDED_AS_CHILD = 150
 
 export default class Crocodile extends Reptile {
   private length: number
-  private numberOfBabiesBorn = NUMBER_OF_BABY_CROCODILES_BORN
-  private numberOfBabiesBornRandomGender = NUMBER_OF_BABY_CROCODILES_BORN_RANDOM_GENDER
 
   constructor(name: string, age: number, isMale: boolean, length: number) {
     super(name, age, isMale)
@@ -30,10 +26,7 @@ export default class Crocodile extends Reptile {
   }
   public giveBirth(): Crocodile[] {
     const family = families.find((crcodile) => crcodile.name == this.home)
-    const candidateCrocks: AnimalCandidate[] = this.generateBabyProperties(
-      this.numberOfBabiesBorn,
-      this.numberOfBabiesBornRandomGender,
-    )
+    const candidateCrocks: AnimalCandidate[] = this.generateBabyProperties()
     const babies: Crocodile[] = []
     let length: number
 
