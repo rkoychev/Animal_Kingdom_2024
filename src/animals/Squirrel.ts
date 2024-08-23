@@ -51,13 +51,6 @@ export default class Squirrel extends Mammal implements ICanJump {
       this.storedNuts += numberOfNuts
     } else throw Error(`${this.name} hole has space left only for ${this.nutsLimit - this.storedNuts} nuts`)
   }
-  public getSpaceNeeded(): number {
-    if (this.isAdult === true) {
-      return SQUIRREL_SPACE_NEEDED_AS_ADULT
-    } else {
-      return SQUIRREL_SPACE_NEEDED_AS_CHILD
-    }
-  }
   public giveBirth(): Squirrel[] {
     const candidateSquirrels: AnimalCandidate[] = this.generateBabyProperties(this.numberOfBabiesBorn)
     const babies: Squirrel[] = []
