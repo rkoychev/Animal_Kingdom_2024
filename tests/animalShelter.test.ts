@@ -118,6 +118,5 @@ describe('Animal Shelter Tests', () => {
     animalShelter.addAnimal(squirrel2)
     animalShelter.addAnimal(lion)
     expect(animalShelter.reportOfNeededSpace([tortoise, tortoise2, squirrel, squirrel2, lion])).toBe(880)
-
   })
 })

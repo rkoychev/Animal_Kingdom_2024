@@ -42,9 +42,7 @@ export default class AnimalShelter {
   }
 
   public reportOfNeededSpace(animals: Animal[]): number {
-    let neededSpace = 0;
-    animals.forEach(animal => neededSpace += animal.getSpaceNeeded())
-    return neededSpace;
+    return animals.reduce((neededSpace, animal) => neededSpace + animal.getSpaceNeeded(), 0);
   }
 
   public resetInstance() {
