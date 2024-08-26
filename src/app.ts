@@ -209,11 +209,11 @@ try {
   }
 }
 
-const snake2 = new Snake("Ssss", 3, "Anaconda", false, "Red", 33);
-const animalShelter = AnimalShelter.getInstance();
+const snake2 = new Snake("Ssss"const animalShelter = AnimalShelter.getInstance();
 animalShelter.addAnimal(snake2);
 animalShelter.addAnimal(lion2);
-animalShelter.addAnimal(lion1);
+animalShelter.addAnimal(lion1);, 3, "Anaconda", false, "Red", 33);
+
 lionsFamily2.addAnimal(new Lion("Lion2", 3, true));
 animalShelter.addAnimal(squirrel1);
 animalShelter.addAnimal(crocodile1);
@@ -294,3 +294,10 @@ try {
 }
 
 animalShelter.report(); */
+
+/* const animalShelter = AnimalShelter.getInstance();
+const snake2 = new Snake("d", 3, "Anaconda", false, "Red", 3);
+animalShelter.addAnimal(snake2);
+const snake3 = new Snake("sssss", 1, "Anaconda", false, "Red", 3);
+animalShelter.addAnimal(snake3);
+animalShelter.setShelterTerritory(200); */
