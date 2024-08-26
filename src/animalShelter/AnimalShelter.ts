@@ -17,8 +17,6 @@ import {
   NO_SPACE_FOR_MORE_REPTILES,
 } from '../../messages/errorMessages'
 import {
-  SUCCESFULLY_ADDED_ANIMAL_BUT_MAMMAL_LIMIT_EXCEEDED,
-  SUCCESFULLY_ADDED_ANIMAL_BUT_REPTILE_LIMIT_EXCEEDED,
   SUCCESFULLY_ADDED_ANIMAL_IN_SHELTER,
   SUCCESFULLY_SET_NEW_MAMMAL_LIMIT,
   SUCCESFULLY_SET_NEW_REPTILE_LIMIT,
@@ -143,11 +141,7 @@ export default class AnimalShelter {
     if (fromBirth) {
       this.animals.push(animal)
       animal.setHome('Animal Shelter')
-      if (animal instanceof Reptile && this.getReptileCount() + 1 > this._reptileLimit) {
-        return `${animal.getName()} ${SUCCESFULLY_ADDED_ANIMAL_BUT_REPTILE_LIMIT_EXCEEDED}`
-      } else if (animal instanceof Mammal && this.getMammalsCount() + 1 > this._mammalLimit) {
-        return `${animal.getName()} ${SUCCESFULLY_ADDED_ANIMAL_BUT_MAMMAL_LIMIT_EXCEEDED}`
-      } else return `${animal.getName()} ${SUCCESFULLY_ADDED_ANIMAL_IN_SHELTER}`
+      return `${animal.getName()} ${SUCCESFULLY_ADDED_ANIMAL_IN_SHELTER}`
     } else {
       if (animal instanceof Reptile && this.getReptileCount() + 1 > this._reptileLimit) {
         return NO_SPACE_FOR_MORE_REPTILES
