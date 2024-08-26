@@ -41,6 +41,7 @@ export default abstract class Animal implements ICanWalk {
     }
     this.timesGivenBirth = 0
   }
+  public abstract getSpaceNeeded(): number;
 
   walk(): string {
     return `${this.name} is walking`
