@@ -2,8 +2,6 @@ import { SnakeType } from '../customTypes'
 import { snakes } from '../app'
 import Reptile from '../hierarchy/Reptile'
 import { AnimalCandidate } from '../hierarchy/Animal'
-export const NUMBER_OF_BABY_SNAKES_BORN = 8
-export const NUMBER_OF_BABY_SNAKES_BORN_RANDOM_GENDER = 5
 export const SNAKE_SPACE_NEEDED_AS_ADULT = 300
 export const SNAKE_SPACE_NEEDED_AS_CHILD = 150
 import { EMPTY_COLOR_ERROR_MESSAGE, NEGATIVE_LENGTH_ERROR_MESSAGE } from '../../messages/errorMessages'
@@ -12,8 +10,6 @@ export default class Snake extends Reptile {
   private color: string
   private length: number
   protected home?: string | undefined
-  private numberOfBabiesBorn = NUMBER_OF_BABY_SNAKES_BORN
-  private numberOfBabiesBornRandomGender = NUMBER_OF_BABY_SNAKES_BORN_RANDOM_GENDER
   constructor(name: string, age: number, type: SnakeType, isMale: boolean, color: string, length: number) {
     super(name, age, isMale)
     if (length <= 0) {
@@ -40,10 +36,7 @@ export default class Snake extends Reptile {
     }
   }
   public giveBirth(): Snake[] {
-    const candidateSnakes: AnimalCandidate[] = this.generateBabyProperties(
-      this.numberOfBabiesBorn,
-      this.numberOfBabiesBornRandomGender,
-    )
+    const candidateSnakes: AnimalCandidate[] = this.generateBabyProperties()
     let length: number
     const babies: Snake[] = []
     candidateSnakes?.forEach((snakeObjectInfo) => {

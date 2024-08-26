@@ -1,5 +1,5 @@
-import { NEGATIVE_VALUES } from '../messages/errorMessages'
-import Lion from '../src/animals/Lion'
+import { NEGATIVE_VALUES } from '../../messages/errorMessages'
+import Lion from '../../src/animals/Lion'
 describe('Generating height and weight checking', () => {
   test('should log an error if any height is negative', () => {
     const lion = new Lion('Simba', 5, true)

@@ -1,6 +1,6 @@
 import { ELEPHANT_HEIGHT_NEGATIVE, ELEPHANT_wEIGHT_NEGATIVE } from '../../messages/errorMessages'
 import { families } from '../app'
-import Animal, { AnimalCandidate } from '../hierarchy/Animal'
+import { AnimalCandidate } from '../hierarchy/Animal'
 import Mammal from '../hierarchy/Mammal'
 import { ICanRun } from '../interfaces/ICanRun'
 import { ICanTalk } from '../interfaces/ICanTalk'
