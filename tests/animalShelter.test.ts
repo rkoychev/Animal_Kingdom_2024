@@ -108,17 +108,17 @@ describe('Animal Shelter Tests', () => {
   })
   test('reportOfNeededSpace should return the needed space for the specific setof animals', () => {
     const animalShelter = AnimalShelter.getInstance()
-    const tortoise = new Tortoise('t1', 3, false)
+    const tortoise = new Tortoise('t1', 1, false)
     const tortoise2 = new Tortoise('t2', 4, false)
     const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
-    const squirrel2 = new Squirrel('s2', 4, false, 'Maple', 44, 4)
+    const squirrel2 = new Squirrel('s2', 1, false, 'Maple', 44, 4)
     const lion = new Lion('simba', 4, true)
     animalShelter.addAnimal(tortoise)
     animalShelter.addAnimal(tortoise2)
     animalShelter.addAnimal(squirrel)
     animalShelter.addAnimal(squirrel2)
     animalShelter.addAnimal(lion)
-    expect(animalShelter.reportOfNeededSpace([tortoise, tortoise2, squirrel, squirrel2, lion])).toBe(880)
+    expect(animalShelter.reportOfNeededSpace([tortoise, tortoise2, squirrel, squirrel2, lion])).toBe(710)
   })
   test("should succesfully set shelter trritory", () => {
     const animalShelter = AnimalShelter.getInstance();
