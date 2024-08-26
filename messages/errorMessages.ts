@@ -24,7 +24,7 @@ export const EMPTY_FAMILY_ERROR_MESSAGE = 'A family must have at least one Anima
 export const ANIMAL_CANNOT_HAVE_FAMILY_ERROR_MESSAGE = `This type of animal doesn't live in a family`
 export const DIFFERENT_TYPE_ANIMALS_CANNOT_HAVE_FAMILY = `Two different types of Animal cannot be in the same family`
 export const ANIMAL_ALREADY_IN_FAMILY = 'Animal is already part of the family'
-export const ANIMAL_NOT_PART_OF_FAMILY = 'Animal is not part of the family'
+export const ANIMAL_NOT_PART_OF_FAMILY = ' is not part of the '
 export const FAMILY_NAME_TAKEN = 'Family name is already taken'
 export const FAMILY_MAX_MEMBERS_EXCEEDED = 'Family members cannot exceed: '
 export const FAMILY_MIN_MEMBERS_NOT_MET = 'Family members cannot be fewer than: '
@@ -37,5 +37,4 @@ export const FAMILY_MAX_MALES_EXCEEDED = 'Males in the family cannot exceed: '
 export const FAMILY_MIN_FEMALES_NOT_MET = 'Females in the family cannot be fewer than: '
 export const FAMILY_MAX_FEMALES_EXCEEDED = 'Females in the family cannot exceed: '
 export const FAMILY_MIN_ANY_GENDER_NOT_MET = 'Family members of one gender must be at least: '
-export const NEGATIVE_SHELTER_TERRITORY = 'Shelter territory cannot bee set to a non-positive number';
-
+export const NEGATIVE_SHELTER_TERRITORY = 'Shelter territory cannot bee set to a non-positive number'

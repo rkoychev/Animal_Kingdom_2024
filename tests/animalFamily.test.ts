@@ -2,6 +2,7 @@ import {
   ANIMALS_ALREADY_HAVE_FAMILY,
   ANIMAL_ALREADY_IN_FAMILY,
   ANIMAL_CANNOT_HAVE_FAMILY_ERROR_MESSAGE,
+  ANIMAL_NOT_PART_OF_FAMILY,
   DIFFERENT_TYPE_ANIMALS_CANNOT_HAVE_FAMILY,
   EMPTY_FAMILY_ERROR_MESSAGE,
   FAMILY_MAX_MALE_ADULTS_EXCEEDED,
@@ -87,7 +88,7 @@ describe('Animal Families Tests', () => {
     expect(crocFam.checkCanRemoveAnimal(croc4)).toEqual([])
     expect(crocFam.removeAnimal(croc4)).toEqual(true)
   })
-  test('should get an error array with a message that animal is not part of the family ', () => {
+  test('should switch animal family correctly ', () => {
     const croc = new Crocodile('Croco', 4, false, 4)
     const croc2 = new Crocodile('Simona', 1, false, 4)
     const croc3 = new Crocodile('Simona2', 4, false, 2)
@@ -97,6 +98,13 @@ describe('Animal Families Tests', () => {
     const crocFam = new AnimalFamily('Family4', [croc, croc2, croc3])
     const crocodiles = new AnimalFamily('Familia', [crocodile1, crocodile2, crocodile3])
     expect(croc3.switchFamily(crocodiles)).toBe(true)
+  })
+  test('should return an error array if animal is not in the family ', () => {
+    const croc = new Crocodile('Croco', 4, false, 4)
+    const croc2 = new Crocodile('Simona', 1, false, 4)
+    const croc3 = new Crocodile('Simona2', 4, false, 2)
+    const crocFam = new AnimalFamily('Family4', [croc, croc2])
+    expect(crocFam.checkCanRemoveAnimal(croc3)).toEqual([`Simona2` + ANIMAL_NOT_PART_OF_FAMILY + 'Family4'])
   })
   test('should return false if we want to switch family of animal that cannot have one', () => {
     const snake = new Snake('s', 4, 'Anaconda', true, 'red', 44)

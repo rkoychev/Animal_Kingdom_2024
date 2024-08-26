@@ -78,7 +78,7 @@ export default class AnimalFamily {
   //return an empty string if it can be removed otherwise the reason that it can't be removed
   public checkCanRemoveAnimal(animal: Animal): string[] {
     if (this.animals.indexOf(animal) === -1) {
-      return [ANIMAL_NOT_PART_OF_FAMILY]
+      return [animal.getName() + ANIMAL_NOT_PART_OF_FAMILY + this.name]
     }
     const animalsWithoutRemovedAnimal = this.animals.filter((anim) => anim !== animal)
     let requirements: VerificationProps = {
