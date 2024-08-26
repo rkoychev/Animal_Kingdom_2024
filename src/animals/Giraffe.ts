@@ -38,7 +38,7 @@ export default class Giraffe extends Mammal implements ICanRun {
     candidateGiraffes?.forEach((giraffeObjectInfo) => {
       const babyGiraffeHeight = this.generateRandomHeight(1.5, 1.8)
       const babyGiraffe = new Giraffe(giraffeObjectInfo.name, 0, giraffeObjectInfo.isMale, babyGiraffeHeight)
-      family!.addAnimal(babyGiraffe, true)
+      family?.addAnimal(babyGiraffe, true)
       if (this.home === 'Animal Shelter') {
         AnimalShelter.getInstance().addAnimal(babyGiraffe, true)
       }

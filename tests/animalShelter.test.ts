@@ -15,6 +15,9 @@ import Crocodile from '../src/animals/Crocodile'
 import Lion from '../src/animals/Lion'
 import Squirrel from '../src/animals/Squirrel'
 import Tortoise from '../src/animals/Tortoise'
+import Elephant from '../src/animals/Elephant'
+import Giraffe from '../src/animals/Giraffe'
+import Snake from '../src/animals/Snake'
 beforeEach(() => {
   const animalShelter = AnimalShelter.getInstance()
   animalShelter.resetInstance()
@@ -81,19 +84,34 @@ describe('Animal Shelter Tests', () => {
   })
   test('should give birth even if it will exceed the reptile limit', () => {
     const animalShelter = AnimalShelter.getInstance()
-    animalShelter.setReptileLimit(1)
+    animalShelter.setReptileLimit(3)
+    const croco = new Crocodile('croco', 44, false, 44)
+    const snake = new Snake('snake', 33, 'Anaconda', false, 'red', 33)
     const tortoise = new Tortoise('t1', 3, false)
     animalShelter.addAnimal(tortoise)
+    animalShelter.addAnimal(snake)
+    animalShelter.addAnimal(croco)
     tortoise.giveBirth()
+    croco.giveBirth()
+    snake.giveBirth()
     expect(animalShelter.showAnimals().tortoises).toBe(9)
   })
   test('should give birth even if it will exceed the mammal limit', () => {
     const animalShelter = AnimalShelter.getInstance()
-    animalShelter.setMammalLimit(1)
-    const tortoise = new Tortoise('t1', 3, false)
-    animalShelter.addAnimal(tortoise)
-    tortoise.giveBirth()
-    expect(animalShelter.showAnimals().tortoises).toBe(9)
+    animalShelter.setMammalLimit(7)
+    const lion = new Lion('simba', 4, false)
+    const elephant = new Elephant('el', 4, false, 44, 444)
+    const squirrel = new Squirrel('s', 4, false, 'Cedar', 444, 44)
+    const giraffe = new Giraffe('gg', 4, false, 444)
+    animalShelter.addAnimal(giraffe)
+    animalShelter.addAnimal(lion)
+    animalShelter.addAnimal(elephant)
+    animalShelter.addAnimal(squirrel)
+    lion.giveBirth()
+    elephant.giveBirth()
+    squirrel.giveBirth()
+    giraffe.giveBirth()
+    expect(animalShelter.showAnimals().lions).toBe(6)
   })
   test('should fail to add crocodile if it cannot be removed from its familly', () => {
     const animalShelter = AnimalShelter.getInstance()

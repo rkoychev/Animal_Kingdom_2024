@@ -142,6 +142,7 @@ export default class AnimalShelter {
   addAnimal(animal: Animal, fromBirth = false): string {
     if (fromBirth) {
       this.animals.push(animal)
+      animal.setHome('Animal Shelter')
       if (animal instanceof Reptile && this.getReptileCount() + 1 > this._reptileLimit) {
         return `${animal.getName()} ${SUCCESFULLY_ADDED_ANIMAL_BUT_REPTILE_LIMIT_EXCEEDED}`
       } else if (animal instanceof Mammal && this.getMammalsCount() + 1 > this._mammalLimit) {

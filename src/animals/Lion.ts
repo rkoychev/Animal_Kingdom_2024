@@ -40,7 +40,7 @@ export default class Lion extends Mammal implements ICanRun, ICanTalk, ICanJump 
     const babies: Lion[] = []
     candidateLions.forEach((lionObjectInfo) => {
       const babyLion = new Lion(lionObjectInfo.name, 0, lionObjectInfo.isMale)
-      family!.addAnimal(babyLion, true)
+      family?.addAnimal(babyLion, true)
       if (this.home === 'Animal Shelter') {
         AnimalShelter.getInstance().addAnimal(babyLion, true)
       }
