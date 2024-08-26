@@ -37,3 +37,5 @@ export const FAMILY_MAX_MALES_EXCEEDED = 'Males in the family cannot exceed: '
 export const FAMILY_MIN_FEMALES_NOT_MET = 'Females in the family cannot be fewer than: '
 export const FAMILY_MAX_FEMALES_EXCEEDED = 'Females in the family cannot exceed: '
 export const FAMILY_MIN_ANY_GENDER_NOT_MET = 'Family members of one gender must be at least: '
+export const NEGATIVE_SHELTER_TERRITORY = 'Shelter territory cannot bee set to a non-positive number';
+
