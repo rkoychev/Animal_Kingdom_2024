@@ -1,8 +1,4 @@
-import Snake, {
-  NUMBER_OF_BABY_SNAKES_BORN,
-  SNAKE_SPACE_NEEDED_AS_ADULT,
-  SNAKE_SPACE_NEEDED_AS_CHILD,
-} from '../../src/animals/Snake'
+import Snake, { SNAKE_SPACE_NEEDED_AS_ADULT, SNAKE_SPACE_NEEDED_AS_CHILD } from '../../src/animals/Snake'
 import {
   EMPTY_COLOR_ERROR_MESSAGE,
   EMPTY_NAME_ERROR_MESSAGE,
@@ -12,6 +8,7 @@ import {
   TELLING_MALE_TO_GIVE_BIRTH,
 } from '../../messages/errorMessages'
 import { AGE_TO_BE_ADULT } from '../../src/hierarchy/Animal'
+import Reptile from '../../src/hierarchy/Reptile'
 
 describe('Snake Class Tests', () => {
   test('should log an error if length is negative', () => {
@@ -85,12 +82,12 @@ describe('Snake Class Tests', () => {
   test('should call give birth method correctly', () => {
     const snake = new Snake('Sssnake', 3, 'Anaconda', false, 'Red', 4)
     const babies = snake.giveBirth()
-    expect(babies.length).toBe(NUMBER_OF_BABY_SNAKES_BORN)
+    expect(babies.length).toBe(Reptile.NUMBER_OF_BABY_REPTILES_BORN)
   })
   test('should call give birth method correctly with at least 2 males and 1 female', () => {
     const snake = new Snake('Sssnake', 3, 'Anaconda', false, 'Red', 4)
     const babies = snake.giveBirth()
-    expect(babies.length).toBe(NUMBER_OF_BABY_SNAKES_BORN)
+    expect(babies.length).toBe(Reptile.NUMBER_OF_BABY_REPTILES_BORN)
     const maleCount = babies.filter((baby) => baby.getIsMale() === true).length
     expect(maleCount).toBeGreaterThanOrEqual(2)
     const femaleCount = babies.filter((baby) => baby.getIsMale() === false).length
