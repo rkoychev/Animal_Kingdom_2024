@@ -1,11 +1,12 @@
-import {
-  ELEPHANT_HEIGHT_NEGATIVE,
-  ELEPHANT_wEIGHT_NEGATIVE,
-  GIRAFFE_HEIGHT_NEGATIVE,
-} from '../../messages/errorMessages'
+import { FAMILY_MIN_MEMBERS_NOT_MET, GIRAFFE_HEIGHT_NEGATIVE } from '../../messages/errorMessages'
 import AnimalFamily from '../../src/animalFamily/AnimalFamily'
-import Elephant, { NUMBER_OF_BABY_ELEPHANTS_BORN } from '../../src/animals/Elephant'
+import {
+  GIRAFFE_SPACE_NEEDED_AS_ADULT,
+  GIRAFFE_SPACE_NEEDED_AS_CHILD,
+  NUMBER_OF_BABY_GIRAFFES_BORN,
+} from '../../src/animals/Giraffe'
 import Giraffe from '../../src/animals/Giraffe'
+import { AGE_TO_BE_ADULT } from '../../src/hierarchy/Animal'
 
 describe('Giraffe Class Tests', () => {
   test('should log an error if height is negative', () => {
@@ -33,10 +34,17 @@ describe('Giraffe Class Tests', () => {
     const giraffe3 = new Giraffe('Savana', 5, true, 5)
     const giraffe4 = new Giraffe('Savana', 5, false, 5)
     expect(() => {
-      const elephants = new AnimalFamily('Elephants', [giraffe, giraffe3, giraffe4])
-    }).toThrow('Family members cannot be less than 10.')
+      const girafes = new AnimalFamily('Giras', [giraffe, giraffe3, giraffe4])
+    }).toThrow(FAMILY_MIN_MEMBERS_NOT_MET + '10')
   })
-
+  test('should get space needed correctly', () => {
+    const giraffe = new Giraffe('Gir', 1, false, 10)
+    const giraffe2 = new Giraffe('Gir2', 4, false, 10)
+    const giraffe3 = new Giraffe('Gir3', AGE_TO_BE_ADULT, false, 10)
+    expect(giraffe.getSpaceNeeded()).toBe(GIRAFFE_SPACE_NEEDED_AS_CHILD)
+    expect(giraffe2.getSpaceNeeded()).toBe(GIRAFFE_SPACE_NEEDED_AS_ADULT)
+    expect(giraffe3.getSpaceNeeded()).toBe(GIRAFFE_SPACE_NEEDED_AS_ADULT)
+  })
   test('should call  giveBirth correctly', () => {
     const giraffe = new Giraffe('Savana', 5, false, 5)
     const giraffe2 = new Giraffe('Savana', 5, false, 5)
@@ -61,6 +69,6 @@ describe('Giraffe Class Tests', () => {
       giraffe10,
     ])
     const babies = giraffe.giveBirth()
-    expect(babies.length).toBe(NUMBER_OF_BABY_ELEPHANTS_BORN)
+    expect(babies.length).toBe(NUMBER_OF_BABY_GIRAFFES_BORN)
   })
 })

@@ -1,6 +1,5 @@
 import AnimalFamily from '../../src/animalFamily/AnimalFamily'
 import Crocodile, { CROCS_SPACE_NEEDED_AS_ADULT, CROCS_SPACE_NEEDED_AS_CHILD } from '../../src/animals/Crocodile'
-import { NUMBER_OF_BABY_CROCODILES_BORN } from '../../src/animals/Crocodile'
 import {
   EMPTY_NAME_ERROR_MESSAGE,
   GIVING_BIRTH_WITHOUT_HOME,
@@ -9,6 +8,7 @@ import {
   TELLING_MALE_TO_GIVE_BIRTH,
 } from '../../messages/errorMessages'
 import { AGE_TO_BE_ADULT } from '../../src/hierarchy/Animal'
+import Reptile from '../../src/hierarchy/Reptile'
 
 describe('Crocodile Class Tests', () => {
   test('should log an error if length is negative', () => {
@@ -78,7 +78,7 @@ describe('Crocodile Class Tests', () => {
     const crocodile2 = new Crocodile('Simona', 4, false, 4)
     const crocsFamily = new AnimalFamily('Crocodiles', [crocodile, crocodile2])
     const babies = crocodile.giveBirth()
-    expect(babies.length).toBe(NUMBER_OF_BABY_CROCODILES_BORN)
+    expect(babies.length).toBe(Reptile.NUMBER_OF_BABY_REPTILES_BORN)
   })
   test('should call give birth method correctly with at least 2 males and 1 female', () => {
     const crocodile3 = new Crocodile('Croco', 4, false, 4)

@@ -7,9 +7,6 @@ import Tortoise from '../animals/Tortoise'
 import Snake from '../animals/Snake'
 import Animal from '../hierarchy/Animal'
 import Reptile from '../hierarchy/Reptile'
-import { forEach } from 'lodash'
-import { ICanJump } from '../interfaces/ICanJump'
-import { ICanRun } from '../interfaces/ICanRun'
 import {
   FAILED_TO_REMOVE_ANIMAL_FROM_FAMILY,
   NEGATIVE_LIMIT_ERROR_MESSAGE,

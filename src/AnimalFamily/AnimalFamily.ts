@@ -1,23 +1,35 @@
+import {
+  ANIMALS_ALREADY_HAVE_FAMILY,
+  ANIMAL_ALREADY_IN_FAMILY,
+  ANIMAL_CANNOT_HAVE_FAMILY_ERROR_MESSAGE,
+  ANIMAL_NOT_PART_OF_FAMILY,
+  DIFFERENT_TYPE_ANIMALS_CANNOT_HAVE_FAMILY,
+  EMPTY_FAMILY_ERROR_MESSAGE,
+} from '../../messages/errorMessages'
 import { families } from '../app'
 import Animal from '../hierarchy/Animal'
-import verifyFamilyInfo, { VerificationResult, VerificationProps } from './verifyFamilyInfo'
+import verifyFamilyInfo, { VerificationProps } from './verifyFamilyInfo'
 export default class AnimalFamily {
   name: string
   animals: Animal[]
   constructor(name: string, animals: Animal[]) {
     if (animals.length === 0) {
-      throw new Error('A family must have at least one Animal')
+      throw new Error(EMPTY_FAMILY_ERROR_MESSAGE)
     }
     if (animals[0].canHaveFamily() === false) {
-      throw new Error(`${animals[0].constructor.name} cannot have family`)
+      throw new Error(ANIMAL_CANNOT_HAVE_FAMILY_ERROR_MESSAGE)
+    }
+    const animalsAlreadyHaveFamily = animals.filter((animal) => animal.getHome() !== undefined).length !== 0
+    if (animalsAlreadyHaveFamily) {
+      throw new Error(ANIMALS_ALREADY_HAVE_FAMILY)
     }
     let requirements: VerificationProps = {
       name: name,
       animals: animals,
     }
     const specificRequirements = getSpecificRequirements(requirements, animals[0])
-    const verificationResult: VerificationResult = verifyFamilyInfo(specificRequirements)
-    if (verificationResult.message === '') {
+    const verificationResult: string[] = verifyFamilyInfo(specificRequirements)
+    if (verificationResult.length === 0) {
       this.name = name
       animals.forEach((animal) => {
         animal.setHome(this.name)
@@ -25,67 +37,65 @@ export default class AnimalFamily {
       this.animals = animals
       families.push(this)
     } else {
-      throw new Error(verificationResult.message)
+      throw new Error(verificationResult.join('\n'))
     }
   }
   //return an empty string if it can be added otherwise the reason that it can't be added
-  public checkCanAddAnimal(animal: Animal): string {
+  public checkCanAddAnimal(animal: Animal): string[] {
     const animalClass = this.animals[0].constructor.name
     if (animal.constructor.name !== animalClass) {
-      return `Two different types of Animal cannot be in the same family`
+      return [DIFFERENT_TYPE_ANIMALS_CANNOT_HAVE_FAMILY]
     }
     if (animal.getHome() === this.name) {
-      return `${this.name} is already in the family`
+      return [ANIMAL_ALREADY_IN_FAMILY]
     }
     const familyWithNewMember = [...this.animals, animal]
     let requirements: VerificationProps = {
       animals: familyWithNewMember,
     }
     const specificRequirements = getSpecificRequirements(requirements, animal)
-    const verificationResult: VerificationResult = verifyFamilyInfo(specificRequirements)
-    return verificationResult.message
+    const verificationResult: string[] = verifyFamilyInfo(specificRequirements)
+    return verificationResult
   }
-  public addAnimal(animal: Animal, fromBirth = false): void {
+  public addAnimal(animal: Animal, fromBirth = false): boolean {
     if (fromBirth) {
       this.animals.push(animal)
+      return true
     } else {
       const verificationResult = this.checkCanAddAnimal(animal)
-      if (verificationResult === '') {
+      if (verificationResult.length === 0) {
+        if (animal.getHome() !== undefined) {
+          return false
+        }
         animal.setHome(this.name)
         this.animals.push(animal)
-        console.log(`${animal.getName()} added to ${this.name}`)
-      } else {
-        console.log(`Cannot add ${animal.getName()} to family`)
-        console.log(verificationResult)
+        return true
       }
+      return false
     }
   }
 
   //return an empty string if it can be removed otherwise the reason that it can't be removed
-  public checkCanRemoveAnimal(animal: Animal): string {
+  public checkCanRemoveAnimal(animal: Animal): string[] {
     if (this.animals.indexOf(animal) === -1) {
-      return `${animal.getName()} is not part of ${this.name}`
+      return [animal.getName() + ANIMAL_NOT_PART_OF_FAMILY + this.name]
     }
     const animalsWithoutRemovedAnimal = this.animals.filter((anim) => anim !== animal)
     let requirements: VerificationProps = {
       animals: animalsWithoutRemovedAnimal,
     }
     const specificRequirements = getSpecificRequirements(requirements, animal)
-    const verificationResult: VerificationResult = verifyFamilyInfo(specificRequirements)
-    return verificationResult.message
+    const verificationResult: string[] = verifyFamilyInfo(specificRequirements)
+    return verificationResult
   }
   public removeAnimal(animal: Animal): boolean {
     const verificationResult = this.checkCanRemoveAnimal(animal)
-    if (verificationResult === '') {
+    if (verificationResult.length === 0) {
       this.animals = this.animals.filter((anim) => anim !== animal)
-      console.log(`Removed ${animal.getName()} from ${this.name}`)
       animal.setHome(undefined)
       return true
-    } else {
-      console.log(`Cannot remove ${animal.getName()} from family`)
-      console.log(verificationResult)
-      return false
     }
+    return false
   }
 }
 
