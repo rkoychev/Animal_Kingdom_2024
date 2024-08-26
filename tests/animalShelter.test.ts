@@ -1,3 +1,4 @@
+import { toInteger } from 'lodash'
 import {
   FAILED_TO_REMOVE_ANIMAL_FROM_FAMILY,
   NEGATIVE_LIMIT_ERROR_MESSAGE,
@@ -78,6 +79,22 @@ describe('Animal Shelter Tests', () => {
     animalShelter.addAnimal(tortoise)
     expect(animalShelter.addAnimal(tortoise2)).toBe(NO_SPACE_FOR_MORE_REPTILES)
   })
+  test('should give birth even if it will exceed the reptile limit', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    animalShelter.setReptileLimit(1)
+    const tortoise = new Tortoise('t1', 3, false)
+    animalShelter.addAnimal(tortoise)
+    tortoise.giveBirth()
+    expect(animalShelter.showAnimals().tortoises).toBe(9)
+  })
+  test('should give birth even if it will exceed the mammal limit', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    animalShelter.setMammalLimit(1)
+    const tortoise = new Tortoise('t1', 3, false)
+    animalShelter.addAnimal(tortoise)
+    tortoise.giveBirth()
+    expect(animalShelter.showAnimals().tortoises).toBe(9)
+  })
   test('should fail to add crocodile if it cannot be removed from its familly', () => {
     const animalShelter = AnimalShelter.getInstance()
     const croc1 = new Crocodile('t1', 3, false, 5)
@@ -106,29 +123,31 @@ describe('Animal Shelter Tests', () => {
     expect(animals.mamamls).toBe(3)
     expect(animals.reptiles).toBe(2)
   })
-  test("should succesfully set shelter trritory", () => {
-    const animalShelter = AnimalShelter.getInstance();
-    animalShelter.setShelterTerritory(2000);
-    expect(animalShelter.getShelterTerritory()).toBe(2000);
-  });
-  test("should throw an error if shelter trritory set to negative", () => {
-    const animalShelter = AnimalShelter.getInstance();
-    expect(() => { animalShelter.setShelterTerritory(-2000) }).toThrow(NEGATIVE_SHELTER_TERRITORY);
-  });
+  test('should succesfully set shelter trritory', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    animalShelter.setShelterTerritory(2000)
+    expect(animalShelter.getShelterTerritory()).toBe(2000)
+  })
+  test('should throw an error if shelter trritory set to negative', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    expect(() => {
+      animalShelter.setShelterTerritory(-2000)
+    }).toThrow(NEGATIVE_SHELTER_TERRITORY)
+  })
 
-  test("report should return an object with the correct number of animals with specific abilities", () => {
-    const animalShelter = AnimalShelter.getInstance();
-    const tortoise = new Tortoise("t1", 3, false);
-    const tortoise2 = new Tortoise("t2", 4, false);
-    const squirrel = new Squirrel("s1", 3, false, "Maple", 44, 4);
-    const lion = new Lion("simba", 4, true);
-    animalShelter.addAnimal(tortoise);
-    animalShelter.addAnimal(tortoise2);
-    animalShelter.addAnimal(squirrel);
-    animalShelter.addAnimal(lion);
-    const animals = animalShelter.report();
-    expect(animals.anaimalsWhoClimbTrees).toBe(4);
-    expect(animals.animalsWhoJump).toBe(2);
-    expect(animals.animalsWhoRun).toBe(1);
-  });
+  test('report should return an object with the correct number of animals with specific abilities', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    const tortoise = new Tortoise('t1', 3, false)
+    const tortoise2 = new Tortoise('t2', 4, false)
+    const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
+    const lion = new Lion('simba', 4, true)
+    animalShelter.addAnimal(tortoise)
+    animalShelter.addAnimal(tortoise2)
+    animalShelter.addAnimal(squirrel)
+    animalShelter.addAnimal(lion)
+    const animals = animalShelter.report()
+    expect(animals.anaimalsWhoClimbTrees).toBe(4)
+    expect(animals.animalsWhoJump).toBe(2)
+    expect(animals.animalsWhoRun).toBe(1)
+  })
 })

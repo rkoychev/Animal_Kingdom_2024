@@ -1,3 +1,4 @@
+import AnimalShelter from '../animalShelter/AnimalShelter'
 import { tortoises } from '../app'
 import { AnimalCandidate } from '../hierarchy/Animal'
 import Reptile from '../hierarchy/Reptile'
@@ -31,6 +32,9 @@ export default class Tortoise extends Reptile {
     candidateTortoises?.forEach((tortoiseObjectInfo) => {
       const babyTortoise = new Tortoise(tortoiseObjectInfo.name, 0, tortoiseObjectInfo.isMale)
       babyTortoise.home = this.home
+      if (this.home === 'Animal Shelter') {
+        AnimalShelter.getInstance().addAnimal(babyTortoise, true)
+      }
       babies.push(babyTortoise)
     })
     return babies

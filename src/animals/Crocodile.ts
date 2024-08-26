@@ -1,4 +1,5 @@
 import { NEGATIVE_LENGTH_ERROR_MESSAGE } from '../../messages/errorMessages'
+import AnimalShelter from '../animalShelter/AnimalShelter'
 import { families } from '../app'
 import { AnimalCandidate } from '../hierarchy/Animal'
 import Reptile from '../hierarchy/Reptile'
@@ -41,6 +42,9 @@ export default class Crocodile extends Reptile {
       length = Math.floor(Math.random() * 4) + 1
       const babyCrocodile = new Crocodile(crockObjectInfo.name, 0, crockObjectInfo.isMale, length)
       family?.addAnimal(babyCrocodile, true)
+      if (this.home === 'Animal Shelter') {
+        AnimalShelter.getInstance().addAnimal(babyCrocodile, true)
+      }
       babies.push(babyCrocodile)
     })
 

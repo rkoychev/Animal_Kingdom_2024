@@ -7,6 +7,7 @@ export const NUMBER_OF_BABY_SNAKES_BORN_RANDOM_GENDER = 5
 export const SNAKE_SPACE_NEEDED_AS_ADULT = 300
 export const SNAKE_SPACE_NEEDED_AS_CHILD = 150
 import { EMPTY_COLOR_ERROR_MESSAGE, NEGATIVE_LENGTH_ERROR_MESSAGE } from '../../messages/errorMessages'
+import AnimalShelter from '../animalShelter/AnimalShelter'
 export default class Snake extends Reptile {
   private type: SnakeType
   private color: string
@@ -50,6 +51,9 @@ export default class Snake extends Reptile {
       length = Math.floor(Math.random() * 3) + 1
       const babySnake = new Snake(snakeObjectInfo.name, 0, this.type, snakeObjectInfo.isMale, this.color, length)
       babySnake.home = this.home
+      if (this.home === 'Animal Shelter') {
+        AnimalShelter.getInstance().addAnimal(babySnake, true)
+      }
       babies.push(babySnake)
     })
     return babies
