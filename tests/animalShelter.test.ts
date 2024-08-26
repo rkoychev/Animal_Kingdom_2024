@@ -1,4 +1,3 @@
-import { toInteger } from 'lodash'
 import {
   FAILED_TO_REMOVE_ANIMAL_FROM_FAMILY,
   NEGATIVE_LIMIT_ERROR_MESSAGE,
