@@ -11,8 +11,8 @@ import { SUCCESFULLY_ADDED_ANIMAL_IN_SHELTER } from '../messages/successMessages
 import AnimalFamily from '../src/animalFamily/AnimalFamily'
 import AnimalShelter from '../src/animalShelter/AnimalShelter'
 import Crocodile from '../src/animals/Crocodile'
-import Lion from '../src/animals/Lion'
-import Squirrel from '../src/animals/Squirrel'
+import Lion, { LION_SPACE_NEEDED_AS_ADULT } from '../src/animals/Lion'
+import Squirrel, { SQUIRREL_SPACE_NEEDED_AS_ADULT } from '../src/animals/Squirrel'
 import Tortoise from '../src/animals/Tortoise'
 beforeEach(() => {
   const animalShelter = AnimalShelter.getInstance()
@@ -133,18 +133,41 @@ describe('Animal Shelter Tests', () => {
     expect(animals.animalsWhoJump).toBe(2)
     expect(animals.animalsWhoRun).toBe(1)
   })
-})
-test('should return an estimate of future space needed', () => {
-  const animalShelter = AnimalShelter.getInstance()
-  const tortoise = new Tortoise('t1', 3, false)
-  const tortoise2 = new Tortoise('t2', 4, false)
-  const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
-  const squirrel2 = new Squirrel('s2', 4, false, 'Maple', 44, 4)
-  const lion = new Lion('simba', 4, true)
-  animalShelter.addAnimal(tortoise)
-  animalShelter.addAnimal(tortoise2)
-  animalShelter.addAnimal(squirrel)
-  animalShelter.addAnimal(squirrel2)
-  animalShelter.addAnimal(lion)
-  const estimate = animalShelter.getFutureEstimate(2)
+
+  test('should return an estimate of future space needed if females always give birth', () => {
+    const originalMathRandom = Math.random
+    Math.random = jest.fn(() => 0.1)
+    const animalShelter = AnimalShelter.getInstance()
+    const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
+    const lion = new Lion('simba', 4, true)
+    animalShelter.addAnimal(squirrel)
+    animalShelter.addAnimal(lion)
+    const estimate = animalShelter.getFutureEstimate(1)
+    expect(estimate.estimatedSpaceNeeded).toBe(340)
+    Math.random = originalMathRandom
+  })
+  test('should return an estimate of future space needed if females never give birth', () => {
+    const originalMathRandom = Math.random
+    Math.random = jest.fn(() => 0.3)
+    const animalShelter = AnimalShelter.getInstance()
+    const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
+    const lion = new Lion('simba', 4, true)
+    animalShelter.addAnimal(squirrel)
+    animalShelter.addAnimal(lion)
+    const estimate = animalShelter.getFutureEstimate(2)
+    expect(estimate.estimatedSpaceNeeded).toBe(LION_SPACE_NEEDED_AS_ADULT + SQUIRREL_SPACE_NEEDED_AS_ADULT)
+    expect(estimate.estimatedAnimals.length).toBe(2)
+    Math.random = originalMathRandom
+  })
+
+  test('space needed and number of animals should stay the same if there are only males', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    const squirrel = new Squirrel('s1', 3, true, 'Maple', 44, 4)
+    const lion = new Lion('simba', 4, true)
+    animalShelter.addAnimal(squirrel)
+    animalShelter.addAnimal(lion)
+    const estimate = animalShelter.getFutureEstimate(2)
+    expect(estimate.estimatedSpaceNeeded).toBe(LION_SPACE_NEEDED_AS_ADULT + SQUIRREL_SPACE_NEEDED_AS_ADULT)
+    expect(estimate.estimatedAnimals.length).toBe(2)
+  })
 })

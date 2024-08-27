@@ -67,7 +67,12 @@ export default abstract class Animal implements ICanWalk {
   getIsAdult(): boolean {
     return this.isAdult
   }
-
+  private setAge(newAge: number): void {
+    if (newAge >= AGE_TO_BE_ADULT) {
+      this.isAdult = true
+    }
+    this.age = newAge
+  }
   getHome(): string | undefined {
     return this.home
   }
@@ -88,10 +93,7 @@ export default abstract class Animal implements ICanWalk {
     return true
   }
   public grow(): void {
-    this.age += 1
-    if (this.age >= AGE_TO_BE_ADULT) {
-      this.isAdult = true
-    }
+    this.setAge(this.age + 1)
   }
   public switchFamily(newFamily: AnimalFamily): boolean {
     if (!this._canHaveFamily) {
