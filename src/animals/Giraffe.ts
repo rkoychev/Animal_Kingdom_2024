@@ -1,9 +1,9 @@
 import { GIRAFFE_HEIGHT_NEGATIVE } from '../../messages/errorMessages'
 import { families } from '../app'
-import Animal, { AnimalCandidate } from '../hierarchy/Animal'
+import { AnimalCandidate } from '../hierarchy/Animal'
 import Mammal from '../hierarchy/Mammal'
 import { ICanRun } from '../interfaces/ICanRun'
-const NUMBER_OF_BABY_GIRAFFES_BORN = 1
+export const NUMBER_OF_BABY_GIRAFFES_BORN = 1
 export const GIRAFFE_SPACE_NEEDED_AS_ADULT = 200
 export const GIRAFFE_SPACE_NEEDED_AS_CHILD = 100
 

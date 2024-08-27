@@ -1,12 +1,10 @@
-import {
-  EMPTY_NAME_ERROR_MESSAGE,
-  NEGATIVE_AGE_ERROR_MESSAGE,
-  NEGATIVE_HOLE_SIZE,
-  NEGATIVE_NUTS_ADDED,
-  NEGATIVE_TREE_AGE,
-  TELLING_MALE_TO_GIVE_BIRTH,
-} from '../../messages/errorMessages'
-import Squirrel, { NUMBER_OF_BABY_SQUIRRELS_BORN } from '../../src/animals/Squirrel'
+import { NEGATIVE_HOLE_SIZE, NEGATIVE_NUTS_ADDED, NEGATIVE_TREE_AGE } from '../../messages/errorMessages'
+import Squirrel, {
+  NUMBER_OF_BABY_SQUIRRELS_BORN,
+  SQUIRREL_SPACE_NEEDED_AS_ADULT,
+  SQUIRREL_SPACE_NEEDED_AS_CHILD,
+} from '../../src/animals/Squirrel'
+import { AGE_TO_BE_ADULT } from '../../src/hierarchy/Animal'
 
 describe('Squirrel Class Tests', () => {
   test('should log an error if treeAge is negative', () => {
@@ -34,7 +32,14 @@ describe('Squirrel Class Tests', () => {
     const squirrel = new Squirrel('Kiki', 5, true, 'Cedar', 5, 8)
     expect(squirrel.jump()).toBe('Kiki is jumping')
   })
-
+  test('should get space needed correctly', () => {
+    const sq1 = new Squirrel('Sq1', 1, false, 'Cedar', 5, 33)
+    const sq2 = new Squirrel('Sq2', 4, false, 'Cedar', 5, 33)
+    const sq3 = new Squirrel('Sq3', AGE_TO_BE_ADULT, false, 'Cedar', 5, 33)
+    expect(sq1.getSpaceNeeded()).toBe(SQUIRREL_SPACE_NEEDED_AS_CHILD)
+    expect(sq2.getSpaceNeeded()).toBe(SQUIRREL_SPACE_NEEDED_AS_ADULT)
+    expect(sq3.getSpaceNeeded()).toBe(SQUIRREL_SPACE_NEEDED_AS_ADULT)
+  })
   test('should call  giveBirth correctly', () => {
     const squirrel = new Squirrel('Kiki', 5, false, 'Cedar', 5, 8)
     const babies = squirrel.giveBirth()

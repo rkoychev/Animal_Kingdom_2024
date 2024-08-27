@@ -1,23 +1,26 @@
 import { ICanSwim } from '../interfaces/ICanSwim'
 import Animal from './Animal'
 import { AnimalCandidate } from './Animal'
-
+export const REPTILE_MALES_AT_BIRTH = 2
+export const REPTILE_FEMALES_AT_BIRTH = 1
 export default abstract class Reptile extends Animal implements ICanSwim {
   swim() {
     return `${this.name} is swimming`
   }
-
-  public generateBabyProperties(numberOfChildren: number, numberOfChildrenWithRandomGender: number): AnimalCandidate[] {
+  static NUMBER_OF_BABY_REPTILES_BORN = 8
+  public generateBabyProperties(): AnimalCandidate[] {
     const candidatesforAnimals: AnimalCandidate[] = []
     if (this.canGiveBirth()) {
       this.timesGivenBirth++
-      for (let i = 1; i <= numberOfChildren; i++) {
+      for (let i = 1; i <= Reptile.NUMBER_OF_BABY_REPTILES_BORN; i++) {
         const name: string = this.name + '-Baby-' + this.timesGivenBirth + '-' + i
-        let isMale: boolean = true // default Value
-        if (i <= numberOfChildrenWithRandomGender) {
-          isMale = Math.random() % 2 == 0 ? false : true
+        let isMale: boolean
+        if (i <= REPTILE_MALES_AT_BIRTH) {
+          isMale = true
+        } else if (i <= REPTILE_MALES_AT_BIRTH + REPTILE_FEMALES_AT_BIRTH) {
+          isMale = false
         } else {
-          isMale = i % 2 == 0 ? true : false
+          isMale = Math.random() % 2 == 0 ? false : true
         }
         candidatesforAnimals.push({ name: name, isMale: isMale })
       }

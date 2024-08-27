@@ -1,8 +1,21 @@
+import {
+  DIFFERENT_TYPE_ANIMALS_CANNOT_HAVE_FAMILY,
+  FAMILY_MAX_MALE_ADULTS_EXCEEDED,
+  FAMILY_MAX_MEMBERS_EXCEEDED,
+  FAMILY_MIN_MALES_NOT_MET,
+  FAMILY_MIN_MEMBERS_NOT_MET,
+  FAMILY_NAME_TAKEN,
+  FAMILY_MAX_FEMALE_ADULTS_EXCEEDED,
+  FAMILY_MIN_FEMALE_ADULTS_NOT_MET,
+  FAMILY_MAX_MALES_EXCEEDED,
+  FAMILY_MIN_FEMALES_NOT_MET,
+  FAMILY_MAX_FEMALES_EXCEEDED,
+  FAMILY_MIN_ANY_GENDER_NOT_MET,
+  ANIMALS_ALREADY_HAVE_FAMILY,
+} from '../../messages/errorMessages'
 import { families } from '../app'
 import Animal from '../hierarchy/Animal'
-export type VerificationResult = {
-  message: string
-}
+
 export type VerificationProps = {
   name?: string
   animals: Animal[]
@@ -16,12 +29,11 @@ export type VerificationProps = {
   maxMaleAdults?: number
   minFemaleAdults?: number
   maxFemaleAdults?: number
-  minOfAnyGender?: number //at least one of the two to have this menny
+  minOfAnyGender?: number // at least one of the two to have this many
 }
 
-export default function verifyFamilyInfo(validations: VerificationProps): VerificationResult {
-  let isValid = true
-  let message = ''
+export default function verifyFamilyInfo(validations: VerificationProps): string[] {
+  const errorMessagesArray: string[] = []
   const animalsClass = validations.animals[0].constructor.name
   const animalsCount = validations.animals?.length
   let femalesCount = 0
@@ -43,55 +55,55 @@ export default function verifyFamilyInfo(validations: VerificationProps): Verifi
     }
   })
   const allSameType = !validations.animals.some((animal) => animal.constructor.name !== animalsClass)
+
   if (!allSameType) {
-    isValid = false
-    message += `Cannot have different animal types in the same family. \n`
+    errorMessagesArray.push(DIFFERENT_TYPE_ANIMALS_CANNOT_HAVE_FAMILY)
   }
+
   families.forEach((family) => {
     if (family.name === validations.name) {
-      isValid = false
-      message += `Family name is already taken.\n `
+      errorMessagesArray.push(FAMILY_NAME_TAKEN)
     }
   })
 
   if (animalsCount && validations.maxAnimals && animalsCount > validations.maxAnimals) {
-    message += `Family members cannot be more than ${validations.maxAnimals}. \n`
+    errorMessagesArray.push(FAMILY_MAX_MEMBERS_EXCEEDED + validations.maxAnimals)
   }
 
   if (animalsCount && validations.minAnimals && animalsCount < validations.minAnimals) {
-    message += `Family members cannot be less than ${validations.minAnimals}. \n`
+    errorMessagesArray.push(FAMILY_MIN_MEMBERS_NOT_MET + validations.minAnimals)
   }
 
   if (validations.maxMaleAdults && malesAdultsCount > validations.maxMaleAdults) {
-    message += `Male adults in the family cannot be more than ${validations.maxMaleAdults}.\n`
+    errorMessagesArray.push(FAMILY_MAX_MALE_ADULTS_EXCEEDED + validations.maxMaleAdults)
   }
 
   if (validations.minMaleAdults && malesAdultsCount < validations.minMaleAdults) {
-    message += `Male adults in the family cannot be less than ${validations.minMaleAdults}.\n `
+    errorMessagesArray.push(FAMILY_MIN_MALES_NOT_MET + validations.minMaleAdults)
   }
 
   if (validations.maxFemaleAdults && femaleAdultsCount > validations.maxFemaleAdults) {
-    message += `Female adults in the family cannot be more than ${validations.maxFemaleAdults}. \n`
+    errorMessagesArray.push(FAMILY_MAX_FEMALE_ADULTS_EXCEEDED + validations.maxFemaleAdults)
   }
 
   if (validations.minFemaleAdults && femaleAdultsCount < validations.minFemaleAdults) {
-    message += `Female adults in the family cannot be less than ${validations.minFemaleAdults}. \n`
+    errorMessagesArray.push(FAMILY_MIN_FEMALE_ADULTS_NOT_MET + validations.minFemaleAdults)
   }
 
   if (validations.minMales && malesCount < validations.minMales) {
-    message += `Males in the family cannot be less than ${validations.minMales}. \n`
+    errorMessagesArray.push(FAMILY_MIN_MALES_NOT_MET + validations.minMales)
   }
 
   if (validations.maxMales && malesCount > validations.maxMales) {
-    message += `Males in the family cannot be more than ${validations.maxMales}. \n`
+    errorMessagesArray.push(FAMILY_MAX_MALES_EXCEEDED + validations.maxMales)
   }
 
   if (validations.minFemales && femalesCount < validations.minFemales) {
-    message += `Females in the family cannot be less than ${validations.minFemales}. \n`
+    errorMessagesArray.push(FAMILY_MIN_FEMALES_NOT_MET + validations.minFemales)
   }
 
   if (validations.maxFemales && femalesCount > validations.maxFemales) {
-    message += `Females in the family cannot be more than ${validations.maxFemales}. \n`
+    errorMessagesArray.push(FAMILY_MAX_FEMALES_EXCEEDED + validations.maxFemales)
   }
 
   if (
@@ -99,10 +111,8 @@ export default function verifyFamilyInfo(validations: VerificationProps): Verifi
     femalesCount < validations.minOfAnyGender &&
     malesCount < validations.minOfAnyGender
   ) {
-    message += `Family members of any gender cannot be less than ${validations.minOfAnyGender}.\n `
+    errorMessagesArray.push(FAMILY_MIN_ANY_GENDER_NOT_MET + validations.minOfAnyGender)
   }
 
-  return {
-    message: message.trim(),
-  }
+  return errorMessagesArray
 }

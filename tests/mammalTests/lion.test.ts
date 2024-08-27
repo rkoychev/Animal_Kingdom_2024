@@ -1,4 +1,8 @@
-import Lion, { NUMBER_OF_BABY_LIONS_BORN } from '../../src/animals/Lion'
+import Lion, {
+  LION_SPACE_NEEDED_AS_ADULT,
+  LION_SPACE_NEEDED_AS_CHILD,
+  NUMBER_OF_BABY_LIONS_BORN,
+} from '../../src/animals/Lion'
 import {
   EMPTY_NAME_ERROR_MESSAGE,
   GIVING_BIRTH_WITHOUT_HOME,
@@ -6,7 +10,7 @@ import {
   TELLING_MALE_TO_GIVE_BIRTH,
 } from '../../messages/errorMessages'
 import AnimalFamily from '../../src/animalFamily/AnimalFamily'
-import { NUMBER_OF_BABY_ELEPHANTS_BORN } from '../../src/animals/Elephant'
+import { AGE_TO_BE_ADULT } from '../../src/hierarchy/Animal'
 
 describe('Lion Class Tests', () => {
   test('should log an error if age is negative', () => {
@@ -52,6 +56,14 @@ describe('Lion Class Tests', () => {
     expect(() => {
       lion.giveBirth()
     }).toThrow(GIVING_BIRTH_WITHOUT_HOME)
+  })
+  test('should get space needed correctly', () => {
+    const lion = new Lion('Lio1', 1, false)
+    const lion2 = new Lion('Lio2', 4, false)
+    const lion3 = new Lion('Lio3', AGE_TO_BE_ADULT, false)
+    expect(lion.getSpaceNeeded()).toBe(LION_SPACE_NEEDED_AS_CHILD)
+    expect(lion2.getSpaceNeeded()).toBe(LION_SPACE_NEEDED_AS_ADULT)
+    expect(lion3.getSpaceNeeded()).toBe(LION_SPACE_NEEDED_AS_ADULT)
   })
   test('should call  giveBirth correctly', () => {
     const lion = new Lion('Nala', 4, false)
