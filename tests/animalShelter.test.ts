@@ -106,29 +106,45 @@ describe('Animal Shelter Tests', () => {
     expect(animals.mamamls).toBe(3)
     expect(animals.reptiles).toBe(2)
   })
-  test("should succesfully set shelter trritory", () => {
-    const animalShelter = AnimalShelter.getInstance();
-    animalShelter.setShelterTerritory(2000);
-    expect(animalShelter.getShelterTerritory()).toBe(2000);
-  });
-  test("should throw an error if shelter trritory set to negative", () => {
-    const animalShelter = AnimalShelter.getInstance();
-    expect(() => { animalShelter.setShelterTerritory(-2000) }).toThrow(NEGATIVE_SHELTER_TERRITORY);
-  });
+  test('should succesfully set shelter trritory', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    animalShelter.setShelterTerritory(2000)
+    expect(animalShelter.getShelterTerritory()).toBe(2000)
+  })
+  test('should throw an error if shelter trritory set to negative', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    expect(() => {
+      animalShelter.setShelterTerritory(-2000)
+    }).toThrow(NEGATIVE_SHELTER_TERRITORY)
+  })
 
-  test("report should return an object with the correct number of animals with specific abilities", () => {
-    const animalShelter = AnimalShelter.getInstance();
-    const tortoise = new Tortoise("t1", 3, false);
-    const tortoise2 = new Tortoise("t2", 4, false);
-    const squirrel = new Squirrel("s1", 3, false, "Maple", 44, 4);
-    const lion = new Lion("simba", 4, true);
-    animalShelter.addAnimal(tortoise);
-    animalShelter.addAnimal(tortoise2);
-    animalShelter.addAnimal(squirrel);
-    animalShelter.addAnimal(lion);
-    const animals = animalShelter.report();
-    expect(animals.anaimalsWhoClimbTrees).toBe(4);
-    expect(animals.animalsWhoJump).toBe(2);
-    expect(animals.animalsWhoRun).toBe(1);
-  });
+  test('report should return an object with the correct number of animals with specific abilities', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    const tortoise = new Tortoise('t1', 3, false)
+    const tortoise2 = new Tortoise('t2', 4, false)
+    const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
+    const lion = new Lion('simba', 4, true)
+    animalShelter.addAnimal(tortoise)
+    animalShelter.addAnimal(tortoise2)
+    animalShelter.addAnimal(squirrel)
+    animalShelter.addAnimal(lion)
+    const animals = animalShelter.report()
+    expect(animals.anaimalsWhoClimbTrees).toBe(4)
+    expect(animals.animalsWhoJump).toBe(2)
+    expect(animals.animalsWhoRun).toBe(1)
+  })
+})
+test('should return an estimate of future space needed', () => {
+  const animalShelter = AnimalShelter.getInstance()
+  const tortoise = new Tortoise('t1', 3, false)
+  const tortoise2 = new Tortoise('t2', 4, false)
+  const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
+  const squirrel2 = new Squirrel('s2', 4, false, 'Maple', 44, 4)
+  const lion = new Lion('simba', 4, true)
+  animalShelter.addAnimal(tortoise)
+  animalShelter.addAnimal(tortoise2)
+  animalShelter.addAnimal(squirrel)
+  animalShelter.addAnimal(squirrel2)
+  animalShelter.addAnimal(lion)
+  const estimate = animalShelter.getFutureEstimate(2)
 })

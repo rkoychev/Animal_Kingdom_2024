@@ -41,7 +41,7 @@ export default abstract class Animal implements ICanWalk {
     }
     this.timesGivenBirth = 0
   }
-  public abstract getSpaceNeeded(): number;
+  public abstract getSpaceNeeded(): number
 
   walk(): string {
     return `${this.name} is walking`
@@ -77,7 +77,7 @@ export default abstract class Animal implements ICanWalk {
   canHaveFamily(): boolean {
     return this._canHaveFamily
   }
-  public abstract giveBirth(): void
+  public abstract giveBirth(): Animal[]
 
   protected canGiveBirth(): boolean {
     if (this.isMale) {
@@ -86,6 +86,12 @@ export default abstract class Animal implements ICanWalk {
       throw new Error(GIVING_BIRTH_WITHOUT_HOME)
     }
     return true
+  }
+  public grow(): void {
+    this.age += 1
+    if (this.age >= AGE_TO_BE_ADULT) {
+      this.isAdult = true
+    }
   }
   public switchFamily(newFamily: AnimalFamily): boolean {
     if (!this._canHaveFamily) {
