@@ -20,7 +20,8 @@ export default abstract class Reptile extends Animal implements ICanSwim {
         } else if (i <= REPTILE_MALES_AT_BIRTH + REPTILE_FEMALES_AT_BIRTH) {
           isMale = false
         } else {
-          isMale = Math.random() % 2 == 0 ? false : true
+          //if some things are changed that work with the random function the tests also need to be updated
+          isMale = Math.floor(Math.random() * 100) % 2 === 0 ? false : true
         }
         candidatesforAnimals.push({ name: name, isMale: isMale })
       }

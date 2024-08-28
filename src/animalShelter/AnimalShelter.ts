@@ -173,13 +173,14 @@ export default class AnimalShelter {
       animals.forEach((animal) => {
         animal.grow()
         //if animal is an adult female
+        //if some things are changed that work with the random function the tests also need to be updated
         if (!animal.getIsMale() && animal.getIsAdult()) {
           if (animal instanceof Reptile) {
-            if (Math.random() < PERCENTAGE_OF_REPTILE_GIVING_BIRTH / 100) {
+            if (Math.floor(Math.random() * 100) < PERCENTAGE_OF_REPTILE_GIVING_BIRTH) {
               babiesBornThisYear.push(...animal.giveBirth())
             }
           } else {
-            if (Math.random() < PERCENTAGE_OF_MAMMAL_GIVING_BIRTH / 100) {
+            if (Math.floor(Math.random() * 100) < PERCENTAGE_OF_MAMMAL_GIVING_BIRTH) {
               babiesBornThisYear.push(...animal.giveBirth())
             }
           }

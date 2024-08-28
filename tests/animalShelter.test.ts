@@ -196,7 +196,7 @@ describe('Animal Shelter Tests', () => {
 
   test('should return an estimate of future space needed if females always give birth in 1 year', () => {
     const originalMathRandom = Math.random
-    Math.random = jest.fn(() => 0.1)
+    Math.random = jest.fn(() => 0.2)
     const animalShelter = AnimalShelter.getInstance()
     const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
     const lion = new Lion('simba', 4, true)
@@ -208,7 +208,7 @@ describe('Animal Shelter Tests', () => {
   })
   test('should return an estimate of future space needed if females never give birth in 2 years', () => {
     const originalMathRandom = Math.random
-    Math.random = jest.fn(() => 0.3)
+    Math.random = jest.fn(() => 0.4)
     const animalShelter = AnimalShelter.getInstance()
     const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
     const lion = new Lion('simba', 4, true)
@@ -230,9 +230,9 @@ describe('Animal Shelter Tests', () => {
     expect(estimate.estimatedSpaceNeeded).toBe(LION_SPACE_NEEDED_AS_ADULT + SQUIRREL_SPACE_NEEDED_AS_ADULT)
     expect(estimate.estimatedAnimals.length).toBe(2)
   })
-  test('should return an estimate of future space needed if females always give birth in 5 years', () => {
+  test('should return an estimate of future space needed if females always give birth in 5 years and always birth males', () => {
     const originalMathRandom = Math.random
-    Math.random = jest.fn(() => 0.1)
+    Math.random = jest.fn(() => 0.21)
     const animalShelter = AnimalShelter.getInstance()
     const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
     const lion = new Lion('simba', 4, true)
@@ -242,9 +242,21 @@ describe('Animal Shelter Tests', () => {
     expect(estimate.estimatedSpaceNeeded).toBe(1040)
     Math.random = originalMathRandom
   })
+  test('should return an estimate of future space needed if females always give birth in 5 years and always birth females', () => {
+    const originalMathRandom = Math.random
+    Math.random = jest.fn(() => 0.2)
+    const animalShelter = AnimalShelter.getInstance()
+    const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
+    const lion = new Lion('simba', 4, true)
+    animalShelter.addAnimal(squirrel)
+    animalShelter.addAnimal(lion)
+    const estimate = animalShelter.getFutureEstimate(5)
+    expect(estimate.estimatedSpaceNeeded).toBe(7040)
+    Math.random = originalMathRandom
+  })
   test('should return an estimate of future space needed if females never give birth in 5 years', () => {
     const originalMathRandom = Math.random
-    Math.random = jest.fn(() => 0.3)
+    Math.random = jest.fn(() => 0.4)
     const animalShelter = AnimalShelter.getInstance()
     const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
     const lion = new Lion('simba', 4, true)
