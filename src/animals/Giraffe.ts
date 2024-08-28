@@ -1,5 +1,5 @@
 import { GIRAFFE_HEIGHT_NEGATIVE } from '../../messages/errorMessages'
-import AnimalShelter from '../animalShelter/AnimalShelter'
+import AnimalShelter, { shelterHomeName } from '../animalShelter/AnimalShelter'
 import { families } from '../app'
 import { AnimalCandidate } from '../hierarchy/Animal'
 import Mammal from '../hierarchy/Mammal'
@@ -39,7 +39,7 @@ export default class Giraffe extends Mammal implements ICanRun {
       const babyGiraffeHeight = this.generateRandomHeight(1.5, 1.8)
       const babyGiraffe = new Giraffe(giraffeObjectInfo.name, 0, giraffeObjectInfo.isMale, babyGiraffeHeight)
       family?.addAnimal(babyGiraffe, true)
-      if (this.home === 'Animal Shelter') {
+      if (this.home === shelterHomeName) {
         AnimalShelter.getInstance().addAnimal(babyGiraffe, true)
       }
       babies.push(babyGiraffe)

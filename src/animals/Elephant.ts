@@ -1,5 +1,5 @@
 import { ELEPHANT_HEIGHT_NEGATIVE, ELEPHANT_wEIGHT_NEGATIVE } from '../../messages/errorMessages'
-import AnimalShelter from '../animalShelter/AnimalShelter'
+import AnimalShelter, { shelterHomeName } from '../animalShelter/AnimalShelter'
 import { families } from '../app'
 import { AnimalCandidate } from '../hierarchy/Animal'
 import Mammal from '../hierarchy/Mammal'
@@ -56,7 +56,7 @@ export default class Elephant extends Mammal implements ICanRun, ICanTalk {
         babyElephantWeight,
       )
       family?.addAnimal(babyElphant, true)
-      if (this.home === 'Animal Shelter') {
+      if (this.home === shelterHomeName) {
         AnimalShelter.getInstance().addAnimal(babyElphant, true)
       }
       babies.push(babyElphant)
