@@ -24,6 +24,7 @@ import {
 const DEFAULT_MAMMAL_LIMIT = 20
 const DEFAULT_REPTILE_LIMIT = 19
 const DEFAULT_SHELTER_TERRITORY = 1500
+export const shelterHomeName = 'Animal Shelter'
 export default class AnimalShelter {
   private static instance: AnimalShelter
   private _mammalLimit: number = DEFAULT_MAMMAL_LIMIT
@@ -137,17 +138,23 @@ export default class AnimalShelter {
     return animalNumbers
   }
 
-  addAnimal(animal: Animal): string {
-    if (animal instanceof Reptile && this.getReptileCount() + 1 > this._reptileLimit) {
-      return NO_SPACE_FOR_MORE_REPTILES
-    } else if (animal instanceof Mammal && this.getMammalsCount() + 1 > this._mammalLimit) {
-      return NO_SPACE_FOR_MORE_MAMMALS
-    }
-    const family = families.find((pack) => pack.name === animal.getHome())
-    if (!family || family.removeAnimal(animal)) {
+  addAnimal(animal: Animal, fromBirth = false): string {
+    if (fromBirth) {
       this.animals.push(animal)
-      animal.setHome('Animal Shelter')
+      animal.setHome(shelterHomeName)
       return `${animal.getName()} ${SUCCESFULLY_ADDED_ANIMAL_IN_SHELTER}`
-    } else return FAILED_TO_REMOVE_ANIMAL_FROM_FAMILY
+    } else {
+      if (animal instanceof Reptile && this.getReptileCount() + 1 > this._reptileLimit) {
+        return NO_SPACE_FOR_MORE_REPTILES
+      } else if (animal instanceof Mammal && this.getMammalsCount() + 1 > this._mammalLimit) {
+        return NO_SPACE_FOR_MORE_MAMMALS
+      }
+      const family = families.find((pack) => pack.name === animal.getHome())
+      if (!family || family.removeAnimal(animal)) {
+        this.animals.push(animal)
+        animal.setHome(shelterHomeName)
+        return `${animal.getName()} ${SUCCESFULLY_ADDED_ANIMAL_IN_SHELTER}`
+      } else return FAILED_TO_REMOVE_ANIMAL_FROM_FAMILY
+    }
   }
 }
