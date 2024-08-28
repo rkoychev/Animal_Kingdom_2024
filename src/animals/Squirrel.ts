@@ -4,6 +4,7 @@ import { AnimalCandidate } from '../hierarchy/Animal'
 import Mammal from '../hierarchy/Mammal'
 import { ICanJump } from '../interfaces/ICanJump'
 import { NEGATIVE_HOLE_SIZE, NEGATIVE_NUTS_ADDED, NEGATIVE_TREE_AGE } from '../../messages/errorMessages'
+import AnimalShelter, { shelterHomeName } from '../animalShelter/AnimalShelter'
 export const NUMBER_OF_BABY_SQUIRRELS_BORN = 5
 export const SQUIRREL_SPACE_NEEDED_AS_ADULT = 40
 export const SQUIRREL_SPACE_NEEDED_AS_CHILD = 20
@@ -37,9 +38,9 @@ export default class Squirrel extends Mammal implements ICanJump {
 
   public getSpaceNeeded(): number {
     if (this.isAdult === true) {
-      return SQUIRREL_SPACE_NEEDED_AS_ADULT;
+      return SQUIRREL_SPACE_NEEDED_AS_ADULT
     } else {
-      return SQUIRREL_SPACE_NEEDED_AS_CHILD;
+      return SQUIRREL_SPACE_NEEDED_AS_CHILD
     }
   }
 
@@ -64,6 +65,9 @@ export default class Squirrel extends Mammal implements ICanJump {
         this.nutsLimit,
       )
       babySquirrel.home = this.home
+      if (this.home === shelterHomeName) {
+        AnimalShelter.getInstance().addAnimal(babySquirrel, true)
+      }
       babies.push(babySquirrel)
     })
     return babies
