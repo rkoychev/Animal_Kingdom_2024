@@ -23,7 +23,9 @@ export default abstract class Mammal extends Animal {
       const numberOfMammalBabies = numberOfChildren
       for (let i = 1; i <= numberOfMammalBabies; i++) {
         const name: string = this.name + '-Baby-' + this.timesGivenBirth + '-' + i
-        const isMale: boolean = Math.random() % 2 == 0 ? false : true
+        //if some things are changed that work with the random function the tests also need to be updated
+        // (Math.floor(Math.random() * 100) ) generates a pseudo-random number between 0 and 99
+        const isMale: boolean = Math.floor(Math.random() * 100) % 2 === 0 ? false : true
         candidatesforAnimals.push({ name: name, isMale: isMale })
       }
     }
