@@ -34,11 +34,7 @@ export default abstract class Animal implements ICanWalk {
     this.name = name
     this.isMale = isMale
     this.age = age
-    if (age >= AGE_TO_BE_ADULT) {
-      this.isAdult = true
-    } else {
-      this.isAdult = false
-    }
+    this.isAdult = this.setMaturity(this.age, AGE_TO_BE_ADULT);
     this.timesGivenBirth = 0
   }
   public abstract getSpaceNeeded(): number;
@@ -46,7 +42,13 @@ export default abstract class Animal implements ICanWalk {
   walk(): string {
     return `${this.name} is walking`
   }
-
+  setMaturity(age: number, ageToBeAdult: number): boolean {
+    if (age >= ageToBeAdult) {
+      return true
+    } else {
+      return false
+    }
+  }
   showHome(): string {
     if (this.home === undefined) {
       return `${this.name} doesn't have a home yet`
