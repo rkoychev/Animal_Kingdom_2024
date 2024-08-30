@@ -4,12 +4,12 @@ import Birds from "../hierarchy/Birds"
 import Reptile from "../hierarchy/Reptile"
 import { ICanFly } from "../interfaces/ICanFly"
 import { ICanTalk } from "../interfaces/ICanTalk"
-const EAGLE_SPACE_NEEDED_AS_ADULT = 100
-const EAGLE_SPACE_NEEDED_AS_CHILD = 50
-const NUMBER_OF_BABY_EAGLES_BORN = 4
+const PARROT_SPACE_NEEDED_AS_ADULT = 40
+const PARROT_SPACE_NEEDED_AS_CHILD = 20
+const NUMBER_OF_BABY_PARROT_BORN = 2
 const AGE_TO_BE_ADULT = 1;
-export default class Eagle extends Birds implements ICanTalk, ICanFly {
-    private numberOfBabiesBorn = NUMBER_OF_BABY_EAGLES_BORN
+export default class Parrot extends Birds implements ICanTalk, ICanFly {
+    private numberOfBabiesBorn = NUMBER_OF_BABY_PARROT_BORN
     protected home?: string | undefined
     constructor(name: string, age: number, isMale: boolean) {
         super(name, age, isMale)
@@ -25,19 +25,19 @@ export default class Eagle extends Birds implements ICanTalk, ICanFly {
     }
     public getSpaceNeeded(): number {
         if (this.isAdult === true) {
-            return EAGLE_SPACE_NEEDED_AS_ADULT
+            return PARROT_SPACE_NEEDED_AS_ADULT
         } else {
-            return EAGLE_SPACE_NEEDED_AS_CHILD
+            return PARROT_SPACE_NEEDED_AS_CHILD
         }
     }
-    public giveBirth(): Eagle[] {
-        const candidateEagles: AnimalCandidate[] = this.generateBabyProperties(this.numberOfBabiesBorn)
-        const babies: Eagle[] = []
-        candidateEagles?.forEach((eagleObjectInfo) => {
-            const babyEagle = new Eagle(eagleObjectInfo.name, 0, eagleObjectInfo.isMale)
-            babyEagle.home = this.home
-            AnimalShelter.getInstance().addAnimal(babyEagle, true)
-            babies.push(babyEagle)
+    public giveBirth(): Parrot[] {
+        const candidateParrots: AnimalCandidate[] = this.generateBabyProperties(this.numberOfBabiesBorn)
+        const babies: Parrot[] = []
+        candidateParrots?.forEach((parrotObjectInfo) => {
+            const babyParrot = new Parrot(parrotObjectInfo.name, 0, parrotObjectInfo.isMale)
+            babyParrot.home = this.home
+            AnimalShelter.getInstance().addAnimal(babyParrot, true)
+            babies.push(babyParrot)
         })
         return babies
     }
