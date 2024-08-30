@@ -3,11 +3,13 @@ import Snake from './animals/Snake'
 import Squirrel from './animals/Squirrel'
 import Tortoise from './animals/Tortoise'
 import AnimalFamily from './animalFamily/AnimalFamily'
+import Eagle from './animals/Eagle'
 
 export const families: AnimalFamily[] = []
 export const squirrels: Squirrel[] = []
 export const snakes: Snake[] = []
 export const tortoises: Tortoise[] = []
+export const eagles: Eagle[] = []
 /* 
 /*console.log("Starting");
 
