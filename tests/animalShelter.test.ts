@@ -11,9 +11,12 @@ import { SUCCESFULLY_ADDED_ANIMAL_IN_SHELTER } from '../messages/successMessages
 import AnimalFamily from '../src/animalFamily/AnimalFamily'
 import AnimalShelter from '../src/animalShelter/AnimalShelter'
 import Crocodile from '../src/animals/Crocodile'
-import Lion from '../src/animals/Lion'
-import Squirrel from '../src/animals/Squirrel'
+import Lion, { LION_SPACE_NEEDED_AS_ADULT } from '../src/animals/Lion'
+import Squirrel, { SQUIRREL_SPACE_NEEDED_AS_ADULT } from '../src/animals/Squirrel'
 import Tortoise from '../src/animals/Tortoise'
+import Elephant from '../src/animals/Elephant'
+import Giraffe from '../src/animals/Giraffe'
+import Snake from '../src/animals/Snake'
 beforeEach(() => {
   const animalShelter = AnimalShelter.getInstance()
   animalShelter.resetInstance()
@@ -78,6 +81,37 @@ describe('Animal Shelter Tests', () => {
     animalShelter.addAnimal(tortoise)
     expect(animalShelter.addAnimal(tortoise2)).toBe(NO_SPACE_FOR_MORE_REPTILES)
   })
+  test('should give birth even if it will exceed the reptile limit', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    animalShelter.setReptileLimit(3)
+    const croco = new Crocodile('croco', 44, false, 44)
+    const snake = new Snake('snake', 33, 'Anaconda', false, 'red', 33)
+    const tortoise = new Tortoise('t1', 3, false)
+    animalShelter.addAnimal(tortoise)
+    animalShelter.addAnimal(snake)
+    animalShelter.addAnimal(croco)
+    tortoise.giveBirth()
+    croco.giveBirth()
+    snake.giveBirth()
+    expect(animalShelter.showAnimals().tortoises).toBe(9)
+  })
+  test('should give birth even if it will exceed the mammal limit', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    animalShelter.setMammalLimit(7)
+    const lion = new Lion('simba', 4, false)
+    const elephant = new Elephant('el', 4, false, 44, 444)
+    const squirrel = new Squirrel('s', 4, false, 'Cedar', 444, 44)
+    const giraffe = new Giraffe('gg', 4, false, 444)
+    animalShelter.addAnimal(giraffe)
+    animalShelter.addAnimal(lion)
+    animalShelter.addAnimal(elephant)
+    animalShelter.addAnimal(squirrel)
+    lion.giveBirth()
+    elephant.giveBirth()
+    squirrel.giveBirth()
+    giraffe.giveBirth()
+    expect(animalShelter.showAnimals().lions).toBe(6)
+  })
   test('should fail to add crocodile if it cannot be removed from its familly', () => {
     const animalShelter = AnimalShelter.getInstance()
     const croc1 = new Crocodile('t1', 3, false, 5)
@@ -106,29 +140,142 @@ describe('Animal Shelter Tests', () => {
     expect(animals.mamamls).toBe(3)
     expect(animals.reptiles).toBe(2)
   })
-  test("should succesfully set shelter trritory", () => {
-    const animalShelter = AnimalShelter.getInstance();
-    animalShelter.setShelterTerritory(2000);
-    expect(animalShelter.getShelterTerritory()).toBe(2000);
-  });
-  test("should throw an error if shelter trritory set to negative", () => {
-    const animalShelter = AnimalShelter.getInstance();
-    expect(() => { animalShelter.setShelterTerritory(-2000) }).toThrow(NEGATIVE_SHELTER_TERRITORY);
-  });
+  test('should succesfully set shelter trritory', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    animalShelter.setShelterTerritory(2000)
+    expect(animalShelter.getShelterTerritory()).toBe(2000)
+  })
+  test('should throw an error if shelter trritory set to negative', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    expect(() => {
+      animalShelter.setShelterTerritory(-2000)
+    }).toThrow(NEGATIVE_SHELTER_TERRITORY)
+  })
+  test('should succesfully set shelter trritory', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    animalShelter.setShelterTerritory(2000)
+    expect(animalShelter.getShelterTerritory()).toBe(2000)
+  })
+  test('should throw an error if shelter trritory set to negative', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    expect(() => {
+      animalShelter.setShelterTerritory(-2000)
+    }).toThrow(NEGATIVE_SHELTER_TERRITORY)
+  })
 
-  test("report should return an object with the correct number of animals with specific abilities", () => {
-    const animalShelter = AnimalShelter.getInstance();
-    const tortoise = new Tortoise("t1", 3, false);
-    const tortoise2 = new Tortoise("t2", 4, false);
-    const squirrel = new Squirrel("s1", 3, false, "Maple", 44, 4);
-    const lion = new Lion("simba", 4, true);
-    animalShelter.addAnimal(tortoise);
-    animalShelter.addAnimal(tortoise2);
-    animalShelter.addAnimal(squirrel);
-    animalShelter.addAnimal(lion);
-    const animals = animalShelter.report();
-    expect(animals.anaimalsWhoClimbTrees).toBe(4);
-    expect(animals.animalsWhoJump).toBe(2);
-    expect(animals.animalsWhoRun).toBe(1);
-  });
+  test('report should return an object with the correct number of animals with specific abilities', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    const tortoise = new Tortoise('t1', 3, false)
+    const tortoise2 = new Tortoise('t2', 4, false)
+    const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
+    const lion = new Lion('simba', 4, true)
+    animalShelter.addAnimal(tortoise)
+    animalShelter.addAnimal(tortoise2)
+    animalShelter.addAnimal(squirrel)
+    animalShelter.addAnimal(lion)
+    const animals = animalShelter.report()
+    expect(animals.anaimalsWhoClimbTrees).toBe(4)
+    expect(animals.animalsWhoJump).toBe(2)
+    expect(animals.animalsWhoRun).toBe(1)
+  })
+  test('report should return an object with the correct number of animals with specific abilities', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    const tortoise = new Tortoise('t1', 3, false)
+    const tortoise2 = new Tortoise('t2', 4, false)
+    const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
+    const lion = new Lion('simba', 4, true)
+    animalShelter.addAnimal(tortoise)
+    animalShelter.addAnimal(tortoise2)
+    animalShelter.addAnimal(squirrel)
+    animalShelter.addAnimal(lion)
+    const animals = animalShelter.report()
+    expect(animals.anaimalsWhoClimbTrees).toBe(4)
+    expect(animals.animalsWhoJump).toBe(2)
+    expect(animals.animalsWhoRun).toBe(1)
+  })
+
+  test('should return an estimate of future space needed if females always give birth in 1 year', () => {
+    const originalMathRandom = Math.random
+    Math.random = jest.fn(() => 0.2)
+    const animalShelter = AnimalShelter.getInstance()
+    const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
+    const lion = new Lion('simba', 4, true)
+    animalShelter.addAnimal(squirrel)
+    animalShelter.addAnimal(lion)
+    const estimate = animalShelter.getFutureEstimate(1)
+    expect(estimate.estimatedSpaceNeeded).toBe(340)
+    Math.random = originalMathRandom
+  })
+  test('should return an estimate of future space needed if females never give birth in 2 years', () => {
+    const originalMathRandom = Math.random
+    Math.random = jest.fn(() => 0.4)
+    const animalShelter = AnimalShelter.getInstance()
+    const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
+    const lion = new Lion('simba', 4, true)
+    animalShelter.addAnimal(squirrel)
+    animalShelter.addAnimal(lion)
+    const estimate = animalShelter.getFutureEstimate(2)
+    expect(estimate.estimatedSpaceNeeded).toBe(LION_SPACE_NEEDED_AS_ADULT + SQUIRREL_SPACE_NEEDED_AS_ADULT)
+    expect(estimate.estimatedAnimals.length).toBe(2)
+    Math.random = originalMathRandom
+  })
+
+  test('space needed and number of animals should stay the same if there are only males in 2 years', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    const squirrel = new Squirrel('s1', 3, true, 'Maple', 44, 4)
+    const lion = new Lion('simba', 4, true)
+    animalShelter.addAnimal(squirrel)
+    animalShelter.addAnimal(lion)
+    const estimate = animalShelter.getFutureEstimate(2)
+    expect(estimate.estimatedSpaceNeeded).toBe(LION_SPACE_NEEDED_AS_ADULT + SQUIRREL_SPACE_NEEDED_AS_ADULT)
+    expect(estimate.estimatedAnimals.length).toBe(2)
+  })
+  test('should return an estimate of future space needed if females always give birth in 5 years and always birth males', () => {
+    const originalMathRandom = Math.random
+    Math.random = jest.fn(() => 0.21)
+    const animalShelter = AnimalShelter.getInstance()
+    const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
+    const lion = new Lion('simba', 4, true)
+    animalShelter.addAnimal(squirrel)
+    animalShelter.addAnimal(lion)
+    const estimate = animalShelter.getFutureEstimate(5)
+    expect(estimate.estimatedSpaceNeeded).toBe(1040)
+    Math.random = originalMathRandom
+  })
+  test('should return an estimate of future space needed if females always give birth in 5 years and always birth females', () => {
+    const originalMathRandom = Math.random
+    Math.random = jest.fn(() => 0.2)
+    const animalShelter = AnimalShelter.getInstance()
+    const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
+    const lion = new Lion('simba', 4, true)
+    animalShelter.addAnimal(squirrel)
+    animalShelter.addAnimal(lion)
+    const estimate = animalShelter.getFutureEstimate(5)
+    expect(estimate.estimatedSpaceNeeded).toBe(7040)
+    Math.random = originalMathRandom
+  })
+  test('should return an estimate of future space needed if females never give birth in 5 years', () => {
+    const originalMathRandom = Math.random
+    Math.random = jest.fn(() => 0.4)
+    const animalShelter = AnimalShelter.getInstance()
+    const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
+    const lion = new Lion('simba', 4, true)
+    animalShelter.addAnimal(squirrel)
+    animalShelter.addAnimal(lion)
+    const estimate = animalShelter.getFutureEstimate(5)
+    expect(estimate.estimatedSpaceNeeded).toBe(LION_SPACE_NEEDED_AS_ADULT + SQUIRREL_SPACE_NEEDED_AS_ADULT)
+    expect(estimate.estimatedAnimals.length).toBe(2)
+    Math.random = originalMathRandom
+  })
+
+  test('space needed and number of animals should stay the same if there are only males in 5 years', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    const squirrel = new Squirrel('s1', 3, true, 'Maple', 44, 4)
+    const lion = new Lion('simba', 4, true)
+    animalShelter.addAnimal(squirrel)
+    animalShelter.addAnimal(lion)
+    const estimate = animalShelter.getFutureEstimate(5)
+    expect(estimate.estimatedSpaceNeeded).toBe(LION_SPACE_NEEDED_AS_ADULT + SQUIRREL_SPACE_NEEDED_AS_ADULT)
+    expect(estimate.estimatedAnimals.length).toBe(2)
+  })
 })
