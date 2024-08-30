@@ -11,12 +11,12 @@ import { SUCCESFULLY_ADDED_ANIMAL_IN_SHELTER } from '../messages/successMessages
 import AnimalFamily from '../src/animalFamily/AnimalFamily'
 import AnimalShelter from '../src/animalShelter/AnimalShelter'
 import Crocodile from '../src/animals/Crocodile'
-import Lion, { LION_SPACE_NEEDED_AS_ADULT } from '../src/animals/Lion'
-import Squirrel, { SQUIRREL_SPACE_NEEDED_AS_ADULT } from '../src/animals/Squirrel'
-import Tortoise from '../src/animals/Tortoise'
 import Elephant from '../src/animals/Elephant'
 import Giraffe from '../src/animals/Giraffe'
+import Lion, { LION_SPACE_NEEDED_AS_ADULT } from '../src/animals/Lion'
 import Snake from '../src/animals/Snake'
+import Squirrel, { SQUIRREL_SPACE_NEEDED_AS_ADULT } from '../src/animals/Squirrel'
+import Tortoise from '../src/animals/Tortoise'
 beforeEach(() => {
   const animalShelter = AnimalShelter.getInstance()
   animalShelter.resetInstance()
@@ -139,6 +139,134 @@ describe('Animal Shelter Tests', () => {
     expect(animals.squirrels).toBe(2)
     expect(animals.mamamls).toBe(3)
     expect(animals.reptiles).toBe(2)
+  })
+  test('reportOfNeededSpace should return the needed space for animals which take 150-300sq ', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    const tortoise = new Tortoise('t1', 1, false)
+    const tortoise2 = new Tortoise('t2', 4, false)
+    const crock1 = new Crocodile("Crocko", 1, true, 5);
+    const crock2 = new Crocodile("Crocko2", 5, false, 9);
+    const snake1 = new Snake("SSSS", 5, "Anaconda", true, "green", 5);
+    const snake2 = new Snake("ssss", 1, "Anaconda", false, "green", 2);
+    animalShelter.addAnimal(tortoise)
+    animalShelter.addAnimal(tortoise2)
+    animalShelter.addAnimal(crock1)
+    animalShelter.addAnimal(crock2)
+    animalShelter.addAnimal(snake1)
+    animalShelter.addAnimal(snake2)
+    expect(animalShelter.reportOfNeededSpace([tortoise, tortoise2, crock1, crock2, snake1, snake2])).toBe(1350)
+  })
+  test('reportOfNeededSpace should return the needed space for animals wich take 100-200sq', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    const lion1 = new Lion('simba', 4, true)
+    const lion2 = new Lion('mufasa', 1, false)
+    const giraffe1 = new Giraffe("Giraffe1", 5, true, 5);
+    const giraffe2 = new Giraffe("Giraffe2", 1, false, 2);
+    const elephant1 = new Elephant("Giraffe1", 5, true, 5, 486);
+    const elephant2 = new Elephant("Giraffe2", 1, false, 2, 258);
+    animalShelter.addAnimal(lion1)
+    animalShelter.addAnimal(lion2)
+    animalShelter.addAnimal(giraffe1)
+    animalShelter.addAnimal(giraffe2)
+    animalShelter.addAnimal(elephant1)
+    animalShelter.addAnimal(elephant2)
+    expect(animalShelter.reportOfNeededSpace([lion1, lion2, giraffe1, giraffe2, elephant1, elephant2])).toBe(900)
+  })
+  test('reportOfNeededSpace should return the needed space for animals which use 20-40sq', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
+    const squirrel2 = new Squirrel('s2', 1, false, 'Maple', 44, 4)
+    animalShelter.addAnimal(squirrel)
+    animalShelter.addAnimal(squirrel2)
+    expect(animalShelter.reportOfNeededSpace([squirrel, squirrel2])).toBe(60)
+  })
+  test('reportOfNeededSpace should return the needed space for the random setof animals', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    const tortoise = new Tortoise('t1', 1, false)
+    const tortoise2 = new Tortoise('t2', 4, false)
+    const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
+    const squirrel2 = new Squirrel('s2', 1, false, 'Maple', 44, 4)
+    const lion = new Lion('simba', 4, true)
+    animalShelter.addAnimal(tortoise)
+    animalShelter.addAnimal(tortoise2)
+    animalShelter.addAnimal(squirrel)
+    animalShelter.addAnimal(squirrel2)
+    animalShelter.addAnimal(lion)
+    expect(animalShelter.reportOfNeededSpace([tortoise, tortoise2, squirrel, squirrel2, lion])).toBe(710)
+  })
+  test('reportOfNeededSpace should return the needed space for mammals only', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    const squirrel = new Squirrel('s1', 3, false, 'Maple', 44, 4)
+    const squirrel2 = new Squirrel('s2', 1, false, 'Maple', 44, 4)
+    const lion1 = new Lion('simba', 4, true)
+    const lion2 = new Lion('mufasa', 1, false)
+    const giraffe1 = new Giraffe("Giraffe1", 5, true, 5);
+    const giraffe2 = new Giraffe("Giraffe2", 1, false, 2);
+    const elephant1 = new Elephant("Giraffe1", 5, true, 5, 486);
+    const elephant2 = new Elephant("Giraffe2", 1, false, 2, 258);
+    animalShelter.addAnimal(lion1)
+    animalShelter.addAnimal(lion2)
+    animalShelter.addAnimal(giraffe1)
+    animalShelter.addAnimal(giraffe2)
+    animalShelter.addAnimal(elephant1)
+    animalShelter.addAnimal(elephant2)
+    animalShelter.addAnimal(squirrel)
+    animalShelter.addAnimal(squirrel2)
+    expect(animalShelter.reportOfNeededSpace([squirrel, squirrel2, lion1, lion2, giraffe1, giraffe2, elephant1, elephant2])).toBe(960)
+  })
+  test('reportOfNeededSpace should return the needed space for reptiles only', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    const tortoise2 = new Tortoise('t2', 4, false)
+    const crock1 = new Crocodile("Crocko", 1, true, 5);
+    const crock2 = new Crocodile("Crocko2", 5, false, 9);
+    const snake2 = new Snake("ssss", 1, "Anaconda", false, "green", 2);
+    animalShelter.addAnimal(tortoise2)
+    animalShelter.addAnimal(crock1)
+    animalShelter.addAnimal(crock2)
+    animalShelter.addAnimal(snake2)
+
+    expect(animalShelter.reportOfNeededSpace([tortoise2, crock1, crock2, snake2])).toBe(900)
+  })
+
+  test('reportOfNeededSpace should return the needed space for babies only', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    const tortoise = new Tortoise('t1', 1, false)
+    const crock1 = new Crocodile("Crocko", 1, true, 5);
+    const snake2 = new Snake("ssss", 1, "Anaconda", false, "green", 2)
+    const giraffe2 = new Giraffe("Giraffe2", 1, false, 2);
+    const squirrel2 = new Squirrel('s2', 1, false, 'Maple', 44, 4)
+    const lion2 = new Lion('mufasa', 1, false)
+    const elephant2 = new Elephant("Giraffe2", 1, false, 2, 258);
+    animalShelter.addAnimal(tortoise)
+    animalShelter.addAnimal(crock1)
+    animalShelter.addAnimal(snake2)
+    animalShelter.addAnimal(lion2)
+    animalShelter.addAnimal(giraffe2)
+    animalShelter.addAnimal(elephant2)
+    animalShelter.addAnimal(squirrel2)
+    expect(animalShelter.reportOfNeededSpace([crock1, tortoise, snake2, lion2, squirrel2, giraffe2, elephant2])).toBe(770)
+  })
+  test('reportOfNeededSpace should return the needed space for adults only', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    const tortoise = new Tortoise('t1', 3, false)
+    const crock1 = new Crocodile("Crocko", 3, true, 5);
+    const snake2 = new Snake("ssss", 3, "Anaconda", false, "green", 2)
+    const giraffe2 = new Giraffe("Giraffe2", 3, false, 2);
+    const squirrel2 = new Squirrel('s2', 3, false, 'Maple', 44, 4)
+    const lion2 = new Lion('mufasa', 3, false)
+    const elephant2 = new Elephant("Giraffe2", 3, false, 2, 258);
+    animalShelter.addAnimal(tortoise)
+    animalShelter.addAnimal(crock1)
+    animalShelter.addAnimal(snake2)
+    animalShelter.addAnimal(lion2)
+    animalShelter.addAnimal(giraffe2)
+    animalShelter.addAnimal(elephant2)
+    animalShelter.addAnimal(squirrel2)
+    expect(animalShelter.reportOfNeededSpace([crock1, tortoise, snake2, lion2, squirrel2, giraffe2, elephant2])).toBe(1540)
+  })
+  test('reportOfNeededSpace should return the needed space for no only', () => {
+    const animalShelter = AnimalShelter.getInstance()
+    expect(animalShelter.reportOfNeededSpace([])).toBe(0)
   })
   test('should succesfully set shelter trritory', () => {
     const animalShelter = AnimalShelter.getInstance()

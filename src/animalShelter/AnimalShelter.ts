@@ -41,6 +41,11 @@ export default class AnimalShelter {
     }
     return AnimalShelter.instance
   }
+
+  public reportOfNeededSpace(animals: Animal[]): number {
+    return animals.reduce((neededSpace, animal) => neededSpace + animal.getSpaceNeeded(), 0);
+  }
+
   public resetInstance() {
     this.animals = []
     this._mammalLimit = DEFAULT_MAMMAL_LIMIT
